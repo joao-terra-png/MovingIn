@@ -6,7 +6,6 @@ namespace MovingIn.Hub{
     ///<summary>
     /// procura o interagivel mais proximo do player,
     /// mostra "[E] Arrumar..." e chama Interact() quando aperta a tecla
-    /// vai no Player
     /// </summary>
     public class PlayerInteractor : MonoBehaviour
     {
