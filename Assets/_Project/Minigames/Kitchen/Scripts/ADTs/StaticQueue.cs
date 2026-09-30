@@ -1,7 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 namespace MovingIn.Minigames.Kitchen.ADTs
 {
     public class StaticQueue<T>
@@ -20,7 +16,7 @@ namespace MovingIn.Minigames.Kitchen.ADTs
         }
 
         public bool Empty() => quantity == 0;
-        public bool Full() => quantity == elements.Length - 1;
+        public bool Full() => quantity == elements.Length;
         public int Quantity => quantity;
         
         public bool Insert(T x)
