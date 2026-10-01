@@ -2,11 +2,15 @@
 
 Versão	da	Unity:	2022.3.62f3		(TODOS	usam	exatamente	esta)
 
-##	Donos
--	Hub	(cena	Hub,	pasta	Hub/):	João Gabriel Azevedo Terra	(integrador)
--	Minigame	FreeCell:	
-- Minigame	Tetris:	
-- Core/:	só	muda	via	PR	revisado	pelo	integrador
+##	Grupo
+- João Gabriel Azevedo Terra (858032)
+- 
+
+## Divisões
+- Hub: João Gabriel Azevedo Terra
+- Minigames:
+- Kitchen: João Gabriel Azevedo Terra
+- Tetris: João Gabriel Azevedo Terra
 
 ##	Regras
 1.	Todos devem usar a mesma versão da Unity.
