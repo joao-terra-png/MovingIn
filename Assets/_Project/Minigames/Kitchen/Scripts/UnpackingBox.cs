@@ -11,6 +11,7 @@ namespace MovingIn.Minigames.Kitchen{
     /// No Awake: copia o conteudo, embaralha (se marcado) e coloca tudo numa FILA
     /// No Start: solta o primeiro item
     /// FreeNext: tira a proxima ficha da fila, cria o item na cena e configura
+    /// UpdatePreviews: mostra a cor dos proximos itens (usa o ElementAt, sem alterar a fila)
     ///
     /// vai no objeto da caixa de mudanca
     /// </summary>
@@ -25,9 +26,13 @@ namespace MovingIn.Minigames.Kitchen{
         [Tooltip("Ponto onde cada item aparece ao sair da caixa")]
         [SerializeField] Transform exitPoint;
 
+        [Tooltip("Quadradinhos que mostram os proximos itens (o primeiro e o proximo a sair)")]
+        [SerializeField] SpriteRenderer[] previews;
+
         [Tooltip("Se marcado, a ordem dos itens muda a cada partida")]
         [SerializeField, FormerlySerializedAs("shuffle")] bool _shuffle;
 
+        // a fila e um CAMPO: existe enquanto a caixa existir
         StaticQueue<ItemData> _queue;
 
         // o ultimo item que saiu da caixa 
@@ -51,19 +56,41 @@ namespace MovingIn.Minigames.Kitchen{
 
         private void Start()
         {
-            FreeNext();  
+            FreeNext();   // a caixa ja comeca soltando o primeiro item
         }
 
         // tira a proxima ficha da fila e cria o item na cena
         // retorna false quando a caixa ja esta vazia
         public bool FreeNext()
         {
-            if (!_queue.Remove(out ItemData data)) return false;
+            bool removed = _queue.Remove(out ItemData data);
+
+            // atualiza as previas mesmo quando a caixa acabou 
+            UpdatePreviews();
+
+            if (!removed) return false;
 
             CurrentItem = Instantiate(prefabItem, exitPoint.position, Quaternion.identity);
             CurrentItem.Configure(data);
 
             return true;
+        }
+
+        // mostra a cor dos proximos itens da fila, sem altera-la
+        void UpdatePreviews()
+        {
+            for (int i = 0; i < previews.Length; i++)
+            {
+                if (_queue.ElementAt(i, out ItemData next))
+                {
+                    previews[i].enabled = true;               
+                    previews[i].color = next.colorPlaceholder;
+                }
+                else
+                {
+                    previews[i].enabled = false;            
+                }
+            }
         }
 
         // "ponte" para testar pelo menu de tres pontinhos do componente 
@@ -74,12 +101,13 @@ namespace MovingIn.Minigames.Kitchen{
                 Debug.Log("[UnpackingBox] A caixa esta vazia.");
         }
 
-        // embaralha os itens
+        // embaralhamento Fisher-Yates: percorre de tras para frente,
+        // sorteia uma posicao entre 0 e i e troca os dois elementos
         void Shuffle(ItemData[] v)
         {
             for (int i = v.Length - 1; i > 0; i--)
             {
-                int j = Random.Range(0, i + 1);   
+                int j = Random.Range(0, i + 1);  
 
                 ItemData temp = v[i];   
                 v[i] = v[j];
