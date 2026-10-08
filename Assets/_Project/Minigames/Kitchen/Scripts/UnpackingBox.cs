@@ -32,6 +32,8 @@ namespace MovingIn.Minigames.Kitchen{
         [Tooltip("Se marcado, a ordem dos itens muda a cada partida")]
         [SerializeField, FormerlySerializedAs("shuffle")] bool _shuffle;
 
+        [SerializeField] KitchenManager manager;
+
         // a fila e um CAMPO: existe enquanto a caixa existir
         StaticQueue<ItemData> _queue;
 
@@ -71,7 +73,7 @@ namespace MovingIn.Minigames.Kitchen{
             if (!removed) return false;
 
             CurrentItem = Instantiate(prefabItem, exitPoint.position, Quaternion.identity);
-            CurrentItem.Configure(data);
+            CurrentItem.Configure(data, manager);
 
             return true;
         }

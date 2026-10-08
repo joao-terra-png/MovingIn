@@ -8,6 +8,8 @@ namespace MovingIn.Minigames.Kitchen
     public class ItemVisual : MonoBehaviour
     {
         public ItemData Data { get; private set; }
+        public KitchenManager Manager {get; private set; }
+        public DropZone CurrentZone {get; set;}
 
         private SpriteRenderer sr;
 
@@ -16,7 +18,7 @@ namespace MovingIn.Minigames.Kitchen
             sr = GetComponent<SpriteRenderer>();
         }
 
-        public void Configure(ItemData data)
+        public void Configure(ItemData data, KitchenManager manager)
         {
             if (data == null)
             {
@@ -25,6 +27,7 @@ namespace MovingIn.Minigames.Kitchen
             }
 
             Data = data;
+            Manager = manager;
             if(data.sprite != null) sr.sprite = data.sprite;
             sr.color = data.colorPlaceholder;
             transform.localScale = Vector3.one * (0.6f + 0.2f * data.size);
