@@ -14,8 +14,9 @@ namespace MovingIn.Minigames.Kitchen
         {
             if(item.Data.type != ItemType.Utensil || !belongToKitchen) return false;
 
-            item.transform.position = transform.position + _firstOffset + Vector3.right * (_spacing * _count);
-            item.GetComponent<Collider2D>().enabled = false;
+            Vector3 target = transform.position + _firstOffset + Vector3.right * (_spacing * _count);
+            item.MoveTo(target);                                 
+            item.GetComponent<Collider2D>().enabled = false;    
             _count++;
             return true;
         }

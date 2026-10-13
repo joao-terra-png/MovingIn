@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 using MovingIn.Minigames.Kitchen.ADTs;
 
@@ -17,10 +16,18 @@ namespace MovingIn.Minigames.Kitchen
         [SerializeField] int _hitPoints = 10;
         [SerializeField] int _missPoints = 5;
 
+        public event Action<int> PointsChanged;
+        public event Action	NoteChanged;
+        public event Action<ItemVisual>	Hit;
+        public event Action<ItemVisual>	Miss;
+        public event Action	Victory;
+
         CadastralList<ItemData> _note;
         int _points;
         bool _boxEmpty;
         bool _won;
+
+        public int Points => _points;
 
         void Awake()
         {
@@ -41,29 +48,44 @@ namespace MovingIn.Minigames.Kitchen
             if(!zone.TryReceive(item, belongs))
             {
                 _points = Mathf.Max(0, _points - _missPoints);
-                Debug.Log($"Erro! Pontos: {_points}");
+                PointsChanged?.Invoke(_points);
+                Miss?.Invoke(item);
                  return false;
             }
             
             _points += _hitPoints;
-            if(zone.IsFinalDestination && belongs) _note.Remove(item.Data);
+            if(zone.IsFinalDestination && belongs)
+            {
+                _note.Remove(item.Data);
+                NoteChanged?.Invoke();
+            } 
 
             bool cameFromBox = item.CurrentZone == null;
             if(!cameFromBox) item.CurrentZone.Release(item);
             item.CurrentZone = zone;
 
             if	(cameFromBox &&	!box.FreeNext()) _boxEmpty = true;
-            Debug.Log($"Acerto!	Pontos:	{_points}");
+            PointsChanged?.Invoke(_points);
+            Hit?.Invoke(item);
             CheckVictory();
             return	true;
         }   
+
+        public void ForEachNoteItem(Action<ItemData> action)
+        {
+            if(!_note.GetFirst(out ItemData item)) return;
+            do
+            {
+                action(item);
+            }while(_note.GetNext(out item));
+        }
 
         void CheckVictory()
         {
             if(!_won && _boxEmpty && _note.Empty())
             {
                 _won = true;
-                Debug.Log("Cozinha arrumada");
+                Victory?.Invoke();
             }
         }
     }
