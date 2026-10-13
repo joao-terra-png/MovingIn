@@ -752,6 +752,7 @@ GameObject:
   - component: {fileID: 662845779}
   - component: {fileID: 662845780}
   - component: {fileID: 662845781}
+  - component: {fileID: 662845782}
   m_Layer: 0
   m_Name: Counter_Slot2
   m_TagString: Untagged
@@ -871,6 +872,22 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 5}
   m_EdgeRadius: 0
+--- !u!114 &662845782
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 662845778}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aea4249c964259149a9bde25e32a2353, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _capacity: 3
+  _heightPerPlate: 0.25
+  _requiresOrder: 0
+  _finalDestination: 0
 --- !u!1 &811328771
 GameObject:
   m_ObjectHideFlags: 0
@@ -882,6 +899,7 @@ GameObject:
   - component: {fileID: 811328772}
   - component: {fileID: 811328773}
   - component: {fileID: 811328774}
+  - component: {fileID: 811328775}
   m_Layer: 0
   m_Name: Shelf
   m_TagString: Untagged
@@ -1001,6 +1019,20 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 5}
   m_EdgeRadius: 0
+--- !u!114 &811328775
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 811328771}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a370e71ced90284488627c7b1e766de6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _firstOffset: {x: -1.5, y: 0.5, z: 0}
+  _spacing: 1
 --- !u!1 &927488668
 GameObject:
   m_ObjectHideFlags: 0
@@ -1166,6 +1198,7 @@ GameObject:
   - component: {fileID: 1306628966}
   - component: {fileID: 1306628967}
   - component: {fileID: 1306628968}
+  - component: {fileID: 1306628969}
   m_Layer: 0
   m_Name: Cabinet
   m_TagString: Untagged
@@ -1285,6 +1318,22 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &1306628969
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1306628965}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aea4249c964259149a9bde25e32a2353, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _capacity: 3
+  _heightPerPlate: 0.25
+  _requiresOrder: 1
+  _finalDestination: 1
 --- !u!1 &1424520414
 GameObject:
   m_ObjectHideFlags: 0
@@ -1413,6 +1462,7 @@ GameObject:
   - component: {fileID: 1590912112}
   - component: {fileID: 1590912113}
   - component: {fileID: 1590912114}
+  - component: {fileID: 1590912115}
   m_Layer: 0
   m_Name: Counter_Slot1
   m_TagString: Untagged
@@ -1532,6 +1582,22 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 5}
   m_EdgeRadius: 0
+--- !u!114 &1590912115
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1590912111}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aea4249c964259149a9bde25e32a2353, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _capacity: 3
+  _heightPerPlate: 0.25
+  _requiresOrder: 0
+  _finalDestination: 0
 --- !u!1 &1886663544
 GameObject:
   m_ObjectHideFlags: 0

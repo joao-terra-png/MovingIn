@@ -14,7 +14,7 @@ namespace MovingIn.Minigames.Kitchen
         public virtual bool IsFinalDestination => true;
 
         //tenta receber um item (true se aceitou)
-        public abstract bool TryRecive(ItemVisual item, bool belongsToKitchen);
+        public abstract bool TryReceive(ItemVisual item, bool belongsToKitchen);
 
         //quando um item foi para outra zona
         public virtual void Release(ItemVisual item){}

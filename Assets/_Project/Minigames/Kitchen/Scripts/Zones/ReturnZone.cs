@@ -8,7 +8,7 @@ namespace MovingIn.Minigames.Kitchen
     
     public class ReturnZone : DropZone
     {
-        public override bool TryRecive(ItemVisual item, bool belongsToKitchen)
+        public override bool TryReceive(ItemVisual item, bool belongsToKitchen)
         {
             if(belongsToKitchen) return false;
             Destroy(item.gameObject);

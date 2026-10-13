@@ -38,7 +38,7 @@ namespace MovingIn.Minigames.Kitchen
 
             bool belongs = _note.Contains(item.Data);
 
-            if(!zone.TryRecive(item, belongs))
+            if(!zone.TryReceive(item, belongs))
             {
                 _points = Mathf.Max(0, _points - _missPoints);
                 Debug.Log($"Erro! Pontos: {_points}");
