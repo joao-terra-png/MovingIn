@@ -53,7 +53,7 @@ namespace MovingIn.Minigames.Kitchen
                  return false;
             }
             
-            _points += _hitPoints;
+            if (zone.IsFinalDestination) _points += _hitPoints;   
             if(zone.IsFinalDestination && belongs)
             {
                 _note.Remove(item.Data);
