@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 2330998325270399674}
   - component: {fileID: 428775523154638603}
   - component: {fileID: 6973055142821544461}
+  - component: {fileID: -2679127249891774144}
+  - component: {fileID: -2333960975238418896}
   m_Layer: 0
   m_Name: ProtCan-Line
   m_TagString: CanLine
@@ -105,3 +107,28 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 0.1, z: 1}
   m_Center: {x: 0, y: -0.125, z: 0}
+--- !u!114 &-2679127249891774144
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4885120868769845696}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2635931fb126a145b46a7e61d884aa5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  temHamster: 0
+--- !u!114 &-2333960975238418896
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4885120868769845696}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b27ea897d0049404facb0470d729938b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

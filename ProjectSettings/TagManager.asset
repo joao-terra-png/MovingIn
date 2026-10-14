@@ -11,6 +11,9 @@ TagManager:
   - RightToUpPipe
   - RightToDownPipe
   - CrossedPipe
+  - CanLine
+  - Hamster
+  - Backdrop
   layers:
   - Default
   - TransparentFX

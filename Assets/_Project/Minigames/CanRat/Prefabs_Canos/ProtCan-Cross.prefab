@@ -14,6 +14,8 @@ GameObject:
   - component: {fileID: 9140263269097054507}
   - component: {fileID: 2157683801523315193}
   - component: {fileID: 6665758874952537040}
+  - component: {fileID: 3879812678938746294}
+  - component: {fileID: -3705531789633507795}
   m_Layer: 0
   m_Name: ProtCan-Cross
   m_TagString: CrossedPipe
@@ -138,5 +140,30 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 69a0311d7d8fade478ba1eb9684df9b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3879812678938746294
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3222856075551163972}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2635931fb126a145b46a7e61d884aa5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  temHamster: 0
+--- !u!114 &-3705531789633507795
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3222856075551163972}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b27ea897d0049404facb0470d729938b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
