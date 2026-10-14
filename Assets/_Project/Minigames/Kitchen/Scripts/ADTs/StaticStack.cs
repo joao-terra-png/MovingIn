@@ -2,20 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-    ///<summary>
-    /// Pilha sequencial e estatica que aceita tipo generico de dados
-    /// new StaticStack<int>(5) -> pilha de inteiros
-    /// new StaticStack<ItemVisual>(3) -> pilha de prato
-    ///</summary>
-    
 namespace MovingIn.Minigames.Kitchen.ADTs
 {
     public class StaticStack<T>
     {
         private readonly T[] elements;
-        private int top; //-1 quando vazia
+        private int top; 
 
-        //Construtor
         public StaticStack(int capacity)
         {
             elements = new T[capacity];
@@ -35,7 +28,6 @@ namespace MovingIn.Minigames.Kitchen.ADTs
             return true;
         }
 
-        //desempilha: tira o elemento do topo e retornar ele pelo out
         public bool Pop(out T x)
         {
             if(Empty())

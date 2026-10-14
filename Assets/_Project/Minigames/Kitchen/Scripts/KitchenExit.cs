@@ -30,7 +30,7 @@ namespace MovingIn.Minigames.Kitchen{
 
             if (!MinigameBridge.IsInsideHub)
             {
-                Debug.Log($"[KitchenExit] Modo teste (vitoria = {success}): recarregando a cena.");
+                Debug.Log($"[KitchenExit] Modo teste (vitoria = {success}): recarregando a cena");
                 SceneManager.LoadScene(gameObject.scene.name);
                 return;
             }
