@@ -1,49 +1,52 @@
-using UnityEngine;
 
-public class FilaEncadeada : MonoBehaviour
+namespace MovingIn.Core.Structures
 {
-    private Node primeiro;
-    private Node ultimo;
-
-    public bool Vazia()
+    public class FilaEncadeada
     {
-        return primeiro == null;
-    }
+        private Node primeiro;
+        private Node ultimo;
 
-    public void Enf(object objeto) //adiciona no final
-    {
-        Node novo = new Node();
-        novo.SetInfo(objeto);
-        novo.SetNext(null);
-        if (Vazia())
+        public bool Vazia()
         {
-            primeiro = novo;
-            ultimo = novo;
+            return primeiro == null;
         }
-        else
+
+        public void Enf(object objeto) //adiciona no final
         {
-            ultimo.SetNext(novo);
-            ultimo = novo;
+            Node novo = new Node();
+            novo.SetInfo(objeto);
+            novo.SetNext(null);
+
+            if (Vazia())
+            {
+                primeiro = novo;
+                ultimo = novo;
+            }
+            else
+            {
+                ultimo.SetNext(novo);
+                ultimo = novo;
+            }
         }
-    }
 
-    public bool Desenf(Node no) //retira do comeco
-    {
-        if (Vazia()) return false;
+        public bool Desenf(Node no) //retira do comeco
+        {
+            if (Vazia()) return false;
 
-        primeiro = primeiro.GetNext();
-        if (primeiro == null) ultimo = null;
-        return true;
-    }
+            primeiro = primeiro.GetNext();
+            if (primeiro == null) ultimo = null;
+            return true;
+        }
 
-    public Node Primeiro()
-    {
-        return primeiro;
-    }
+        public Node Primeiro()
+        {
+            return primeiro;
+        }
 
-    public FilaEncadeada()
-    {
-        primeiro = null;
-        ultimo = null;
+        public FilaEncadeada()
+        {
+            primeiro = null;
+            ultimo = null;
+        }
     }
 }
