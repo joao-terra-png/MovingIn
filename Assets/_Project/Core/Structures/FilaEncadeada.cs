@@ -4,10 +4,12 @@ public class FilaEncadeada : MonoBehaviour
 {
     private Node primeiro;
     private Node ultimo;
+
     public bool Vazia()
     {
         return primeiro == null;
     }
+
     public void Enf(object objeto) //adiciona no final
     {
         Node novo = new Node();
@@ -24,16 +26,21 @@ public class FilaEncadeada : MonoBehaviour
             ultimo = novo;
         }
     }
-    public bool Desenf(object objeto) //retira do comeco
+
+    public bool Desenf(Node no) //retira do comeco
     {
-        if (Vazia())
-        {
-            return false;
-        }
-        objeto = primeiro;
+        if (Vazia()) return false;
+
         primeiro = primeiro.GetNext();
+        if (primeiro == null) ultimo = null;
         return true;
     }
+
+    public Node Primeiro()
+    {
+        return primeiro;
+    }
+
     public FilaEncadeada()
     {
         primeiro = null;

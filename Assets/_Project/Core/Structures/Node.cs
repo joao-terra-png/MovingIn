@@ -9,6 +9,7 @@ public class Node
     {
         return info;
     }
+
     public Node GetNext()
     {
         return next;
@@ -17,10 +18,12 @@ public class Node
     {
         this.info = info;
     }
+
     public void SetNext(Node next)
     {
         this.next = next;
     }
+
     public Node()
     {
         info = null;
