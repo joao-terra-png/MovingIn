@@ -1,31 +1,34 @@
-public class Node
+
+namespace MovingIn.Core.Structures
 {
-    private object info;
-    private Node next;
-
-    public object GetInfo()
+    public class Node
     {
-        return info;
-    }
+        private object info;
+        private Node next;
 
-    public Node GetNext()
-    {
-        return next;
-    }
+        public object GetInfo()
+        {
+            return info;
+        }
 
-    public void SetInfo(object info)
-    {
-        this.info = info;
-    }
+        public Node GetNext()
+        {
+            return next;
+        }
 
-    public void SetNext(Node next)
-    {
-        this.next = next;
-    }
+        public void SetInfo(object info)
+        {
+            this.info = info;
+        }
 
-    public Node()
-    {
-        info = null;
-        next = null;
-    }
-}
+        public void SetNext(Node next)
+        {
+            this.next = next;
+        }
+
+        public Node()
+        {
+            info = null;
+            next = null;
+        }
+    }}
