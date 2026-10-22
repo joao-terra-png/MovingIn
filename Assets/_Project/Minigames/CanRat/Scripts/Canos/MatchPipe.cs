@@ -22,6 +22,10 @@ public class MatchPipe : MonoBehaviour
                 return (tag == "HorizontalPipe") || (tag == "RightToUpPipe") || (tag == "RightToDownPipe");
             case "DownToRightPipe":
                 return (tag == "HorizontalPipe") || (tag == "RightToUpPipe") || (tag == "RightToDownPipe");
+            case "Horizontal":
+                return (tag == "RightToUpPipe") || (tag == "RightToDownPipe");
+            case "Vertical":
+                return (tag == "UpToRightPipe") || (tag == "DownToRightPipe");
             default: 
                 return false;
         }

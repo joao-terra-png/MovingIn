@@ -1,4 +1,6 @@
-public class FilaEncadeada
+using UnityEngine;
+
+public class FilaEncadeada : MonoBehaviour
 {
     private Node primeiro;
     private Node ultimo;
@@ -11,7 +13,7 @@ public class FilaEncadeada
         Node novo = new Node();
         novo.SetInfo(objeto);
         novo.SetNext(null);
-        if (vazia())
+        if (Vazia())
         {
             primeiro = novo;
             ultimo = novo;
@@ -22,13 +24,13 @@ public class FilaEncadeada
             ultimo = novo;
         }
     }
-    public bool Desenf(Node no) //retira do comeco
+    public bool Desenf(object objeto) //retira do comeco
     {
-        if (vazia())
+        if (Vazia())
         {
             return false;
         }
-        no = primeiro;
+        objeto = primeiro;
         primeiro = primeiro.GetNext();
         return true;
     }

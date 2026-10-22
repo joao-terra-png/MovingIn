@@ -2,8 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class IsInventory : MonoBehaviour
+public class InInventory : MonoBehaviour
 {
+
+    /*Projeto pra static InvVazio: contador que decrementa/aumenta conforme eu retiro os canos*/
     bool IsStored;
     //Estado inicial de todos os canos (guardados e dispostos ao posicionamento)
     void Start()

@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4193105275409543559}
   - component: {fileID: -4276996193471483656}
   - component: {fileID: 5265431985626076915}
+  - component: {fileID: -8169709176761982309}
   m_Layer: 0
   m_Name: Cano_H
   m_TagString: HorizontalPipe
@@ -88,6 +89,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b27ea897d0049404facb0470d729938b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IsSelected: 0
+  teste: {fileID: 0}
+--- !u!114 &-8169709176761982309
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2200459464235281317}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69a0311d7d8fade478ba1eb9684df9b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &3093850436958899307

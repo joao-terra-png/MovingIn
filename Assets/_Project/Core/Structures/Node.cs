@@ -1,9 +1,11 @@
+using UnityEngine;
+
 public class Node
 {
-    private static Object info;
+    private object info;
     private Node next;
 
-    public static Object GetInfo()
+    public object GetInfo()
     {
         return info;
     }
@@ -11,7 +13,7 @@ public class Node
     {
         return next;
     }
-    public void SetInfo(Object info)
+    public void SetInfo(object info)
     {
         this.info = info;
     }

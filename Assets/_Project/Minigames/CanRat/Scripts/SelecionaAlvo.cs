@@ -1,12 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.ProBuilder.Shapes;
 
 public class SelecionaAlvo : MonoBehaviour
 {
     
     RaycastHit alvoMarcado;
-    public GameObject canoSelecionado;
+    static private GameObject canoSelecionado;
+    public GameObject teste;
+
+    static public GameObject GetAlvo()
+    {
+        return canoSelecionado;
+    }
     bool ok; //variavel que retorna se houve atualização de direção
     Vector3 vetorDirecao;
     // Start is called before the first frame update
@@ -35,15 +42,18 @@ public class SelecionaAlvo : MonoBehaviour
         else if(Input.GetKeyDown(KeyCode.RightArrow)){
             AtualizaDirecao(2*Vector3.right, out ok);
          }
-        //Seleciona/desseleciona o objeto selecionado no momento
-        if(ok == true && canoSelecionado.GetComponent<SelectedPipe>().GetIsSelected() == true)
-            canoSelecionado.GetComponent<SelectedPipe>().SelectPipe();
+        //Seleciona/desseleciona o objeto selecionado no momento ao mudar a seleção(raio)
+        if(ok == true && canoSelecionado.GetComponent<PipeSelection>().GetIsSelected() == true)
+            canoSelecionado.GetComponent<PipeSelection>().SelectPipe();
         
         if(Physics.Raycast(transform.position, vetorDirecao, out alvoMarcado, 2f))
             Debug.DrawLine(transform.position, alvoMarcado.point);
         
         MarcaAlvo(alvoMarcado);
-
+        teste = canoSelecionado;
+        //Tira a seleção caso já não esteja mais selecionado
+        if(canoSelecionado.GetComponent<PipeSelection>().IsSelected == false)
+            canoSelecionado = null;
     }
 
     void AtualizaDirecao(Vector3 vetorDeslocamento, out bool sucesso)
@@ -58,7 +68,7 @@ public class SelecionaAlvo : MonoBehaviour
             //fazer o visual de seleção
             if(Input.GetKeyDown(KeyCode.KeypadEnter)){
                 canoSelecionado = alvo.collider.gameObject;
-                canoSelecionado.GetComponent<SelectedPipe>().SelectPipe();
+                canoSelecionado.GetComponent<PipeSelection>().SelectPipe();
             }
         }
     }

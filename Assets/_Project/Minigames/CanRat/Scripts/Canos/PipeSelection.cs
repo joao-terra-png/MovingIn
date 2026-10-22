@@ -2,28 +2,31 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SelectedPipe : MonoBehaviour
+public class PipeSelection : MonoBehaviour
 {
     // Start is called before the first frame update
     //Indica se o objeto está ou não selecionado
-    private bool IsSelected;
+    public bool IsSelected;
 
-    public bool GetIsSelected()
-    {
-        return IsSelected;
-    }
+    public GameObject teste;
+    
     void Start()
     {
         IsSelected = false;
     }
 
-    // Update is called once per frame
+    public bool GetIsSelected()
+    {
+        return IsSelected;
+    }
     //Marca o objeto selecionado (e desmarca)
     void MarkSelected(){
-        if(IsSelected == true)
+        if(IsSelected == true){
             gameObject.transform.position += -0.2f * Vector3.forward;
-        else
+        }
+        else{
             gameObject.transform.position += 0.2f * Vector3.forward;
+        }
     }
 
 
