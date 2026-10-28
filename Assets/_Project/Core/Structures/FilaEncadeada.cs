@@ -29,13 +29,19 @@ namespace MovingIn.Core.Structures
             }
         }
 
-        public bool Desenf(Node no) //retira do comeco
+        public bool Desenf(out object objeto) //retira do comeco
         {
-            if (Vazia()) return false;
-
-            primeiro = primeiro.GetNext();
-            if (primeiro == null) ultimo = null;
-            return true;
+            if (Vazia()){ 
+                objeto = null;
+                return false;
+                }
+            else{
+                objeto = primeiro.GetInfo();
+                primeiro = primeiro.GetNext();
+                if (primeiro == null) 
+                    ultimo = null;
+                return true;
+            }
         }
 
         public Node Primeiro()

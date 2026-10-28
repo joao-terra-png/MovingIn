@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8311394266257585624}
   m_Layer: 0
   m_Name: Fundo_Parede
-  m_TagString: Untagged
+  m_TagString: Backdrop
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

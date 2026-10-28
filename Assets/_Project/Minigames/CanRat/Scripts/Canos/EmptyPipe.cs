@@ -6,14 +6,23 @@ using UnityEngine;
 public class EmptyPipe : MonoBehaviour
 {
     public bool temHamster;
-    void OnCollisionStay(Collision collision)
+
+    void Start()
+    {
+        temHamster = false;
+    }
+    void OnCollisionEnter(Collision collision)
     {
         if(collision.gameObject.CompareTag("Hamster"))
-            temHamster = true;
-        else
-            temHamster = false;    
+            temHamster = true;  
     }
-    
+
+        void OnCollisionExit(Collision collision)
+    {
+        if(collision.gameObject.CompareTag("Hamster"))
+            temHamster = false;  
+    }
+
     /*Retorna 0 se não está vazio, e 1 se está*/
     public bool IsEmpty()
     {

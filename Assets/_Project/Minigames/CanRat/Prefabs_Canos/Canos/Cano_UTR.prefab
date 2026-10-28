@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 9145956290711395345}
   - component: {fileID: -4954741837778762884}
   - component: {fileID: 9137200549986294488}
+  - component: {fileID: -8164562834193830506}
   m_Layer: 0
   m_Name: Cano_UTR
   m_TagString: UpToRightPipe
@@ -125,6 +126,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b27ea897d0049404facb0470d729938b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IsSelected: 0
+  teste: {fileID: 0}
+--- !u!114 &-8164562834193830506
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6375265004089818414}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7a7730ad130d9d4e9976b0a057aa601, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IsStored: 0
 --- !u!1 &7863489786822661854
 GameObject:
   m_ObjectHideFlags: 0

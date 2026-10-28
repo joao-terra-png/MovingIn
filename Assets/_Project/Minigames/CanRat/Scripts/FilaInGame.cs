@@ -1,18 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using MovingIn.Minigames.CanRat;
 
 public class FilaInGame : MonoBehaviour
 {
     //Inicialização de uma fila vazia
     public IntelliFila fila;
-    public GameObject teste;
 
     public bool testandoafila;
+    [SerializeField] GameObject CanoSelecionado;
     void Start()
     {
         fila = gameObject.GetComponent<IntelliFila>();
         testandoafila = false;
+        CanoSelecionado = null;
     }
 
     void Update()
@@ -22,11 +24,20 @@ public class FilaInGame : MonoBehaviour
 
     void MenuFila()
     {
-        GameObject CanoSelecionado = SelecionaAlvo.GetAlvo();
-        teste = CanoSelecionado;
-        if(Input.GetKeyDown(KeyCode.E))
-            testandoafila = fila.IntelliEnque(CanoSelecionado);
-
-
+        CanoSelecionado = SelecionaAlvo.GetAlvo();
+        if(Input.GetKeyDown(KeyCode.E)){
+            if(fila.GetComponent<IntelliFila>().IntelliEnque(CanoSelecionado))
+            {
+                CanoSelecionado.GetComponent<PipeSelection>().SelectPipe();
+                testandoafila = true;
+            }
+        }
+        else if (Input.GetKeyDown(KeyCode.D))
+        {
+        if(fila.GetComponent<IntelliFila>().IntelliDeque())
+            {
+                testandoafila = false;
+            }
+        }
     }
 }

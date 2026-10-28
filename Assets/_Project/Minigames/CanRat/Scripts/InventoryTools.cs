@@ -1,37 +1,36 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class InventoryTools : MonoBehaviour
+namespace MovingIn.Minigames.CanRat
 {
-
-    //Verifica se há item no Inventario (pelo rayCast)
-    public bool TemItem()
-    {   
-        RaycastHit ponto;
-        Physics.Raycast(transform.position, Vector3.forward, out ponto, 2f);
-        if(ponto.collider.gameObject.CompareTag("Backdrop"))
-        {
-            return true;
-        }
-        else
-            return false;
-    }
-
-
-    public bool Store(GameObject objeto)
+    public class InventoryTools : MonoBehaviour
     {
-        RaycastHit InvRay;
-        Physics.Raycast(transform.position, Vector3.forward, out InvRay, 2f);
-        if(!TemItem()){
-            objeto.transform.position = InvRay.point;
-            return true;    
+    
+        //Verifica se há item no Inventario (pelo rayCast)
+        public bool TemItem()
+        {   
+            RaycastHit ponto;
+            Physics.Raycast(transform.position, Vector3.forward, out ponto, 2f);
+            if(ponto.collider.gameObject.CompareTag("Backdrop"))
+                return false;
+            else
+                return true;
         }
-        else
+    
+    
+        public bool Store(GameObject objeto)
         {
-             return false;
+            RaycastHit InvRay;
+            Physics.Raycast(transform.position, Vector3.forward, out InvRay, 2f);
+            if(!TemItem()){
+                objeto.transform.position = InvRay.point + 0.1f * Vector3.up;
+                objeto.GetComponent<InInventory>().SetIsStored(true);
+                return true;    
+            }
+            else
+                return false;
         }
+    
+    
     }
-
-
 }

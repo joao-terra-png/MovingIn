@@ -2,56 +2,61 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using MovingIn.Minigames.CanRat;
 
-public class RatVision : MonoBehaviour
+
+namespace MovingIn.Minigames.CanRat.RatMov
 {
-    Vector3 ComponenteHorizontal = Vector3.right;
-    Vector3 ComponenteVertical = Vector3.down;
-    Vector3 vetorSolo;
-    RaycastHit FloorPoint;
-    public RaycastHit CollisionPoint;
-    
+    public class RatVision : MonoBehaviour
+    {
+        Vector3 ComponenteHorizontal = Vector3.right;
+        Vector3 ComponenteVertical = Vector3.down;
+        Vector3 vetorSolo;
+        RaycastHit FloorPoint;
+        public RaycastHit CollisionWall;
 
-    void Start()
-    {
-        //Calculo da distancia necessária para andar pro proximo cano (vetor)
-        vetorSolo = ((transform.localScale.y/2) * ComponenteVertical) +
-            ComponenteHorizontal;
-    }
-    /*
-    Função: FloorVision
-    @param: void
-    @return: 1, se há solo(cano) disponível à frente, e 0 se não
-    */
-    public bool FloorVision()
-    {
-        if(Physics.Raycast(transform.position, vetorSolo, out FloorPoint,3))
+
+        void Start()
         {
-            Debug.DrawLine(transform.position, FloorPoint.point);
-            return true;    
-        } 
-        else
-        {
-            return false;
+            //Calculo da distancia necessária para andar pro proximo cano (vetor)
+            vetorSolo = (transform.localScale.y/2f * ComponenteVertical) +
+                ComponenteHorizontal;
         }
-    }
-
-    /*
-    Função: StraighVision
-    @param: void
-    @return: 1, se há obstáculo à frente, 0 senão
-    */
-    public bool StraighVision()
-    {
-        if(Physics.Raycast(transform.position, Vector3.right, out CollisionPoint, 0.5f))
+        /*
+        Função: FloorVision
+        @param: void
+        @return: 1, se há solo(cano) disponível à frente, e 0 se não
+        */
+        public bool FloorVision()
         {
-            Debug.DrawLine(transform.position, Vector3.right);
-            return true;    
-        } 
-        else
-        {
-            return false;
+            if(Physics.Raycast(transform.position, vetorSolo, out FloorPoint,3))
+            {
+                Debug.DrawLine(transform.position, FloorPoint.point);
+                return true;    
+            } 
+            else
+            {
+                return false;
+            }
         }
-    }
 
+        /*
+        Função: StraighVision
+        @param: void
+        @return: 1, se há obstáculo à frente, 0 senão
+        */
+        public bool StraighVision()
+        {
+            if(Physics.Raycast(transform.position, Vector3.right, out CollisionWall, 0.5f))
+            {
+                Debug.DrawLine(transform.position, Vector3.right);
+                return true;    
+            } 
+            else
+            {
+                return false;
+            }
+        }
+
+    }
 }
