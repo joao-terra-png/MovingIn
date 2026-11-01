@@ -1,20 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using MovingIn.Minigames.CanRat;
 
 public class FilaInGame : MonoBehaviour
 {
     //Inicialização de uma fila vazia
-    public IntelliFila fila;
+    IntelliFila Fila;
+    public bool enableFila;
+    public void DisableFila(){
+        enableFila = false;
+    }
 
-    public bool testandoafila;
+    [SerializeField] UnityEvent ReajustaInventario = new UnityEvent();
+
     [SerializeField] GameObject CanoSelecionado;
     void Start()
     {
-        fila = gameObject.GetComponent<IntelliFila>();
-        testandoafila = false;
+        Fila = gameObject.GetComponent<IntelliFila>();
         CanoSelecionado = null;
+        enableFila = true;
     }
 
     void Update()
@@ -25,18 +31,21 @@ public class FilaInGame : MonoBehaviour
     void MenuFila()
     {
         CanoSelecionado = SelecionaAlvo.GetAlvo();
-        if(Input.GetKeyDown(KeyCode.E)){
-            if(fila.GetComponent<IntelliFila>().IntelliEnque(CanoSelecionado))
+        if(Input.GetKeyDown(KeyCode.E) && enableFila){
+            if(Fila.GetComponent<IntelliFila>().IntelliEnque(CanoSelecionado))
             {
+                //Desseleciona:
                 CanoSelecionado.GetComponent<PipeSelection>().SelectPipe();
-                testandoafila = true;
+                //Reajusta a direção do Inventario
+                ReajustaInventario.Invoke();
             }
         }
         else if (Input.GetKeyDown(KeyCode.D))
         {
-        if(fila.GetComponent<IntelliFila>().IntelliDeque())
+        if(Fila.GetComponent<IntelliFila>().IntelliDeque())
             {
-                testandoafila = false;
+                //Reajusta a direção do Inventario
+                ReajustaInventario.Invoke();
             }
         }
     }

@@ -9,8 +9,8 @@ namespace MovingIn.Minigames.CanRat.RatMov
 {
     public class RatVision : MonoBehaviour
     {
-        Vector3 ComponenteHorizontal = Vector3.right;
-        Vector3 ComponenteVertical = Vector3.down;
+        Vector3 ComponenteHorizontal;
+        Vector3 ComponenteVertical;
         Vector3 vetorSolo;
         RaycastHit FloorPoint;
         public RaycastHit CollisionWall;
@@ -18,8 +18,10 @@ namespace MovingIn.Minigames.CanRat.RatMov
 
         void Start()
         {
-            //Calculo da distancia necessária para andar pro proximo cano (vetor)
-            vetorSolo = (transform.localScale.y/2f * ComponenteVertical) +
+            ComponenteVertical = Vector3.down;
+            ComponenteHorizontal = 0.2f *Vector3.right;
+            //Calculo da distancia necessária para andar pro proximo cano (vetor), scale pelo seu tamanho
+            vetorSolo = (transform.lossyScale.y/1.5f * ComponenteVertical) +
                 ComponenteHorizontal;
         }
         /*
@@ -35,9 +37,7 @@ namespace MovingIn.Minigames.CanRat.RatMov
                 return true;    
             } 
             else
-            {
                 return false;
-            }
         }
 
         /*
@@ -47,7 +47,7 @@ namespace MovingIn.Minigames.CanRat.RatMov
         */
         public bool StraighVision()
         {
-            if(Physics.Raycast(transform.position, Vector3.right, out CollisionWall, 0.5f))
+            if(Physics.Raycast(transform.position, Vector3.right, out CollisionWall, 0.25f))
             {
                 Debug.DrawLine(transform.position, Vector3.right);
                 return true;    

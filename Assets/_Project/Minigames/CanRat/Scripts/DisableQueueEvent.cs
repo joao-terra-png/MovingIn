@@ -2,15 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-using MovingIn.Minigames.CanRat;
 
-public class DisableQueueEvent : MonoBehaviour
-{
-    public UnityEvent DisableQueue;
-
-    void ChegouAoDestino()
+namespace MovingIn.Minigames.CanRat{
+    public class DisableQueueEvent : MonoBehaviour
     {
-        if(!gameObject.GetComponent<EmptyPipe>().IsEmpty())
-            DisableQueue.Invoke();
+        public UnityEvent DisableQueue = new UnityEvent();
+        [SerializeField]bool TemRato;
+
+        void Update()
+        {
+            TemRato = !gameObject.GetComponent<EmptyPipe>().IsEmpty();
+            Debug.Log("Uptade rodando...");
+            if(TemRato)
+                DisableQueue.Invoke();
+        }
     }
 }

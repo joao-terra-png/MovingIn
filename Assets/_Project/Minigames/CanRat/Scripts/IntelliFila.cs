@@ -14,7 +14,6 @@ namespace MovingIn.Minigames.CanRat
         [SerializeField]Vector3 NextPipePos;
         //Guarda o ultimo cano colocado
         [SerializeField]GameObject LastEnqPipe;
-        [SerializeField]bool IsFinished;
         
 
         //Objeto Inventario para comandos como store (em retirar)
@@ -38,8 +37,6 @@ namespace MovingIn.Minigames.CanRat
         public bool IntelliEnque(GameObject NextObj)
         {
             if(NextObj == null)
-                return false;
-            else if(IsFinished)
                 return false;
             else if (filaBurra.Vazia() && (NextObj.CompareTag("RightToUpPipe") ||
                     NextObj.CompareTag("RightToDownPipe") || 
@@ -116,9 +113,6 @@ namespace MovingIn.Minigames.CanRat
                     break;
             }
         }
-        public void FinishQueue()
-        {
-            IsFinished = true;
-        }
+
     }
 }

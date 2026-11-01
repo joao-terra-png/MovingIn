@@ -16,7 +16,7 @@ namespace MovingIn.Minigames.CanRat
         // Start is called before the first frame update
         void Start()
         {
-            vetorDirecao = 2 *Vector3.forward;
+            vetorDirecao = Mathf.Abs(transform.position.z) * Vector3.forward;
             Physics.Raycast(transform.position, vetorDirecao, out alvoMarcado, 2f);
 
             ok = false;   
@@ -31,16 +31,16 @@ namespace MovingIn.Minigames.CanRat
         {
             ok = false;
             if(Input.GetKeyDown(KeyCode.UpArrow)){
-                AtualizaDirecao(2*Vector3.up, out ok);
+                AtualizaDirecao(Vector3.up, out ok);
             }
             else if(Input.GetKeyDown(KeyCode.DownArrow)){
-                AtualizaDirecao(2*Vector3.down, out ok);
+                AtualizaDirecao(Vector3.down, out ok);
             }
             else if(Input.GetKeyDown(KeyCode.LeftArrow)){
-                AtualizaDirecao(2*Vector3.left, out ok);
+                AtualizaDirecao(Vector3.left, out ok);
             }
             else if(Input.GetKeyDown(KeyCode.RightArrow)){
-                AtualizaDirecao(2*Vector3.right, out ok);
+                AtualizaDirecao(Vector3.right, out ok);
              }
             //Seleciona/desseleciona o objeto selecionado no momento ao mudar a seleção(raio)
             DesmarcaAlvo(canoSelecionado);
@@ -77,6 +77,11 @@ namespace MovingIn.Minigames.CanRat
                 canoSelecionado.GetComponent<PipeSelection>().SelectPipe();
                 canoSelecionado.GetComponent<PipeSelection>().MarkSelected();
                 }
+        }
+
+        public void ReajustaDirecao()
+        {
+            vetorDirecao = Mathf.Abs(transform.position.z) * Vector3.forward;
         }
     }
 }

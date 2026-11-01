@@ -16,7 +16,7 @@ namespace MovingIn.Minigames.CanRat.RatMov
         }
         void Update()
         {
-            if (_ratVision.FloorVision() && !(_ratVision.StraighVision()))
+            if (_ratVision.FloorVision() && !_ratVision.StraighVision())
             {
                 ForwardMove();
             }
@@ -28,7 +28,7 @@ namespace MovingIn.Minigames.CanRat.RatMov
 
         void ForwardMove() // Movimento unidirecional para frente
         {
-            transform.position += 0.5f * Vector3.right;
+            transform.Translate(0.5f*Time.deltaTime, 0, 0);
         }
 
         void YMove() // Movimento em canos curvos  (no eixo Y)
