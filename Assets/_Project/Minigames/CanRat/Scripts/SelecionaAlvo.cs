@@ -18,7 +18,7 @@ namespace MovingIn.Minigames.CanRat
         {
             vetorDirecao = Mathf.Abs(transform.position.z) * Vector3.forward;
             Physics.Raycast(transform.position, vetorDirecao, out alvoMarcado, 2f);
-
+            canoSelecionado = null;
             ok = false;   
         }
         static public GameObject GetAlvo()
@@ -43,14 +43,15 @@ namespace MovingIn.Minigames.CanRat
                 AtualizaDirecao(Vector3.right, out ok);
              }
             //Seleciona/desseleciona o objeto selecionado no momento ao mudar a seleção(raio)
-            DesmarcaAlvo(canoSelecionado);
+            if(canoSelecionado != null)
+                DesmarcaAlvo(canoSelecionado);
 
             if(Physics.Raycast(transform.position, vetorDirecao, out alvoMarcado, 2f))
                 Debug.DrawLine(transform.position, alvoMarcado.point);
 
             MarcaAlvo(alvoMarcado);
             //Tira a seleção caso já não esteja mais selecionado
-            if(canoSelecionado.GetComponent<PipeSelection>().IsSelected == false)
+            if(canoSelecionado != null && canoSelecionado.GetComponent<PipeSelection>().IsSelected == false)
                 canoSelecionado = null;
         }
 

@@ -15,6 +15,7 @@ TagManager:
   - Hamster
   - Backdrop
   - Inventory
+  - GameManager
   layers:
   - Default
   - TransparentFX

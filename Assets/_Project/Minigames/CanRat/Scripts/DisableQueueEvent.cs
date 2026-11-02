@@ -12,9 +12,10 @@ namespace MovingIn.Minigames.CanRat{
         void Update()
         {
             TemRato = !gameObject.GetComponent<EmptyPipe>().IsEmpty();
-            Debug.Log("Uptade rodando...");
-            if(TemRato)
+            if(TemRato){
+                Debug.Log("Desabilitando fila...");
                 DisableQueue.Invoke();
+            }
         }
     }
 }

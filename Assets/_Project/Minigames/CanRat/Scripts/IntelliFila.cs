@@ -70,9 +70,10 @@ namespace MovingIn.Minigames.CanRat
                 return false;
         }
 
+        [SerializeField] GameObject FirstEnqdEmpty;
         public bool IntelliDeque()
         {
-            GameObject FirstEnqdEmpty = (GameObject)filaBurra.Primeiro().GetInfo();  //Usado para ver se há hamster
+            FirstEnqdEmpty = (GameObject)filaBurra.Primeiro().GetInfo();  //Usado para ver se há hamster
             GameObject FstEnqdCasted;   //Receberá o Objeto em si se retirar da fila
             object fstObjectTemp;
             if (FirstEnqdEmpty.GetComponent<EmptyPipe>().IsEmpty() &&

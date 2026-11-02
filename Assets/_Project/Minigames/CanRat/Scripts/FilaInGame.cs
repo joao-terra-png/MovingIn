@@ -26,6 +26,8 @@ public class FilaInGame : MonoBehaviour
     void Update()
     {
         MenuFila();
+        if(!enableFila)
+            GetComponent<FinishGameEvent>().FinishGame();
     }
 
     void MenuFila()
@@ -34,16 +36,18 @@ public class FilaInGame : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.E) && enableFila){
             if(Fila.GetComponent<IntelliFila>().IntelliEnque(CanoSelecionado))
             {
+                Debug.Log($"Inserindo {CanoSelecionado.tag} na fila...");
                 //Desseleciona:
                 CanoSelecionado.GetComponent<PipeSelection>().SelectPipe();
                 //Reajusta a direção do Inventario
                 ReajustaInventario.Invoke();
             }
         }
-        else if (Input.GetKeyDown(KeyCode.D))
+        else if(Input.GetKeyDown(KeyCode.D))
         {
         if(Fila.GetComponent<IntelliFila>().IntelliDeque())
             {
+                Debug.Log("Retirando objeto da fila...");
                 //Reajusta a direção do Inventario
                 ReajustaInventario.Invoke();
             }
