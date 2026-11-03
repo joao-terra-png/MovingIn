@@ -8,5 +8,6 @@ public class FinishGameEvent : MonoBehaviour
     public void FinishGame()
     {
         ShowFinishPanel.Invoke();
+        Time.timeScale = 0f;
     }
 }

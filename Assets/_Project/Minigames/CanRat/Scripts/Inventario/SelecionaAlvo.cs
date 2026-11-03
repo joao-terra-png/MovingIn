@@ -13,13 +13,16 @@ namespace MovingIn.Minigames.CanRat
 
         bool ok; //variavel que retorna se houve atualização de direção
         Vector3 vetorDirecao;
-        // Start is called before the first frame update
+        GameObject SelectionBox;
+        Vector3 BoxOrigPosition;
         void Start()
         {
             vetorDirecao = Mathf.Abs(transform.position.z) * Vector3.forward;
             Physics.Raycast(transform.position, vetorDirecao, out alvoMarcado, 2f);
             canoSelecionado = null;
             ok = false;   
+            SelectionBox = transform.GetChild(0).gameObject;
+            BoxOrigPosition = SelectionBox.transform.position;
         }
         static public GameObject GetAlvo()
         {
@@ -59,6 +62,12 @@ namespace MovingIn.Minigames.CanRat
         {
             vetorDirecao += vetorDeslocamento;
             sucesso = true;
+            AtualizaSelectionBox(vetorDeslocamento);
+        }
+
+        void AtualizaSelectionBox(Vector3 vetorDeslocamento)
+        {
+            SelectionBox.transform.position += vetorDeslocamento;
         }
 
         void MarcaAlvo(RaycastHit alvo)
@@ -83,6 +92,7 @@ namespace MovingIn.Minigames.CanRat
         public void ReajustaDirecao()
         {
             vetorDirecao = Mathf.Abs(transform.position.z) * Vector3.forward;
+            SelectionBox.transform.position = BoxOrigPosition;
         }
     }
 }
