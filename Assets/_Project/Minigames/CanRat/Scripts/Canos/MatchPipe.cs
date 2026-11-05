@@ -25,9 +25,9 @@ namespace MovingIn.Minigames.CanRat
                 case "DownToRightPipe":
                     return (tag == "HorizontalPipe") || (tag == "RightToUpPipe") || (tag == "RightToDownPipe");
                 case "HorizontalPipe":
-                    return (tag == "RightToUpPipe") || (tag == "RightToDownPipe");
+                    return (tag == "RightToUpPipe") || (tag == "RightToDownPipe") || (tag == "HorizontalPipe");
                 case "VerticalPipe":
-                    return (tag == "UpToRightPipe") || (tag == "DownToRightPipe");
+                    return (tag == "UpToRightPipe") || (tag == "DownToRightPipe") || (tag == "VerticalPipe");
                 default: 
                     return false;
             }

@@ -7,28 +7,22 @@ using MovingIn.Core.Structures;
 
 namespace MovingIn.Minigames.CanRat
 {
-    public class IntelliFila : MonoBehaviour
+    public class IntelliFila
     {
         FilaEncadeada filaBurra;
         //Guarda a posição onde o próximo cano da Fila será colocado
-        [SerializeField]Vector3 NextPipePos;
+        public Vector3 NextPipePos {get; private set;}
         //Guarda o ultimo cano colocado
-        [SerializeField]GameObject LastEnqPipe;
+        public GameObject LastEnqPipe {get; private set;}
         
 
         //Objeto Inventario para comandos como store (em retirar)
-        GameObject Inventario;
-
-
-        void Start()
-        {
-            Inventario = GameObject.FindGameObjectWithTag("Inventory");
-        }
+        public GameObject Inventario;   //Passado como referencia para ser associado no FilaManager
         public IntelliFila()
         {
             filaBurra = new FilaEncadeada();
             //PosInicial como (0, 0, 0)
-            NextPipePos = Vector3.right;
+            NextPipePos = Vector3.zero;
             LastEnqPipe = null;
 
         }
@@ -70,7 +64,7 @@ namespace MovingIn.Minigames.CanRat
                 return false;
         }
 
-        [SerializeField] GameObject FirstEnqdEmpty;
+        public GameObject FirstEnqdEmpty {get; private set;}
         public bool IntelliDeque()
         {
             FirstEnqdEmpty = (GameObject)filaBurra.Primeiro().GetInfo();  //Usado para ver se há hamster
@@ -113,6 +107,12 @@ namespace MovingIn.Minigames.CanRat
                     NextPipePos = LastEnqPipe.transform.position + Vector3.zero;
                     break;
             }
+        }
+
+        public void SetInicialPos(Vector3 PosInicial)
+        {
+            if(NextPipePos == Vector3.zero)
+                NextPipePos = PosInicial;
         }
 
     }

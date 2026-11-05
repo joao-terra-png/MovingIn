@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.Events;
 
 public class PauseLevel : MonoBehaviour
 {
@@ -11,9 +10,11 @@ public class PauseLevel : MonoBehaviour
     bool IsPaused;
     public UnityEvent PauseGame = new UnityEvent();
     [SerializeField]UnityEvent ResumeGame = new UnityEvent();   //Inscrito pelo inspector
+    //Jogo inicializa pausado
     void Start()
     {
-        IsPaused = false;
+        IsPaused = true;
+        Time.timeScale = 0f;
     }
 
     void Update()

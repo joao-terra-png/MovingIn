@@ -13,15 +13,16 @@ namespace MovingIn.Minigames.CanRat
 
         bool ok; //variavel que retorna se houve atualização de direção
         Vector3 vetorDirecao;
-        GameObject SelectionBox;
+        [SerializeField]GameObject SelectionBox;
         Vector3 BoxOrigPosition;
+        float distanciaCam;
         void Start()
         {
-            vetorDirecao = Mathf.Abs(transform.position.z) * Vector3.forward;
-            Physics.Raycast(transform.position, vetorDirecao, out alvoMarcado, 2f);
+            distanciaCam = 1.5f * Mathf.Abs(transform.position.z);  //distanciamax >= distancia da camera da parede
+            vetorDirecao = distanciaCam * Vector3.forward;
+            Physics.Raycast(transform.position, vetorDirecao, out alvoMarcado, distanciaCam);
             canoSelecionado = null;
             ok = false;   
-            SelectionBox = transform.GetChild(0).gameObject;
             BoxOrigPosition = SelectionBox.transform.position;
         }
         static public GameObject GetAlvo()
@@ -29,40 +30,42 @@ namespace MovingIn.Minigames.CanRat
             return canoSelecionado;
         }
 
-        // Update is called once per frame
         void Update()
         {
+            //Impede movimento seo jogo estiver pausado
+            if(Time.timeScale != 0){
             ok = false;
             if(Input.GetKeyDown(KeyCode.UpArrow)){
-                AtualizaDirecao(Vector3.up, out ok);
+                AtualizaDirecao(1.5f*Vector3.up, out ok);
             }
             else if(Input.GetKeyDown(KeyCode.DownArrow)){
-                AtualizaDirecao(Vector3.down, out ok);
+                AtualizaDirecao(1.5f*Vector3.down, out ok);
             }
             else if(Input.GetKeyDown(KeyCode.LeftArrow)){
-                AtualizaDirecao(Vector3.left, out ok);
+                AtualizaDirecao(1.5f*Vector3.left, out ok);
             }
             else if(Input.GetKeyDown(KeyCode.RightArrow)){
-                AtualizaDirecao(Vector3.right, out ok);
+                AtualizaDirecao(1.5f*Vector3.right, out ok);
              }
             //Seleciona/desseleciona o objeto selecionado no momento ao mudar a seleção(raio)
             if(canoSelecionado != null)
                 DesmarcaAlvo(canoSelecionado);
 
-            if(Physics.Raycast(transform.position, vetorDirecao, out alvoMarcado, 2f))
+            if(Physics.Raycast(transform.position, vetorDirecao, out alvoMarcado, distanciaCam))
                 Debug.DrawLine(transform.position, alvoMarcado.point);
 
             MarcaAlvo(alvoMarcado);
             //Tira a seleção caso já não esteja mais selecionado
             if(canoSelecionado != null && canoSelecionado.GetComponent<PipeSelection>().IsSelected == false)
                 canoSelecionado = null;
+            }
         }
 
         void AtualizaDirecao(Vector3 vetorDeslocamento, out bool sucesso)
         {
             vetorDirecao += vetorDeslocamento;
             sucesso = true;
-            AtualizaSelectionBox(vetorDeslocamento);
+            AtualizaSelectionBox(vetorDeslocamento/1.5f);
         }
 
         void AtualizaSelectionBox(Vector3 vetorDeslocamento)
@@ -91,7 +94,7 @@ namespace MovingIn.Minigames.CanRat
 
         public void ReajustaDirecao()
         {
-            vetorDirecao = Mathf.Abs(transform.position.z) * Vector3.forward;
+            vetorDirecao = distanciaCam * Vector3.forward;
             SelectionBox.transform.position = BoxOrigPosition;
         }
     }

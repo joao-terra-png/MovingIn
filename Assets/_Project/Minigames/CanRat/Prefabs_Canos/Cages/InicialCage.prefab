@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2381109012376622534}
   m_Layer: 0
   m_Name: InicialCage
-  m_TagString: CanLine
+  m_TagString: InicialCage
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

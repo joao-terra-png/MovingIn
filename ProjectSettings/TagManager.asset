@@ -17,6 +17,8 @@ TagManager:
   - Inventory
   - GameManager
   - Target
+  - InicialCage
+  - FinalCage
   layers:
   - Default
   - TransparentFX
