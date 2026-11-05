@@ -150,8 +150,8 @@ BoxCollider:
   m_ProvidesContacts: 1
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 0.1, z: 1}
-  m_Center: {x: 0, y: -0.125, z: 0}
+  m_Size: {x: 0.5525664, y: 0.099999994, z: 1}
+  m_Center: {x: -0.2237168, y: -0.125, z: 0}
 --- !u!65 &4412039336719576368
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -210,6 +210,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   temHamster: 0
+  HamsterInside: {fileID: 0}
 --- !u!114 &-1666581636565626855
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -11,11 +11,22 @@ namespace MovingIn.Minigames.CanRat
     */
     public class FilaManager1 : MonoBehaviour
     {
-        GameObject InicialCage;
-        public IntelliFila Fila { get; private set; }
-        public bool enableFila { get; set; }
-    
+        [SerializeField]GameObject InicialCage;
+        [SerializeField]GameObject FinalCage;
+        IntelliFila Fila;
+        public bool enableFila;
+        [SerializeField] GameObject Inventario;
         [SerializeField] GameObject SuperiorManager; 
+
+        public IntelliFila GetFila()
+        {
+            return Fila;
+        }
+
+        public bool GetEnableFila()
+        {
+            return enableFila;
+        }
     
         public void DisableFila(){
             enableFila = false;
@@ -24,13 +35,14 @@ namespace MovingIn.Minigames.CanRat
         void Awake()
         {
             Fila = new IntelliFila();
-            InicialCage = GameObject.FindGameObjectWithTag("InicialCage");
             Fila.SetInicialPos(InicialCage.transform.position + Vector3.right);
-            enableFila = true;
+            enableFila = FinalCage.GetComponent<ValidaFila>().IsEnabled();
+            Fila.Inventario = this.Inventario;
         }
     
         void Update()
         {
+            enableFila = enableFila = FinalCage.GetComponent<ValidaFila>().IsEnabled();
             if(!enableFila)
                 SuperiorManager.GetComponent<FinishGameEvent>().FinishGame();
         }

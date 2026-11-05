@@ -16,15 +16,17 @@ namespace MovingIn.Minigames.CanRat
         void Start()
         {
             CanoSelecionado = null;
-            currentFila = gameObject.GetComponent<FilaManager1>().Fila;
-            enableCurrentFila = gameObject.GetComponent<FilaManager1>().enableFila;
+            currentFila = gameObject.GetComponent<FilaManager1>().GetFila();
+            enableCurrentFila = gameObject.GetComponent<FilaManager1>().GetEnableFila();
 
         }
 
         void Update()
         {
-            if(currentFila != null && gameObject.GetComponent<FilaManager1>().Fila != currentFila)
-                currentFila = gameObject.GetComponent<FilaManager1>().Fila;
+            if(currentFila != null && gameObject.GetComponent<FilaManager1>().GetFila() != currentFila){
+                currentFila = gameObject.GetComponent<FilaManager1>().GetFila();
+            }
+            enableCurrentFila = gameObject.GetComponent<FilaManager1>().GetEnableFila();
             if(Time.timeScale != 0){
                 MenuFila();
             }
@@ -47,11 +49,11 @@ namespace MovingIn.Minigames.CanRat
             else if(Input.GetKeyDown(KeyCode.D))
             {
                 if(currentFila.IntelliDeque())
-                {
-                    Debug.Log("Retirando objeto da fila...");
-                    //Reajusta a direção do Inventario
-                    ReajustaInventario.Invoke();
-                }
+                    {
+                        Debug.Log("Retirando objeto da fila...");
+                        //Reajusta a direção do Inventario
+                        ReajustaInventario.Invoke();
+                    }
             }
         }
     }

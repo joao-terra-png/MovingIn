@@ -4,12 +4,12 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace MovingIn.Minigames.CanRat{
+namespace MovingIn.Minigames.CanRat
+{
     public class ValidaFila : MonoBehaviour
     {
         public UnityEvent ShowDefeatScreen = new UnityEvent();
         [SerializeField]GameObject HamsterPredestinado; // Hamster que deve chegar a essa cage
-        GameObject HamsterAlcançado;    //Hamster que realmente chegou a cage
 
         bool EnableQueue;
         void Awake()
@@ -26,23 +26,28 @@ namespace MovingIn.Minigames.CanRat{
             if(!gameObject.GetComponent<EmptyPipe>().IsEmpty() && EnableQueue){
                 Debug.Log("Desabilitando fila...");
                 EnableQueue = false;
-                //Testa se a fila é inválida
-                if(!IsValid())
-                    ShowDefeatScreen.Invoke();
             }
         }
-
-        void OnCollsionStay(Collision collision)
+        void LateUpdate()
         {
-            HamsterAlcançado = collision.gameObject;
+            if(!EnableQueue && !IsValid()){
+                    ShowDefeatScreen.Invoke();
+                    Time.timeScale = 0f;    //Pausa o jogo    
+                }
         }
+
+
 
     bool IsValid()
         {
-            if(HamsterAlcançado == HamsterPredestinado)
+            if(gameObject.GetComponent<EmptyPipe>().HamsterInside == HamsterPredestinado){
+                Debug.Log("Fila valida!");
                 return true;
-            else
+            }
+            else{
+                Debug.Log("Fila invalida!");
                 return false;
+            }
         }
 
     }

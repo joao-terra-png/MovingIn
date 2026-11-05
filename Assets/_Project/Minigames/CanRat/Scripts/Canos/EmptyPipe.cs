@@ -6,6 +6,7 @@ namespace MovingIn.Minigames.CanRat{
     public class EmptyPipe : MonoBehaviour
     {
         public bool temHamster;
+        public GameObject HamsterInside;
     
         void Start()
         {
@@ -13,14 +14,18 @@ namespace MovingIn.Minigames.CanRat{
         }
         void OnCollisionEnter(Collision collision)
         {
-            if(collision.gameObject.CompareTag("Hamster"))
+            if(collision.gameObject.CompareTag("Hamster")){
                 temHamster = true;  
+                HamsterInside = collision.gameObject;    
+            }
         }
     
-            void OnCollisionExit(Collision collision)
+        void OnCollisionExit(Collision collision)
         {
-            if(collision.gameObject.CompareTag("Hamster"))
+            if(collision.gameObject.CompareTag("Hamster")){
+                HamsterInside = null;
                 temHamster = false;  
+            }
         }
     
         /*Retorna 0 se não está vazio, e 1 se está*/
