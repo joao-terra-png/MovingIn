@@ -56,9 +56,10 @@ public class GerenciadorOndas : MonoBehaviour
         encerrado = true;
         if (rotina != null) StopCoroutine(rotina);
 
-        while (fila.Desenf(out Node no))
+        while (!fila.Vazia())
         {
-            Inimigo restante = (Inimigo)no.GetInfo();
+            Inimigo restante = AlvoAtual;
+            fila.Desenf(null);
             if (restante != null)
             {
                 Desligar(restante);
@@ -130,10 +131,11 @@ public class GerenciadorOndas : MonoBehaviour
 
     private void RetirarDaFila(Inimigo esperado)
     {
-        bool deuCerto = fila.Desenf(out Node no);
+        Inimigo daFrente = AlvoAtual;
+        bool deuCerto = fila.Desenf(null);
         Desligar(esperado);
 
-        if (deuCerto && (Inimigo)no.GetInfo() != esperado)
+        if (deuCerto && daFrente != esperado)
             Debug.LogWarning("A ordem da fila foi quebrada: saiu um inimigo diferente do esperado.");
     }
 
