@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using MovingIn.Core.Structures;
 
 // Cria os inimigos e os remove
 public class GerenciadorOndas : MonoBehaviour
