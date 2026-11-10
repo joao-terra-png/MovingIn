@@ -37,6 +37,8 @@ namespace MovingIn.Minigames.CanRat
                 currentFila = gameObject.GetComponent<FilaManager2>().GetFilaSelecionada();
                 enableCurrentFila = gameObject.GetComponent<FilaManager2>().EnableFilaSelecionada();
             }
+            enableCurrentFila = gameObject.GetComponent<FilaManager2>().EnableFilaSelecionada();
+
             if(Time.timeScale != 0){
                 MenuFila();
             }
@@ -57,7 +59,7 @@ namespace MovingIn.Minigames.CanRat
                     ReajustaInventario.Invoke();
                 }
             }
-            else if(Input.GetKeyDown(KeyCode.D))
+            else if(Input.GetKeyDown(KeyCode.Q))
             {
                 Debug.Log($"Tentando remover da fila {currentFila}");
                 if(currentFila.IntelliDeque())

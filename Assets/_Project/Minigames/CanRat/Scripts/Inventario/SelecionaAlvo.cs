@@ -35,16 +35,16 @@ namespace MovingIn.Minigames.CanRat
             //Impede movimento seo jogo estiver pausado
             if(Time.timeScale != 0){
             ok = false;
-            if(Input.GetKeyDown(KeyCode.UpArrow)){
+            if(Input.GetKeyDown(KeyCode.W)){
                 AtualizaDirecao(1.5f*Vector3.up, out ok);
             }
-            else if(Input.GetKeyDown(KeyCode.DownArrow)){
+            else if(Input.GetKeyDown(KeyCode.S)){
                 AtualizaDirecao(1.5f*Vector3.down, out ok);
             }
-            else if(Input.GetKeyDown(KeyCode.LeftArrow)){
+            else if(Input.GetKeyDown(KeyCode.A)){
                 AtualizaDirecao(1.5f*Vector3.left, out ok);
             }
-            else if(Input.GetKeyDown(KeyCode.RightArrow)){
+            else if(Input.GetKeyDown(KeyCode.D)){
                 AtualizaDirecao(1.5f*Vector3.right, out ok);
              }
             //Seleciona/desseleciona o objeto selecionado no momento ao mudar a seleção(raio)
@@ -77,7 +77,7 @@ namespace MovingIn.Minigames.CanRat
         {
             if(alvo.collider.gameObject != null && alvo.collider.gameObject.CompareTag("Backdrop") == false){
                 //fazer o visual de seleção
-                if(Input.GetKeyDown(KeyCode.Return)){
+                if(Input.GetKeyDown(KeyCode.Space)){
                     canoSelecionado = alvo.collider.gameObject;
                     canoSelecionado.GetComponent<PipeSelection>().SelectPipe();
                     canoSelecionado.GetComponent<PipeSelection>().MarkSelected();

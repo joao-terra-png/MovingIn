@@ -80,6 +80,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   temHamster: 0
+  HamsterInside: {fileID: 0}
 --- !u!114 &5265431985626076915
 MonoBehaviour:
   m_ObjectHideFlags: 0

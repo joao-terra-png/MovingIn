@@ -31,7 +31,7 @@ namespace MovingIn.Minigames.CanRat.RatMov
         */
         public bool FloorVision()
         {
-            if(Physics.Raycast(transform.position, vetorSolo, out FloorPoint,3))
+            if(Physics.Raycast(transform.position, vetorSolo, out FloorPoint,0.25f))
             {
                 Debug.DrawLine(transform.position, FloorPoint.point);
                 return true;    
