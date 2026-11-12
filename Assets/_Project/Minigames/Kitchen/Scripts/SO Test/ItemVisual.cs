@@ -1,16 +1,12 @@
 using UnityEngine;
 
 namespace MovingIn.Minigames.Kitchen{
-    ///<summary>
-    /// o item na cena: recebe a ficha (ItemData) e o gerenciador pelo Configure
-    /// vai no prefab do item
-    /// </summary>
     [RequireComponent(typeof(SpriteRenderer), typeof(BoxCollider2D))]
     public class ItemVisual : MonoBehaviour
     {
         public ItemData Data { get; private set; }
         public KitchenManager Manager { get; private set; }
-        public DropZone CurrentZone { get; set; }  
+        public DropZone CurrentZone { get; set; }
         public Color BaseColor { get; private set; }
 
         SpriteRenderer _sr;
@@ -19,7 +15,7 @@ namespace MovingIn.Minigames.Kitchen{
         void Awake()
         {
             _sr = GetComponent<SpriteRenderer>();
-            _movement = GetComponent<Movement>();   
+            _movement = GetComponent<Movement>();
         }
 
         public void Configure(ItemData data, KitchenManager manager)
@@ -35,16 +31,20 @@ namespace MovingIn.Minigames.Kitchen{
 
             if (data.sprite != null)
             {
+                transform.localScale = Vector3.one;
                 _sr.sprite = data.sprite;
-                BaseColor = Color.white;           
+                BoxCollider2D col = GetComponent<BoxCollider2D>();
+                col.size = data.sprite.bounds.size;
+                col.offset = data.sprite.bounds.center;
+                BaseColor = Color.white;
             }
             else
             {
-                BaseColor = data.colorPlaceholder; 
+                BaseColor = data.colorPlaceholder;
+                transform.localScale = Vector3.one * (0.6f + 0.2f * data.size);
             }
             _sr.color = BaseColor;
 
-            transform.localScale = Vector3.one * (0.6f + 0.2f * data.size);
             name = $"Item_{data.exhibitName}";
         }
 

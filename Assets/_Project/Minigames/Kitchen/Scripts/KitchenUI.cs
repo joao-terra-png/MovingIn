@@ -2,15 +2,16 @@ using System.Text;
 using TMPro;
 using UnityEngine;
 
-namespace MovingIn.Minigames.Kitchen
-{
+namespace MovingIn.Minigames.Kitchen{
     public class KitchenUI : MonoBehaviour
     {
         [SerializeField] KitchenManager manager;
         [SerializeField] TMP_Text pointsText;
         [SerializeField] TMP_Text noteText;
+        [SerializeField] TMP_Text noteTextRight;
         [SerializeField] GameObject victoryPanel;
         [SerializeField] TMP_Text finalScoreText;
+        [SerializeField] string _doneColor = "#4A5A62";
 
         void OnEnable()
         {
@@ -37,20 +38,31 @@ namespace MovingIn.Minigames.Kitchen
 
         void UpdateNote()
         {
-            var sb = new StringBuilder();
-            manager.ForEachNoteItem(item => sb.AppendLine("- " + item.exhibitName));
-            noteText.text = sb.Length == 0 ? "Tudo guardado! <3" : sb.ToString();
+            int total = 0;
+            manager.ForEachNoteEntry((item, done) => total++);
+            int half = noteTextRight != null ? (total + 1) / 2 : total;
+
+            var left = new StringBuilder();
+            var right = new StringBuilder();
+            int index = 0;
+
+            manager.ForEachNoteEntry((item, done) =>
+            {
+                string line = done
+                    ? $"<color={_doneColor}><s>{item.exhibitName}</s></color>"
+                    : $"• {item.exhibitName}";
+                (index < half ? left : right).AppendLine(line);
+                index++;
+            });
+
+            noteText.text = left.ToString();
+            if (noteTextRight != null) noteTextRight.text = right.ToString();
         }
 
         void ShowVictory()
         {
             victoryPanel.SetActive(true);
             finalScoreText.text = $"Pontos: {manager.Points}";
-        }
-
-        public void BackHome()
-        {
-            Debug.Log("Voltar pra casa clicado");
         }
     }
 }

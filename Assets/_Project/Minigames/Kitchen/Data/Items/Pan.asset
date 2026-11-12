@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2109502938e3c1e4fbd1184b97c2293e, type: 3}
   m_Name: Pan
   m_EditorClassIdentifier: 
-  exhibitName: Pan
-  sprite: {fileID: 0}
+  exhibitName: Panela
+  sprite: {fileID: 21300000, guid: ff7d6bed5a4cb5b4ca5d5a1889912b36, type: 3}
   colorPlaceholder: {r: 0.2901961, g: 0.2901961, b: 0.2901961, a: 1}
   type: 1
   size: 2

@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2109502938e3c1e4fbd1184b97c2293e, type: 3}
   m_Name: Bear
   m_EditorClassIdentifier: 
-  exhibitName: Bear
-  sprite: {fileID: 0}
+  exhibitName: Ursinho
+  sprite: {fileID: 21300000, guid: 612ad2addc0a5424dbe734b521fd024c, type: 3}
   colorPlaceholder: {r: 0.627451, g: 0.32156864, b: 0.1764706, a: 1}
   type: 2
   size: 1

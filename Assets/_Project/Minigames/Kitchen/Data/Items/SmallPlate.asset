@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2109502938e3c1e4fbd1184b97c2293e, type: 3}
   m_Name: SmallPlate
   m_EditorClassIdentifier: 
-  exhibitName: Small Plate
-  sprite: {fileID: 0}
+  exhibitName: Prato Pequeno
+  sprite: {fileID: 86191893, guid: bcb92ec00c99d4c419f9678852c9a929, type: 3}
   colorPlaceholder: {r: 0.6862745, g: 0.78431374, b: 0.8627451, a: 1}
   type: 0
   size: 1
