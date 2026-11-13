@@ -8,7 +8,7 @@ namespace MovingIn.Minigames.CanRat
     {
         // Start is called before the first frame update
         //Indica se o objeto está ou não selecionado
-        public bool IsSelected;
+        bool IsSelected;
 
         public GameObject teste;
 

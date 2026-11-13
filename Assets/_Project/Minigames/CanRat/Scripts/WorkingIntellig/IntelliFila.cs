@@ -47,7 +47,8 @@ namespace MovingIn.Minigames.CanRat
                 AtualizaNextPos();
                 return true;
             }
-            else if(LastEnqPipe.GetComponent<MatchPipe>().TestaEncaixe(NextObj.tag))
+            else if(LastEnqPipe.GetComponent<MatchPipe>().ProxCano() == null && 
+                LastEnqPipe.GetComponent<MatchPipe>().TestaEncaixe(NextObj.tag))
             {
                 //Enfileira e muda o estado de inventario
                 filaBurra.Enf(NextObj);

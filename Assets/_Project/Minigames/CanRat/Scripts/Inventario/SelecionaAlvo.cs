@@ -56,7 +56,7 @@ namespace MovingIn.Minigames.CanRat
 
             MarcaAlvo(alvoMarcado);
             //Tira a seleção caso já não esteja mais selecionado
-            if(canoSelecionado != null && canoSelecionado.GetComponent<PipeSelection>().IsSelected == false)
+            if(canoSelecionado != null && canoSelecionado.GetComponent<PipeSelection>().GetIsSelected() == false)
                 canoSelecionado = null;
             }
         }

@@ -39,29 +39,34 @@ namespace MovingIn.Minigames.CanRat
         */
         public string ProxCano()
         {
-            RaycastHit procuraComplemento;
+            RaycastHit procuraProx;
     
             switch (gameObject.tag)
             {
                 case "RightToUpPipe":
-                    if (Physics.Raycast(transform.position, Vector3.up, out procuraComplemento, 0.6f))
-                        return procuraComplemento.collider.gameObject.tag;
+                    if (Physics.Raycast(transform.position, Vector3.up, out procuraProx, 1f))
+                        return procuraProx.collider.gameObject.tag;
                     else
                         return null;
                 case "RightToDownPipe":
                     if (Physics.Raycast((transform.position + 0.18f *Vector3.down), // +0.18f *Vector3.down para não conflitar com ele mesmo
-                            Vector3.down, out procuraComplemento, 0.6f))                //Visto que a plataforma horizontal esta abaixo do centro
-                        return procuraComplemento.collider.gameObject.tag; 
+                            Vector3.down, out procuraProx, 1f))                //Visto que a plataforma horizontal esta abaixo do centro
+                        return procuraProx.collider.gameObject.tag; 
                     else
                         return null;
                 case "UpToRightPipe":
-                    if (Physics.Raycast(transform.position, Vector3.up, out procuraComplemento, 0.6f))
-                        return procuraComplemento.collider.gameObject.tag;
+                    if (Physics.Raycast(transform.position+ 0.18f * Vector3.down, Vector3.right, out procuraProx, 1f))
+                        return procuraProx.collider.gameObject.tag;
                     else
                         return null;
                 case "DownToRightPipe":
-                    if (Physics.Raycast(transform.position, Vector3.up, out procuraComplemento, 0.6f))
-                        return procuraComplemento.collider.gameObject.tag;
+                    if (Physics.Raycast(transform.position+ 0.18f * Vector3.down, Vector3.right, out procuraProx, 1f))
+                        return procuraProx.collider.gameObject.tag;
+                    else
+                        return null;
+                case "HorizontalPipe":
+                    if(Physics.Raycast(transform.position + 0.18f * Vector3.down, Vector3.right, out procuraProx, 1f))
+                        return procuraProx.collider.gameObject.tag;
                     else
                         return null;
                 default: 
