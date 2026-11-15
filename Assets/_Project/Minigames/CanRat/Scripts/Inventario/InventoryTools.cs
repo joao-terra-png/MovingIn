@@ -36,8 +36,8 @@ namespace MovingIn.Minigames.CanRat
                 Debug.Log("Storing in Inventory...");
                 objeto.transform.position = InvRay.point - 0.9f * Vector3.up;
                 objeto.GetComponent<InInventory>().SetIsStored(true);
-                TargetBox.transform.position = TargetBox.transform.position.z * Vector3.back + 
-                    RecycleBox.transform.position;
+                //TargetBox.transform.position = TargetBox.transform.position.z * Vector3.back + 
+                    //RecycleBox.transform.position;
 
 
                 return true;    

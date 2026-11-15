@@ -103,7 +103,7 @@ namespace MovingIn.Minigames.CanRat
                     {
                         Debug.Log("Retirando objeto da fila...");
                         //Reajusta a direção do Inventario
-                        ReajustaInventario.Invoke();
+                        //ReajustaInventario.Invoke();
                     }
             }
         }
