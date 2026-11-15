@@ -1183,6 +1183,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1317137935}
     m_Modifications:
+    - target: {fileID: 5051664057541063600, guid: b32138b97f37f494a99145cb26bd031b, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6375265004089818414, guid: b32138b97f37f494a99145cb26bd031b, type: 3}
       propertyPath: m_Name
       value: Cano_UTR
@@ -1657,6 +1661,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6346550411836596287, guid: 558fc78768beed640b7f5fb159f7a1c2, type: 3}
       propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6346550411836596287, guid: 558fc78768beed640b7f5fb159f7a1c2, type: 3}
+      propertyPath: m_LightProbeUsage
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6346550411836596287, guid: 558fc78768beed640b7f5fb159f7a1c2, type: 3}
+      propertyPath: m_ReflectionProbeUsage
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8015035428191908602, guid: 558fc78768beed640b7f5fb159f7a1c2, type: 3}
@@ -4408,8 +4420,20 @@ PrefabInstance:
       propertyPath: m_Name
       value: 'Cano_H '
       objectReference: {fileID: 0}
+    - target: {fileID: 3093850436958899307, guid: 558fc78768beed640b7f5fb159f7a1c2, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6346550411836596287, guid: 558fc78768beed640b7f5fb159f7a1c2, type: 3}
       propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6346550411836596287, guid: 558fc78768beed640b7f5fb159f7a1c2, type: 3}
+      propertyPath: m_LightProbeUsage
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6346550411836596287, guid: 558fc78768beed640b7f5fb159f7a1c2, type: 3}
+      propertyPath: m_ReflectionProbeUsage
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8015035428191908602, guid: 558fc78768beed640b7f5fb159f7a1c2, type: 3}
@@ -6401,8 +6425,7 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cano_RTD
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: -1836309952583213802, guid: 705783a8cf3ccac49a78ef8d7b89b0be, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -7277,6 +7300,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 43521054}
     m_Modifications:
+    - target: {fileID: 1072633761548730006, guid: 7bc05bb49b77e224295405092d25b829, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1072633761548730006, guid: 7bc05bb49b77e224295405092d25b829, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1072633761548730006, guid: 7bc05bb49b77e224295405092d25b829, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9e60d033aa6ff0f42b5a4d8bd0d41ec1, type: 2}
+    - target: {fileID: 1072633761548730006, guid: 7bc05bb49b77e224295405092d25b829, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 996ed1631bbda3a4aabacb1d30094a6a, type: 2}
     - target: {fileID: 2699904518363593114, guid: 7bc05bb49b77e224295405092d25b829, type: 3}
       propertyPath: m_LocalPosition.x
       value: -7.35937
@@ -7317,6 +7356,38 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4494536124157125463, guid: 7bc05bb49b77e224295405092d25b829, type: 3}
+      propertyPath: m_Size.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4494536124157125463, guid: 7bc05bb49b77e224295405092d25b829, type: 3}
+      propertyPath: m_Size.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4494536124157125463, guid: 7bc05bb49b77e224295405092d25b829, type: 3}
+      propertyPath: m_Color.a
+      value: 0.9843137
+      objectReference: {fileID: 0}
+    - target: {fileID: 4494536124157125463, guid: 7bc05bb49b77e224295405092d25b829, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4494536124157125463, guid: 7bc05bb49b77e224295405092d25b829, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4494536124157125463, guid: 7bc05bb49b77e224295405092d25b829, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4494536124157125463, guid: 7bc05bb49b77e224295405092d25b829, type: 3}
+      propertyPath: m_DrawMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4494536124157125463, guid: 7bc05bb49b77e224295405092d25b829, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
     - target: {fileID: 4995705954409362891, guid: 7bc05bb49b77e224295405092d25b829, type: 3}
       propertyPath: m_Name
       value: Fundo_Parede
@@ -7332,6 +7403,10 @@ PrefabInstance:
     - target: {fileID: 4995705954409362891, guid: 7bc05bb49b77e224295405092d25b829, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5453054468884279230, guid: 7bc05bb49b77e224295405092d25b829, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8311394266257585624, guid: 7bc05bb49b77e224295405092d25b829, type: 3}
       propertyPath: m_Enabled
