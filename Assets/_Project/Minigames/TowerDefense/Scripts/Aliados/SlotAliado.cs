@@ -1,10 +1,13 @@
 using UnityEngine;
 
-[RequireComponent(typeof(Collider2D))]
-public class SlotAliado : MonoBehaviour
+namespace MovingIn.Minigames.TowerDefense
 {
-    public bool Ocupado { get; private set; }
+    [RequireComponent(typeof(Collider2D))]
+    public class SlotAliado : MonoBehaviour
+    {
+        public bool Ocupado { get; private set; }
 
-    public void Ocupar() { Ocupado = true; }
-    public void Liberar() { Ocupado = false; }
+        public void Ocupar() { Ocupado = true; }
+        public void Liberar() { Ocupado = false; }
+    }
 }

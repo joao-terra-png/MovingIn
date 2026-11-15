@@ -1,33 +1,36 @@
 using System;
 using UnityEngine;
 
-// A torre que os inimigos tentam alcançar.
-public class TorreFinal : MonoBehaviour
+namespace MovingIn.Minigames.TowerDefense
 {
-    [SerializeField] private int vidaMaxima = 10;
-
-    public int VidaAtual { get; private set; }
-
-    public event Action<int, int> VidaMudou;
-    public event Action Destruida;
-
-    private void Awake()
+    // A torre que os inimigos tentam alcançar.
+    public class TorreFinal : MonoBehaviour
     {
-        VidaAtual = vidaMaxima;
-    }
+        [SerializeField] private int vidaMaxima = 10;
 
-    private void Start()
-    {
-        VidaMudou?.Invoke(VidaAtual, vidaMaxima);
-    }
+        public int VidaAtual { get; private set; }
 
-    public void ReceberDano(int dano)
-    {
-        if (VidaAtual <= 0) return;
+        public event Action<int, int> VidaMudou;
+        public event Action Destruida;
 
-        VidaAtual = Mathf.Max(0, VidaAtual - dano);
-        VidaMudou?.Invoke(VidaAtual, vidaMaxima);
+        private void Awake()
+        {
+            VidaAtual = vidaMaxima;
+        }
 
-        if (VidaAtual == 0) Destruida?.Invoke();
+        private void Start()
+        {
+            VidaMudou?.Invoke(VidaAtual, vidaMaxima);
+        }
+
+        public void ReceberDano(int dano)
+        {
+            if (VidaAtual <= 0) return;
+
+            VidaAtual = Mathf.Max(0, VidaAtual - dano);
+            VidaMudou?.Invoke(VidaAtual, vidaMaxima);
+
+            if (VidaAtual == 0) Destruida?.Invoke();
+        }
     }
 }

@@ -1,20 +1,23 @@
 using UnityEngine;
 
-// Gera energia em intervalos regulares.
-public class Bateria : Aliado
+namespace MovingIn.Minigames.TowerDefense
 {
-    private float proximaGeracao;
-
-    protected override void AoInicializar()
+    // Gera energia em intervalos regulares.
+    public class Bateria : Aliado
     {
-        proximaGeracao = Time.time + dados.intervaloAcao;
-    }
+        private float proximaGeracao;
 
-    private void Update()
-    {
-        if (!ativo || Time.time < proximaGeracao) return;
+        protected override void AoInicializar()
+        {
+            proximaGeracao = Time.time + dados.intervaloAcao;
+        }
 
-        energia.Adicionar(dados.energiaGerada);
-        proximaGeracao = Time.time + dados.intervaloAcao;
+        private void Update()
+        {
+            if (!ativo || Time.time < proximaGeracao) return;
+
+            energia.Adicionar(dados.energiaGerada);
+            proximaGeracao = Time.time + dados.intervaloAcao;
+        }
     }
 }

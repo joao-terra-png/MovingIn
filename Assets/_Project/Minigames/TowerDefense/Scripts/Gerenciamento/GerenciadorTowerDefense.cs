@@ -1,94 +1,97 @@
 using System;
 using UnityEngine;
 
-public enum EstadoPartida { Aguardando, EmAndamento, Vitoria, Derrota }
-
-// Coordena o minigame: liga os sistemas entre si e decide vitória e derrota.
-public class GerenciadorTowerDefense : MonoBehaviour
+namespace MovingIn.Minigames.TowerDefense
 {
-    [SerializeField] private GerenciadorOndas ondas;
-    [SerializeField] private TorreFinal torre;
-    [SerializeField] private GerenciadorEnergia energia;
-    [SerializeField] private GerenciadorPosicionamento posicionamento;
+    public enum EstadoPartida { Aguardando, EmAndamento, Vitoria, Derrota }
 
-    [Header("Início")]
-    [Tooltip("Desmarque se o jogo principal for chamar Iniciar() (ex.: ao religar a energia).")]
-    [SerializeField] private bool iniciarAutomaticamente = true;
-
-    [Header("UI (opcional)")]
-    [SerializeField] private GameObject painelVitoria;
-    [SerializeField] private GameObject painelDerrota;
-
-    public EstadoPartida Estado { get; private set; } = EstadoPartida.Aguardando;
-
-    public event Action<bool> Finalizado;
-
-    private void OnEnable()
+    // Coordena o minigame: liga os sistemas entre si e decide vitória e derrota.
+    public class GerenciadorTowerDefense : MonoBehaviour
     {
-        ondas.InimigoDerrotado += AoInimigoDerrotado;
-        ondas.InimigoChegouAoFim += AoInimigoChegarAoFim;
-        ondas.TodasOndasConcluidas += AoConcluirOndas;
-        torre.Destruida += AoTorreDestruida;
-    }
+        [SerializeField] private GerenciadorOndas ondas;
+        [SerializeField] private TorreFinal torre;
+        [SerializeField] private GerenciadorEnergia energia;
+        [SerializeField] private GerenciadorPosicionamento posicionamento;
 
-    private void OnDisable()
-    {
-        ondas.InimigoDerrotado -= AoInimigoDerrotado;
-        ondas.InimigoChegouAoFim -= AoInimigoChegarAoFim;
-        ondas.TodasOndasConcluidas -= AoConcluirOndas;
-        torre.Destruida -= AoTorreDestruida;
-    }
+        [Header("Início")]
+        [Tooltip("Desmarque se o jogo principal for chamar Iniciar() (ex.: ao religar a energia).")]
+        [SerializeField] private bool iniciarAutomaticamente = true;
 
-    private void Start()
-    {
-        if (painelVitoria != null) painelVitoria.SetActive(false);
-        if (painelDerrota != null) painelDerrota.SetActive(false);
+        [Header("UI (opcional)")]
+        [SerializeField] private GameObject painelVitoria;
+        [SerializeField] private GameObject painelDerrota;
 
-        if (iniciarAutomaticamente) Iniciar();
-    }
+        public EstadoPartida Estado { get; private set; } = EstadoPartida.Aguardando;
 
-    public void Iniciar()
-    {
-        if (Estado != EstadoPartida.Aguardando) return;
+        public event Action<bool> Finalizado;
 
-        Estado = EstadoPartida.EmAndamento;
-        ondas.Iniciar();
-    }
+        private void OnEnable()
+        {
+            ondas.InimigoDerrotado += AoInimigoDerrotado;
+            ondas.InimigoChegouAoFim += AoInimigoChegarAoFim;
+            ondas.TodasOndasConcluidas += AoConcluirOndas;
+            torre.Destruida += AoTorreDestruida;
+        }
 
-    private void AoInimigoDerrotado(Inimigo inimigo)
-    {
-        if (Estado != EstadoPartida.EmAndamento) return;
-        energia.Adicionar(inimigo.Dados.recompensa);
-    }
+        private void OnDisable()
+        {
+            ondas.InimigoDerrotado -= AoInimigoDerrotado;
+            ondas.InimigoChegouAoFim -= AoInimigoChegarAoFim;
+            ondas.TodasOndasConcluidas -= AoConcluirOndas;
+            torre.Destruida -= AoTorreDestruida;
+        }
 
-    private void AoInimigoChegarAoFim(Inimigo inimigo)
-    {
-        if (Estado != EstadoPartida.EmAndamento) return;
-        torre.ReceberDano(inimigo.Dados.danoNaTorre);
-    }
+        private void Start()
+        {
+            if (painelVitoria != null) painelVitoria.SetActive(false);
+            if (painelDerrota != null) painelDerrota.SetActive(false);
 
-    private void AoTorreDestruida()
-    {
-        Encerrar(false);
-    }
+            if (iniciarAutomaticamente) Iniciar();
+        }
 
-    private void AoConcluirOndas()
-    {
-        Encerrar(true);
-    }
+        public void Iniciar()
+        {
+            if (Estado != EstadoPartida.Aguardando) return;
 
-    private void Encerrar(bool venceu)
-    {
-        if (Estado != EstadoPartida.EmAndamento) return;
+            Estado = EstadoPartida.EmAndamento;
+            ondas.Iniciar();
+        }
 
-        Estado = venceu ? EstadoPartida.Vitoria : EstadoPartida.Derrota;
+        private void AoInimigoDerrotado(Inimigo inimigo)
+        {
+            if (Estado != EstadoPartida.EmAndamento) return;
+            energia.Adicionar(inimigo.Dados.recompensa);
+        }
 
-        ondas.Parar();
-        posicionamento.Encerrar();
+        private void AoInimigoChegarAoFim(Inimigo inimigo)
+        {
+            if (Estado != EstadoPartida.EmAndamento) return;
+            torre.ReceberDano(inimigo.Dados.danoNaTorre);
+        }
 
-        if (venceu && painelVitoria != null) painelVitoria.SetActive(true);
-        if (!venceu && painelDerrota != null) painelDerrota.SetActive(true);
+        private void AoTorreDestruida()
+        {
+            Encerrar(false);
+        }
 
-        Finalizado?.Invoke(venceu);
+        private void AoConcluirOndas()
+        {
+            Encerrar(true);
+        }
+
+        private void Encerrar(bool venceu)
+        {
+            if (Estado != EstadoPartida.EmAndamento) return;
+
+            Estado = venceu ? EstadoPartida.Vitoria : EstadoPartida.Derrota;
+
+            ondas.Parar();
+            posicionamento.Encerrar();
+
+            if (venceu && painelVitoria != null) painelVitoria.SetActive(true);
+            if (!venceu && painelDerrota != null) painelDerrota.SetActive(true);
+
+            Finalizado?.Invoke(venceu);
+        }
     }
 }

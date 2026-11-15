@@ -1,40 +1,43 @@
 using System;
 using UnityEngine;
 
-// Escolha e compra de aliados.
-public class LojaAliados : MonoBehaviour
+namespace MovingIn.Minigames.TowerDefense
 {
-    [SerializeField] private GerenciadorEnergia energia;
-
-    public AliadoData AliadoSelecionado { get; private set; }
-    public event Action<AliadoData> SelecaoMudou;
-    public event Action EnergiaInsuficiente;
-
-    public bool PodeComprar(AliadoData dados)
+    // Escolha e compra de aliados.
+    public class LojaAliados : MonoBehaviour
     {
-        return dados != null && energia.TemSaldo(dados.custo);
-    }
+        [SerializeField] private GerenciadorEnergia energia;
 
-    public void SelecionarAliado(AliadoData dados)
-    {
-        if (!PodeComprar(dados))
+        public AliadoData AliadoSelecionado { get; private set; }
+        public event Action<AliadoData> SelecaoMudou;
+        public event Action EnergiaInsuficiente;
+
+        public bool PodeComprar(AliadoData dados)
         {
-            EnergiaInsuficiente?.Invoke();
-            return;
+            return dados != null && energia.TemSaldo(dados.custo);
         }
 
-        AliadoSelecionado = dados;
-        SelecaoMudou?.Invoke(dados);
-    }
+        public void SelecionarAliado(AliadoData dados)
+        {
+            if (!PodeComprar(dados))
+            {
+                EnergiaInsuficiente?.Invoke();
+                return;
+            }
 
-    public void Cancelar()
-    {
-        AliadoSelecionado = null;
-        SelecaoMudou?.Invoke(null);
-    }
+            AliadoSelecionado = dados;
+            SelecaoMudou?.Invoke(dados);
+        }
 
-    public bool TentarComprar(AliadoData dados)
-    {
-        return dados != null && energia.TentarGastar(dados.custo);
+        public void Cancelar()
+        {
+            AliadoSelecionado = null;
+            SelecaoMudou?.Invoke(null);
+        }
+
+        public bool TentarComprar(AliadoData dados)
+        {
+            return dados != null && energia.TentarGastar(dados.custo);
+        }
     }
 }
