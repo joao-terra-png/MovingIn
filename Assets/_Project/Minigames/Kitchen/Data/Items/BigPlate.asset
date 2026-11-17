@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2109502938e3c1e4fbd1184b97c2293e, type: 3}
   m_Name: BigPlate
   m_EditorClassIdentifier: 
-  exhibitName: Big Plate
-  sprite: {fileID: 0}
+  exhibitName: Prato Grande
+  sprite: {fileID: -354868232, guid: 46b4ff0e7b7c6474581884ed4cdb277c, type: 3}
   colorPlaceholder: {r: 1, g: 1, b: 1, a: 1}
   type: 0
   size: 3
