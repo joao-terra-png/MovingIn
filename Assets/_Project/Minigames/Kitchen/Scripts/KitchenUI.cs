@@ -1,4 +1,5 @@
 using System.Text;
+using MovingIn.Core;
 using TMPro;
 using UnityEngine;
 
@@ -6,11 +7,10 @@ namespace MovingIn.Minigames.Kitchen{
     public class KitchenUI : MonoBehaviour
     {
         [SerializeField] KitchenManager manager;
+        [SerializeField] MinigameScreens screens;
         [SerializeField] TMP_Text pointsText;
         [SerializeField] TMP_Text noteText;
         [SerializeField] TMP_Text noteTextRight;
-        [SerializeField] GameObject victoryPanel;
-        [SerializeField] TMP_Text finalScoreText;
         [SerializeField] string _doneColor = "#4A5A62";
 
         void OnEnable()
@@ -31,10 +31,12 @@ namespace MovingIn.Minigames.Kitchen{
         {
             UpdatePoints(manager.Points);
             UpdateNote();
-            victoryPanel.SetActive(false);
         }
 
-        void UpdatePoints(int points) => pointsText.text = $"Pontos: {points}";
+        void UpdatePoints(int points)
+        {
+            pointsText.text = screens != null ? $"Pontos: {points} / {screens.Goal}" : $"Pontos: {points}";
+        }
 
         void UpdateNote()
         {
@@ -61,8 +63,7 @@ namespace MovingIn.Minigames.Kitchen{
 
         void ShowVictory()
         {
-            victoryPanel.SetActive(true);
-            finalScoreText.text = $"Pontos: {manager.Points}";
+            if (screens != null) screens.ShowResult(manager.Points);
         }
     }
 }
