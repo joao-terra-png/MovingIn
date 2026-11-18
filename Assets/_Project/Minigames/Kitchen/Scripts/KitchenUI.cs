@@ -1,16 +1,20 @@
 using System.Text;
+using MovingIn.Core;
 using TMPro;
 using UnityEngine;
 
-namespace MovingIn.Minigames.Kitchen
-{
+namespace MovingIn.Minigames.Kitchen{
+    ///<summary>
+    /// interface: pontos e bilhete
+    /// so ESCUTA os eventos do KitchenManager (nao conhece as regras)
+    /// o resultado final (meta, "Tentar de novo") fica com o MinigameScreens
+    /// </summary>
     public class KitchenUI : MonoBehaviour
     {
         [SerializeField] KitchenManager manager;
+        [SerializeField] MinigameScreens screens;
         [SerializeField] TMP_Text pointsText;
         [SerializeField] TMP_Text noteText;
-        [SerializeField] GameObject victoryPanel;
-        [SerializeField] TMP_Text finalScoreText;
 
         void OnEnable()
         {
@@ -28,12 +32,15 @@ namespace MovingIn.Minigames.Kitchen
 
         void Start()
         {
+            // estado inicial: nada "mudou" ainda, entao desenha na mao
             UpdatePoints(manager.Points);
             UpdateNote();
-            victoryPanel.SetActive(false);
         }
 
-        void UpdatePoints(int points) => pointsText.text = $"Pontos: {points}";
+        void UpdatePoints(int points)
+        {
+            pointsText.text = screens != null ? $"Pontos: {points} / {screens.Goal}" : $"Pontos: {points}";
+        }
 
         void UpdateNote()
         {
@@ -44,13 +51,7 @@ namespace MovingIn.Minigames.Kitchen
 
         void ShowVictory()
         {
-            victoryPanel.SetActive(true);
-            finalScoreText.text = $"Pontos: {manager.Points}";
-        }
-
-        public void BackHome()
-        {
-            Debug.Log("Voltar pra casa clicado");
+            if (screens != null) screens.ShowResult(manager.Points);
         }
     }
 }
