@@ -31,4 +31,5 @@ namespace MovingIn.Core.Structures
             info = null;
             next = null;
         }
-    }}
+    }
+}
