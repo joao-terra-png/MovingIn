@@ -6,7 +6,7 @@ Versão	da	Unity:	2022.3.62f3		(TODOS	usam	exatamente	esta)
 - Davi Filipe Del Bianco (858023)
 - Felipe Gabriel Rabello (858039)
 - João Gabriel Azevedo Terra (858032)
--
+- Nicolas Catini Ramalho dos Santos (858044)
 
 ## Divisões
 - Hub: João Gabriel Azevedo Terra
@@ -14,6 +14,7 @@ Versão	da	Unity:	2022.3.62f3		(TODOS	usam	exatamente	esta)
 - Kitchen: João Gabriel Azevedo Terra
 - Tetris: João Gabriel Azevedo Terra
 - Can Rat: Felipe e Davi
+- towerDefense: Nicolas
 
 ##	Regras
 1.	Todos devem usar a mesma versão da Unity.

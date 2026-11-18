@@ -11,4 +11,13 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/_Project/Minigames/_Exemplo/_Exemplo/_Exemplo.unity
     guid: 390df5e3db89469a49d85a8f4f53cc51
+  - enabled: 1
+    path: Assets/_Project/Minigames/CanRat/Scenes/HAMSTER_TUTORIAL.unity
+    guid: af91a3b2e45c4c5488cd3bff867423b1
+  - enabled: 1
+    path: Assets/_Project/Minigames/CanRat/Scenes/HAMSTER_LEVEL1.unity
+    guid: b9086f49aebc1fc41b7f5a879ff5cd96
+  - enabled: 1
+    path: Assets/_Project/Minigames/CanRat/Scenes/HAMSTER_LEVEL2.unity
+    guid: 625b6124ca8c1904eb8635e85bd02a33
   m_configObjects: {}
