@@ -16,7 +16,7 @@ namespace MovingIn.Core{
         public static event Action<bool> Finished;
 
         // true se tem um hub esperando o resultado
-        // false quando a cena do minigame foi aberta sozinha (modo teste)
+        // false quando a cena do minigame foi aberta sozinha 
         public static bool IsInsideHub => Finished != null;
 
         public static void Finish(bool success)

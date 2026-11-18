@@ -4,11 +4,6 @@ using UnityEngine;
 using MovingIn.Core;
 
 namespace MovingIn.Minigames.Exemplo{
-    ///<summary>
-    /// minigame "de mentira" pra testar o hub antes dos minigames reais
-    /// serve de modelo: todo minigame chama MinigameBridge.Finish(true) ao vencer
-    /// e Finish(false) ao sair
-    /// </summary>
     public class PlaceholderMinigame : MonoBehaviour
     {
         void Update()
