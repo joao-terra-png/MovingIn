@@ -7,7 +7,7 @@ using UnityEngine.Events;
 public class PauseLevel : MonoBehaviour
 {
     // Start is called before the first frame update
-    bool IsPaused;
+    [SerializeField]bool IsPaused;
     public UnityEvent PauseGame = new UnityEvent();
     [SerializeField]UnityEvent ResumeGame = new UnityEvent();   //Inscrito pelo inspector
     //Jogo inicializa pausado
@@ -19,7 +19,7 @@ public class PauseLevel : MonoBehaviour
 
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Escape))
+        if(Input.GetKeyDown(KeyCode.Escape) && !IsPaused)
             SetPause(); 
     }
 

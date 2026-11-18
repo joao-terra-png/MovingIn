@@ -15,6 +15,10 @@ namespace MovingIn.Minigames.CanRat
         Vector3 vetorDirecao;
         [SerializeField]GameObject SelectionBox;
         Vector3 BoxOrigPosition;
+        //limite do inventario para impedir que a caixa de seleção ande além dele
+        [SerializeField]float []InvBoundMin;
+        [SerializeField]float []InvBoundMax;
+
         float distanciaCam;
         void Start()
         {
@@ -63,9 +67,16 @@ namespace MovingIn.Minigames.CanRat
 
         void AtualizaDirecao(Vector3 vetorDeslocamento, out bool sucesso)
         {
-            vetorDirecao += vetorDeslocamento;
-            sucesso = true;
-            AtualizaSelectionBox(vetorDeslocamento/1.5f);
+            if(((vetorDeslocamento + vetorDirecao).x > InvBoundMin[0]) &&
+                ((vetorDeslocamento + vetorDirecao).x < InvBoundMax[0]) &&
+                ((vetorDeslocamento + vetorDirecao).y > InvBoundMin[1]) &&
+                ((vetorDeslocamento + vetorDirecao).y < InvBoundMax[1])){
+                vetorDirecao += vetorDeslocamento;
+                sucesso = true;
+                AtualizaSelectionBox(vetorDeslocamento/1.5f);
+                }
+            else
+                sucesso = false;
         }
 
         void AtualizaSelectionBox(Vector3 vetorDeslocamento)

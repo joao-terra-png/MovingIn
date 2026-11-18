@@ -34,7 +34,7 @@ namespace MovingIn.Minigames.CanRat
             Physics.Raycast(transform.position, Vector3.forward, out InvRay, maxDistance);
             if(!TemItem()){
                 Debug.Log("Storing in Inventory...");
-                objeto.transform.position = InvRay.point - 0.9f * Vector3.up;
+                objeto.transform.position = RecycleBox.transform.position;
                 objeto.GetComponent<InInventory>().SetIsStored(true);
                 //TargetBox.transform.position = TargetBox.transform.position.z * Vector3.back + 
                     //RecycleBox.transform.position;
