@@ -59,10 +59,9 @@ namespace MovingIn.Minigames.TowerDefense
             encerrado = true;
             if (rotina != null) StopCoroutine(rotina);
 
-            while (!fila.Vazia())
+            while (fila.Desenf(out object removido))
             {
-                Inimigo restante = AlvoAtual;
-                fila.Desenf(null);
+                Inimigo restante = removido as Inimigo;
                 if (restante != null)
                 {
                     Desligar(restante);
@@ -134,13 +133,12 @@ namespace MovingIn.Minigames.TowerDefense
 
         private void RetirarDaFila(Inimigo esperado)
         {
-            Inimigo daFrente = AlvoAtual;
-            bool deuCerto = fila.Desenf(null);
+            bool deuCerto = fila.Desenf(out object removido);
             Desligar(esperado);
 
-            if (deuCerto && daFrente != esperado)
+            if (deuCerto && (removido as Inimigo) != esperado)
                 Debug.LogWarning("A ordem da fila foi quebrada: saiu um inimigo diferente do esperado.");
-        }
+        }   
 
         private void Desligar(Inimigo inimigo)
         {
