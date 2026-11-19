@@ -12,6 +12,10 @@ namespace MovingIn.Core{
         [SerializeField, TextArea(5, 14)] string _howToPlay = "";
         [SerializeField, Min(0)] int _goal = 50;
         [SerializeField] TMP_FontAsset font;
+        [Tooltip("Mostra a meta de pontos na tela de abertura")]
+        [SerializeField] bool _showGoal = true;
+        [Tooltip("Desmarque se o minigame tem a propria tela de inicio e solta o tempo sozinho")]
+        [SerializeField] bool _unpauseOnPlay = true;
 
         [Header("Cores")]
         [SerializeField] Color _paper = new Color32(0xF4, 0xEA, 0xD8, 0xFF);
@@ -49,7 +53,8 @@ namespace MovingIn.Core{
         {
             _intro = true;
             Time.timeScale = 0f;
-            Show(_title, $"{_howToPlay}\n\n<b>Meta: {_goal} pontos</b>", TextAlignmentOptions.TopLeft, 720f,
+            string body = _showGoal ? $"{_howToPlay}\n\n<b>Meta: {_goal} pontos</b>" : _howToPlay;
+            Show(_title, body, TextAlignmentOptions.TopLeft, 720f,
                  "Jogar", Play, null, null);
         }
 
@@ -70,7 +75,7 @@ namespace MovingIn.Core{
             if (!_intro) return;
             _intro = false;
             Hide();
-            Time.timeScale = 1f;
+            if (_unpauseOnPlay) Time.timeScale = 1f;
         }
 
         public void ShowResult(int points)

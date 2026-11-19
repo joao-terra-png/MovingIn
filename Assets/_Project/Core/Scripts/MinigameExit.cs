@@ -4,11 +4,14 @@ using UnityEngine.SceneManagement;
 namespace MovingIn.Core{
     public class MinigameExit : MonoBehaviour
     {
+        [Tooltip("Desmarque se o minigame ja usa o ESC para outra coisa (pausa, cancelar...)")]
+        [SerializeField] bool _escapeLeaves = true;
+
         bool _finished;
 
         void Update()
         {
-            if (Input.GetKeyDown(KeyCode.Escape)) Leave(false);
+            if (_escapeLeaves && Input.GetKeyDown(KeyCode.Escape)) Leave(false);
 #if UNITY_EDITOR
             if (Input.GetKeyDown(KeyCode.F9)) Leave(true);
 #endif
@@ -32,13 +35,14 @@ namespace MovingIn.Core{
             MinigameBridge.Finish(success);
         }
 
-        public void Retry()
+        public void Retry() => LoadLevel(gameObject.scene.name);
+
+        public void LoadLevel(string sceneName)
         {
             if (_finished) return;
             _finished = true;
             Time.timeScale = 1f;
 
-            string sceneName = gameObject.scene.name;
             if (!MinigameBridge.IsInsideHub)
             {
                 SceneManager.LoadScene(sceneName);

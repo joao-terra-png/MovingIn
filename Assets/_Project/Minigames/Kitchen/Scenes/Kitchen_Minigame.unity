@@ -484,6 +484,8 @@ GameObject:
   m_Component:
   - component: {fileID: 129709544}
   - component: {fileID: 129709543}
+  - component: {fileID: 129709546}
+  - component: {fileID: 129709545}
   m_Layer: 0
   m_Name: KitchenExit
   m_TagString: Untagged
@@ -498,7 +500,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 129709542}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b366f9e6e2f921344904fcea829d78f0, type: 3}
   m_Name: 
@@ -518,6 +520,45 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1424520415}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &129709545
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 129709542}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ee5c1615d00ea449845a919abb86ad3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _title: Cozinha em Ordem
+  _howToPlay: "Tire os itens da caixa um de cada vez e arraste cada um para o lugar
+    certo.\nO bilhete mostra o que ainda falta guardar.\n\nPratos: um prato s\xF3
+    pode ficar em cima de um prato MAIOR.\nUse a bancada como apoio para trocar a
+    ordem.\n\nAcerto: +10    Erro: -5\nP: pausar"
+  _goal: 60
+  font: {fileID: 11400000, guid: f63ff3045d161f047aa28ae3fcff18bc, type: 2}
+  _showGoal: 1
+  _unpauseOnPlay: 1
+  _paper: {r: 0.95686275, g: 0.91764706, b: 0.84705883, a: 1}
+  _ink: {r: 0.16862746, g: 0.13333334, b: 0.1882353, a: 1}
+  _accent: {r: 0.6901961, g: 0.3764706, b: 0.22745098, a: 1}
+  _soft: {r: 0.8666667, g: 0.8117647, b: 0.72156864, a: 1}
+  _shade: {r: 0.08, g: 0.05, b: 0.1, a: 0.72}
+--- !u!114 &129709546
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 129709542}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d136a7a5fd54b494da16247f2d3b5694, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _escapeLeaves: 1
 --- !u!1 &138433121
 GameObject:
   m_ObjectHideFlags: 0
@@ -1540,11 +1581,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   manager: {fileID: 2013497734}
+  screens: {fileID: 129709545}
   pointsText: {fileID: 1839206082}
   noteText: {fileID: 237522485}
   noteTextRight: {fileID: 2103794237}
-  victoryPanel: {fileID: 101202250}
-  finalScoreText: {fileID: 779417468}
   _doneColor: '#34424A'
 --- !u!1 &662845778
 GameObject:

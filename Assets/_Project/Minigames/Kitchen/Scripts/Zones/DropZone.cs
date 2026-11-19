@@ -6,7 +6,7 @@ namespace MovingIn.Minigames.Kitchen
 {
     ///<summary>
     /// base de toda zona onde um item pode ser solto
-    ///</sumarry>
+    ///</summary>
     
     public abstract class DropZone : MonoBehaviour
     {

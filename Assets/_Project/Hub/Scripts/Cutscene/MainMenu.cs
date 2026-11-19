@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using System.IO;
 using MovingIn.Core;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -106,7 +105,7 @@ namespace MovingIn.Hub{
             continueButton.onClick.AddListener(Continue);
             optionsButton.onClick.AddListener(OpenOptions);
             quitButton.onClick.AddListener(Quit);
-            continueButton.interactable = MostRecentSlot() >= 0;
+            continueButton.interactable = SaveSystem.HasSave;
 
             yield return Cutscene.Fade(group, 1f, 0.6f);
             group.interactable = true;
@@ -208,11 +207,10 @@ namespace MovingIn.Hub{
 
         void Continue()
         {
-            int slot = MostRecentSlot();
-            if (slot < 0) return;
+            if (!SaveSystem.HasSave) return;
             Active = false;
             Cutscene.Playing = false;
-            SaveSystem.Load(slot);
+            SaveSystem.Load();
         }
 
         void OpenOptions()
@@ -227,24 +225,6 @@ namespace MovingIn.Hub{
 #else
             Application.Quit();
 #endif
-        }
-
-        static int MostRecentSlot()
-        {
-            int best = -1;
-            DateTime bestTime = DateTime.MinValue;
-            for (int i = 0; i <= SaveSystem.ManualSlots; i++)
-            {
-                string path = SaveSystem.PathFor(i);
-                if (!File.Exists(path)) continue;
-                DateTime time = File.GetLastWriteTime(path);
-                if (time > bestTime)
-                {
-                    bestTime = time;
-                    best = i;
-                }
-            }
-            return best;
         }
 
         static Vector3 Forward(float pitch)
