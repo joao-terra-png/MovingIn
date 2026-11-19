@@ -9,12 +9,13 @@ Versão	da	Unity:	2022.3.62f3		(TODOS	usam	exatamente	esta)
 - Nicolas Catini Ramalho dos Santos (858044)
 
 ## Divisões
-- Hub: João Gabriel Azevedo Terra
+- Hub: João 
 - Minigames:
-- Kitchen: João Gabriel Azevedo Terra
-- Tetris: João Gabriel Azevedo Terra
+- Kitchen: João 
+- Tetris: João 
 - Can Rat: Felipe e Davi
 - towerDefense: Nicolas
+- Laundry: João
 
 ##	Regras
 1.	Todos devem usar a mesma versão da Unity.
