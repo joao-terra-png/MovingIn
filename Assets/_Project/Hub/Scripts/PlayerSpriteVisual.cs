@@ -35,6 +35,8 @@ namespace MovingIn.Hub{
         bool _flip;
 
         public bool FacingBack => _facingBack;
+
+        public void FaceFront() => _facingBack = false;
         public bool IsMoving { get; private set; }
 
         void Start()

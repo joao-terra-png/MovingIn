@@ -20,4 +20,16 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_Project/Minigames/CanRat/Scenes/HAMSTER_LEVEL2.unity
     guid: 625b6124ca8c1904eb8635e85bd02a33
+  - enabled: 1
+    path: Assets/_Project/Minigames/Kitchen/Scenes/Kitchen_Minigame.unity
+    guid: 919c65d48e9964249ad29b82c8d327e1
+  - enabled: 1
+    path: Assets/_Project/Minigames/Laundry/Scenes/Laundry_Minigame.unity
+    guid: fd78e2be1c1eec54cabe86922a274197
+  - enabled: 1
+    path: Assets/_Project/Minigames/TowerDefense/Scenes/TowerDefense.unity
+    guid: acdd1147cc154044cb03ccbe95756509
+  - enabled: 1
+    path: Assets/_Project/Minigames/Tetris/Scenes/Minigame_Tetris.unity
+    guid: ca2beef8221cf6c44865d994277cef2e
   m_configObjects: {}

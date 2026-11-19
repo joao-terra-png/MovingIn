@@ -148,6 +148,10 @@ namespace MovingIn.Hub{
                 while (!done) yield return null;
             }
 
+            FaceFront(player);
+            if (mom != null) FaceFront(mom.transform);
+            if (dad != null) FaceFront(dad.transform);
+
             AimCamera(_photoFocus, _photoSize, false);
             while (_camT < 1f)
             {
@@ -240,6 +244,12 @@ namespace MovingIn.Hub{
                 foreach (Transform p in arrivalPath)
                     if (p != null) yield return npc.WalkTo(p.position);
             yield return npc.WalkTo(spot.position);
+        }
+
+        static void FaceFront(Transform t)
+        {
+            if (t == null) return;
+            foreach (PlayerSpriteVisual v in t.GetComponentsInChildren<PlayerSpriteVisual>(true)) v.FaceFront();
         }
 
         IEnumerator Nudge(NpcWalker npc)

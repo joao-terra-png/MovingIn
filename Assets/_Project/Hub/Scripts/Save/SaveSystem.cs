@@ -8,14 +8,11 @@ using UnityEngine.SceneManagement;
 namespace MovingIn.Hub{
     public static class SaveSystem
     {
-        public const int AutoSlot = 0;
-        public const int ManualSlots = 3;
-
         static SaveData _pending;
-        static float _playTimeBase;
-        static float _sessionStart;
 
-        public static float PlayTime => _playTimeBase + Time.unscaledTime - _sessionStart;
+        static string SavePath => Path.Combine(Application.persistentDataPath, "save.json");
+
+        public static bool HasSave => File.Exists(SavePath);
         public static bool HasPending => _pending != null;
 
         public static bool CanSave
@@ -30,50 +27,33 @@ namespace MovingIn.Hub{
             }
         }
 
-        public static string PathFor(int slot)
-        {
-            string file = slot == AutoSlot ? "save_auto.json" : $"save_{slot}.json";
-            return Path.Combine(Application.persistentDataPath, file);
-        }
-
-        public static bool Save(int slot)
-        {
-            if (!CanSave) return false;
-            try
-            {
-                File.WriteAllText(PathFor(slot), JsonUtility.ToJson(Capture(), true));
-                return true;
-            }
-            catch (Exception e)
-            {
-                Debug.LogWarning($"[SaveSystem] Nao consegui salvar no slot {slot}: {e.Message}");
-                return false;
-            }
-        }
-
         public static void AutoSave()
         {
-            Save(AutoSlot);
-        }
-
-        public static SaveData Peek(int slot)
-        {
-            string path = PathFor(slot);
-            if (!File.Exists(path)) return null;
+            if (!CanSave) return;
             try
             {
-                return JsonUtility.FromJson<SaveData>(File.ReadAllText(path));
+                File.WriteAllText(SavePath, JsonUtility.ToJson(Capture(), true));
             }
             catch (Exception e)
             {
-                Debug.LogWarning($"[SaveSystem] Save {slot} corrompido: {e.Message}");
-                return null;
+                Debug.LogWarning($"[SaveSystem] Nao consegui salvar: {e.Message}");
             }
         }
 
-        public static bool Load(int slot)
+        public static bool Load()
         {
-            SaveData data = Peek(slot);
+            if (!HasSave) return false;
+
+            SaveData data;
+            try
+            {
+                data = JsonUtility.FromJson<SaveData>(File.ReadAllText(SavePath));
+            }
+            catch (Exception e)
+            {
+                Debug.LogWarning($"[SaveSystem] Save corrompido: {e.Message}");
+                return false;
+            }
             if (data == null) return false;
 
             GameProgress.ResetAll();
@@ -82,17 +62,14 @@ namespace MovingIn.Hub{
                     GameProgress.MarkCompleted(id);
 
             _pending = data;
-            _playTimeBase = data.playTime;
-            _sessionStart = Time.unscaledTime;
             Time.timeScale = 1f;
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
             return true;
         }
 
-        public static void Delete(int slot)
+        public static void Delete()
         {
-            string path = PathFor(slot);
-            if (File.Exists(path)) File.Delete(path);
+            if (HasSave) File.Delete(SavePath);
         }
 
         public static bool TakePending(out SaveData data)
@@ -102,30 +79,10 @@ namespace MovingIn.Hub{
             return data != null;
         }
 
-        public static string Describe(SaveData data)
-        {
-            if (data == null) return "vazio";
-            return $"{ChapterTitle(data.chapter)}  ·  {data.savedAt}";
-        }
-
-        public static string ChapterTitle(string chapter)
-        {
-            switch (chapter)
-            {
-                case nameof(Chapter.Arrival): return "Chegada";
-                case nameof(Chapter.Blackout): return "Apagão";
-                case nameof(Chapter.PowerRestored): return "Luz de volta";
-                case nameof(Chapter.Afternoon): return "A tarde";
-                case nameof(Chapter.FirstNight): return "Primeira noite";
-                case nameof(Chapter.Morning): return "Amanhecer";
-                default: return chapter;
-            }
-        }
-
         static SaveData Capture()
         {
             StoryManager sm = StoryManager.Instance;
-            List<string> done = new List<string>();
+            var done = new List<string>();
             if (sm != null)
                 foreach (TrackedMinigame t in sm.Minigames)
                     if (GameProgress.IsCompleted(t.id) || (t.minigame != null && t.minigame.IsCompleted))
@@ -137,8 +94,6 @@ namespace MovingIn.Hub{
                 chapter = sm != null ? sm.Current.ToString() : nameof(Chapter.Arrival),
                 room = rm != null && rm.CurrentRoom != null ? rm.CurrentRoom.name : "",
                 completed = done.ToArray(),
-                playTime = PlayTime,
-                savedAt = DateTime.Now.ToString("dd/MM HH:mm"),
             };
         }
     }

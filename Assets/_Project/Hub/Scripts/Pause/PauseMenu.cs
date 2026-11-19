@@ -1,6 +1,4 @@
-using MovingIn.Core;
 using MovingIn.Minigames.Kitchen.ADTs;
-using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -14,13 +12,8 @@ namespace MovingIn.Hub{
         [SerializeField] GameObject root;
         [SerializeField] GameObject mainScreen;
         [SerializeField] GameObject optionsScreen;
-        [SerializeField] SlotsScreen slotsScreen;
-        [SerializeField] TextMeshProUGUI title;
         [SerializeField] Button resumeButton;
         [SerializeField] Button optionsButton;
-        [SerializeField] Button saveButton;
-        [SerializeField] Button loadButton;
-        [SerializeField] Button leaveMinigameButton;
         [SerializeField] Button quitButton;
         [SerializeField] KeyCode key = KeyCode.Escape;
 
@@ -44,9 +37,6 @@ namespace MovingIn.Hub{
 
             resumeButton.onClick.AddListener(Close);
             optionsButton.onClick.AddListener(() => Show(optionsScreen));
-            saveButton.onClick.AddListener(() => OpenSlots(true));
-            loadButton.onClick.AddListener(() => OpenSlots(false));
-            leaveMinigameButton.onClick.AddListener(LeaveMinigame);
             quitButton.onClick.AddListener(Quit);
         }
 
@@ -58,6 +48,7 @@ namespace MovingIn.Hub{
         void Update()
         {
             if (!Input.GetKeyDown(key)) return;
+            if (!_open && MinigameManager.Instance != null && MinigameManager.Instance.IsPlayingMinigame) return;
             if (_open) Back();
             else if (!Cutscene.Playing) Open();
         }
@@ -76,16 +67,8 @@ namespace MovingIn.Hub{
             if (EventSystem.current == null)
                 _tempEventSystem = new GameObject("EventSystem (Pause)", typeof(EventSystem), typeof(StandaloneInputModule));
 
-            bool inMinigame = MinigameManager.Instance != null && MinigameManager.Instance.IsPlayingMinigame;
-            title.text = "Pausado";
-            saveButton.gameObject.SetActive(!inMinigame);
-            loadButton.gameObject.SetActive(!inMinigame);
-            leaveMinigameButton.gameObject.SetActive(inMinigame);
-            saveButton.interactable = SaveSystem.CanSave;
-
             mainScreen.SetActive(false);
             optionsScreen.SetActive(false);
-            slotsScreen.gameObject.SetActive(false);
             root.SetActive(true);
             Show(mainScreen);
         }
@@ -139,19 +122,6 @@ namespace MovingIn.Hub{
             Cursor.lockState = _previousLock;
             if (_tempEventSystem != null) Destroy(_tempEventSystem);
             _tempEventSystem = null;
-        }
-
-        void OpenSlots(bool saving)
-        {
-            slotsScreen.Setup(saving);
-            Show(slotsScreen.gameObject);
-        }
-
-        void LeaveMinigame()
-        {
-            Close();
-            Time.timeScale = 1f;
-            MinigameBridge.Finish(false);
         }
 
         void Quit()
