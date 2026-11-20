@@ -1,3 +1,4 @@
+using MovingIn.Minigames.Onaf;
 namespace MovingIn.Core.Structures
 {
     public class QuartoNode
