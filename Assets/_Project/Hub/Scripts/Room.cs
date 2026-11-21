@@ -12,7 +12,6 @@ namespace MovingIn.Hub{
     /// </summary>
     public class Room : MonoBehaviour
     {
-        [SerializeField] int RoomId;
         [SerializeField] string _roomName = "Comodo";
 
         [Tooltip("Ponto que a camera enquadra. Se ficar vazio, usa a posicao deste objeto")]

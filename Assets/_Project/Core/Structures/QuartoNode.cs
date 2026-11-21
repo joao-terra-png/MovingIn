@@ -1,3 +1,4 @@
+using MovingIn.Hub;
 using MovingIn.Minigames.Onaf;
 namespace MovingIn.Core.Structures
 {
@@ -10,6 +11,7 @@ namespace MovingIn.Core.Structures
         private QuartoNode dir;
 
         private Boneco boneco;
+        private Room room;
 
         public QuartoNode(int id)
         {
@@ -79,6 +81,15 @@ namespace MovingIn.Core.Structures
             boneco = null;
         }
 
+        public Room GetRoom()
+        {
+            return room;
+        }
+
+        public void SetRoom(Room room)
+        {
+            this.room = room;
+        }
         public bool IsEmpty()
         {
             return boneco == null;
