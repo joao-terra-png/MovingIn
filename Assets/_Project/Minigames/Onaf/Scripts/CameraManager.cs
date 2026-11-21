@@ -33,7 +33,9 @@ namespace MovingIn.Minigames.Onaf{
                 idCurrentRoom = value;
 
             if(currentRoom.GetID() != idCurrentRoom){
+                currentRoom.GetRoom().gameObject.SetActive(false);
                 currentRoom = Tree.GetQuarto(idCurrentRoom);
+                currentRoom.GetRoom().gameObject.SetActive(true);
                 SecurityCamera.GetComponent<IsoCamera>().SnapTo(currentRoom.GetRoom());
             }
         }
