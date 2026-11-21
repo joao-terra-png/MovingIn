@@ -22622,6 +22622,8 @@ MonoBehaviour:
     2022.3 \xB7 C#\r\nTextMesh Pro\r\n\r\nObrigado por jogar!"
   _creditsSpeed: 60
   _creditsBottomMargin: 160
+  _replayTip: "Agora d\xE1 pra jogar os minigames de novo! \xC9 s\xF3 apertar ESC
+    e escolher Minigames."
 --- !u!114 &173297686
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -67247,6 +67249,7 @@ MonoBehaviour:
   _minigameId: bedroom_hamster
   _sceneName: HAMSTER_TUTORIAL
   _prompt: Montar a gaiola do hamster
+  _displayName: Hamsters' Pipe
   hideWhenDone:
   - {fileID: 714047451}
   showWhenDone:
@@ -101775,6 +101778,7 @@ MonoBehaviour:
   _minigameId: garage_boxes
   _sceneName: Minigame_Tetris
   _prompt: Organizar as caixas
+  _displayName: Box Tetris
   hideWhenDone:
   - {fileID: 773300362}
   - {fileID: 168186909}
@@ -104157,6 +104161,7 @@ MonoBehaviour:
   _minigameId: laundry_basket
   _sceneName: Laundry_Minigame
   _prompt: Lavar as roupas
+  _displayName: Laundry
   hideWhenDone:
   - {fileID: 793555737}
   - {fileID: 818826032}
@@ -115350,6 +115355,7 @@ MonoBehaviour:
   _minigameId: basement_breaker
   _sceneName: TowerDefense
   _prompt: Mexer no quadro de luz
+  _displayName: Fuse Defense
   hideWhenDone:
   - {fileID: 2112272156}
   showWhenDone:
@@ -170340,6 +170346,7 @@ MonoBehaviour:
   _minigameId: bedroom_first_night
   _sceneName: Minigame_PrimeiraNoite
   _prompt: Dormir (primeira noite)
+  _displayName: 
   hideWhenDone: []
   showWhenDone: []
   onCompleted:
@@ -171630,6 +171637,8 @@ MonoBehaviour:
   optionsButton: {fileID: 1906567668}
   quitButton: {fileID: 267174612}
   key: 27
+  _replayLabel: Minigames
+  _alwaysShowReplay: 0
 --- !u!114 &1257557878
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -285049,6 +285058,7 @@ MonoBehaviour:
   _minigameId: kitchen_box
   _sceneName: Kitchen_Minigame
   _prompt: Arrumar a cozinha
+  _displayName: Kitchen Organizer
   hideWhenDone:
   - {fileID: 2084836893}
   - {fileID: 1795610858}

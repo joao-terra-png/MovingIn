@@ -48,8 +48,11 @@ namespace MovingIn.Hub{
         [SerializeField, TextArea(3, 12)] string _creditsBody = "Projeto final de AED1 · UFSCar\n\n<size=120%><b>Equipe</b></size>\nDavi Filipe Del Bianco\nFelipe Gabriel Rabello\nJoão Gabriel Azevedo Terra\nNicolas Catini Ramalho dos Santos\n\n<size=120%><b>Minigames</b></size>\n<b>Hamsters' Pipe</b>\nDavi Filipe Del Bianco\nFelipe Gabriel Rabello\n\n<b>Fuse Defense</b>\nNicolas Catini Ramalho dos Santos\n\n<b>Kitchen Organizer · Laundry · Box Tetris</b>\nJoão Gabriel Azevedo Terra\n\n<size=120%><b>Arte</b></size>\n@krol.psd (Kitchen Organizer)\nJoão Gabriel Azevedo Terra\nFelipe Gabriel Rabello\n\n<size=120%><b>Músicas</b></size>\n\"Main Title Theme\"\n\"Night Walk\"\nJonathan Morali\nLife is Strange - Original Soundtrack\nDONTNOD Entertainment / Square Enix, 2015\n\n<size=120%><b>Efeitos sonoros</b></size>\nInterface Sounds\nKenney (kenney.nl) - CC0\n\n<size=120%><b>Assets</b></size>\nModelos 3D: Furniture Kit\nKenney (kenney.nl) - CC0\n\nFonte: Pixelify Sans\nThe Pixelify Sans Project Authors\nSIL Open Font License 1.1\n\n<size=120%><b>Ferramentas</b></size>\nUnity 2022.3 · C#\nTextMesh Pro\n\nObrigado por jogar!";
         [SerializeField] float _creditsSpeed = 60f;
         [SerializeField] float _creditsBottomMargin = 160f;
+        [Tooltip("Fala depois dos creditos avisando que da para rejogar. Vazio = sem fala")]
+        [SerializeField] string _replayTip = "Agora dá pra jogar os minigames de novo! É só apertar ESC e escolher Minigames.";
 
         public static bool Playing { get; private set; }
+        public static bool Finished { get; private set; }
 
         Texture2D _shot;
         Behaviour[] _followers;
@@ -195,6 +198,14 @@ namespace MovingIn.Hub{
             cam.orthographicSize = 4.5f;
             Cutscene.SetBehaviours(_followers, true);
             yield return Cutscene.Fade(black, 0f, 1f);
+
+            Finished = true;
+            if (dm != null && !string.IsNullOrEmpty(_replayTip))
+            {
+                bool tipDone = false;
+                dm.Play(new[] { new DialogueLine(null, _replayTip) }, true, () => tipDone = true);
+                while (!tipDone) yield return null;
+            }
 
             Playing = false;
             Cutscene.Playing = false;

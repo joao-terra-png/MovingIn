@@ -805,19 +805,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   screens: {fileID: 504694134}
-  _startFall: 0.45
-  _minFall: 0.06
-  _speedUp: 0.75
-  _linesPerLevel: 3
+  _startFall: 0.75
+  _minFall: 0.15
+  _speedUp: 0.88
+  _linesPerLevel: 6
   _softFall: 0.04
-  _lockDelay: 0.3
-  _maxLockResets: 6
+  _lockDelay: 0.5
+  _maxLockResets: 12
   _repeatDelay: 0.17
   _repeatRate: 0.05
   _clearTime: 0.3
   _lineScores: 00000000640000002c010000f401000020030000
   _softDropPoints: 0
-  _hardDropPoints: 0
+  _hardDropPoints: 1
 --- !u!114 &504694134
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -834,10 +834,11 @@ MonoBehaviour:
   _howToPlay: "Empilhe as caixas da garagem sem deixar buracos.\nUma linha completa
     some e vale pontos.\n\n{A} {D}  mover            {W}  girar\n{S}  descer mais
     r\xE1pido\n{Espa\xE7o}  soltar de vez\nAs setas do teclado tamb\xE9m funcionam."
-  _goal: 3000
+  _goal: 1500
   font: {fileID: 11400000, guid: f63ff3045d161f047aa28ae3fcff18bc, type: 2}
   _showGoal: 1
   _unpauseOnPlay: 1
+  _skipLabel: Pular
   _introCard: {fileID: 0}
   _resultCard: {fileID: 0}
   _buttonSprite: {fileID: 0}

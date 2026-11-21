@@ -22,6 +22,9 @@ namespace MovingIn.Hub{
         [Tooltip("Texto que aparece quando o jogador chega perto")]
         [SerializeField, FormerlySerializedAs("prompt")] string _prompt = "Arrumar as caixas";
 
+        [Tooltip("Nome do minigame na lista de rejogar do menu de pausa. Vazio usa o texto do Prompt")]
+        [SerializeField] string _displayName = "";
+
         [Header("O que muda quando o minigame e vencido")]
         [Tooltip("Objetos da BAGUNCA (caixas, brinquedos no chao...). Somem ao vencer")]
         [SerializeField] GameObject[] hideWhenDone;
@@ -35,6 +38,7 @@ namespace MovingIn.Hub{
         public string MinigameId => _minigameId;
         public string SceneName => _sceneName;
         public string Prompt => _prompt;
+        public string DisplayName => string.IsNullOrEmpty(_displayName) ? _prompt : _displayName;
         public bool IsCompleted { get; private set; }
 
         void Start()

@@ -43,12 +43,17 @@ namespace MovingIn.Hub{
                 Debug.LogError("[MinigameManager] Este objeto esta DENTRO do HubRoot. Tire ele de la");
         }
 
-        public void StartMinigame(MinigameInteractable source)
+        public void StartMinigame(MinigameInteractable source, bool replay = false)
         {
-            if (IsPlayingMinigame) return;
+            if (IsPlayingMinigame || source == null) return;
 
             if (!Application.CanStreamedLevelBeLoaded(source.SceneName))
             {
+                if (replay)
+                {
+                    Debug.LogWarning($"[MinigameManager] A cena '{source.SceneName}' nao esta no Build Settings. Nao da para rejogar.");
+                    return;
+                }
                 if (_skipMissingScenes)
                 {
                     Debug.LogWarning($"[MinigameManager] A cena '{source.SceneName}' nao existe no Build Settings. " +
@@ -62,15 +67,16 @@ namespace MovingIn.Hub{
                 return;
             }
 
-            StartCoroutine(RunMinigame(source));
+            StartCoroutine(RunMinigame(source, replay));
         }
 
-        IEnumerator RunMinigame(MinigameInteractable source)
+        IEnumerator RunMinigame(MinigameInteractable source, bool replay)
         {
             IsPlayingMinigame = true;
             _finished = false;
             string sceneName = source.SceneName;
 
+            // Freeze do Hub (o EventSystem da casa fica fora do HubRoot: desliga para nao ficarem dois)
             hubRoot.SetActive(false);
             var hubEventSystems = new List<GameObject>();
             foreach (EventSystem es in FindObjectsOfType<EventSystem>())
@@ -80,6 +86,7 @@ namespace MovingIn.Hub{
                 hubEventSystems.Add(es.gameObject);
             }
 
+            // Espera o minigame acabar e inicia ele
             MinigameBridge.Finished += OnMinigameFinished;
             yield return SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive);
             SceneManager.SetActiveScene(SceneManager.GetSceneByName(sceneName));
@@ -88,6 +95,7 @@ namespace MovingIn.Hub{
             yield return new WaitUntil(() => _finished);
             MinigameBridge.Finished -= OnMinigameFinished;
 
+            // unfreeze do hub (descarrega tudo o que nao e o hub: o minigame pode ter trocado de fase)
             var loaded = new List<Scene>();
             for (int i = 0; i < SceneManager.sceneCount; i++)
             {
@@ -96,6 +104,7 @@ namespace MovingIn.Hub{
             }
             foreach (Scene s in loaded)
                 yield return SceneManager.UnloadSceneAsync(s);
+            // alguns minigames pausam o tempo enquanto a cena ainda esta sendo descarregada
             Time.timeScale = 1f;
             SceneManager.SetActiveScene(gameObject.scene);
             foreach (GameObject es in hubEventSystems)
@@ -103,7 +112,7 @@ namespace MovingIn.Hub{
             hubRoot.SetActive(true);
 
             // Resultado
-            if (_lastResult)
+            if (_lastResult && !replay)
             {
                 GameProgress.MarkCompleted(source.MinigameId);
                 source.MarkAsCompleted();

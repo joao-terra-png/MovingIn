@@ -25,6 +25,8 @@ namespace MovingIn.Core{
         [SerializeField] bool _showGoal = true;
         [Tooltip("Desmarque se o minigame tem a propria tela de inicio e solta o tempo sozinho")]
         [SerializeField] bool _unpauseOnPlay = true;
+        [Tooltip("Texto do botao que pula o minigame (conta como concluido). Deixe vazio para esconder o botao")]
+        [SerializeField] string _skipLabel = "Pular";
 
         [Header("Arte (opcional)")]
         [Tooltip("Fundo da tela de abertura, proporcao 1040 x 720 (ex.: 260 x 180 pixels)")]
@@ -67,6 +69,7 @@ namespace MovingIn.Core{
         void Awake()
         {
             _exit = GetComponent<MinigameExit>();
+            if (_exit == null) _exit = gameObject.AddComponent<MinigameExit>();
             EnsureEventSystem();
             Build();
         }
@@ -76,7 +79,7 @@ namespace MovingIn.Core{
             _intro = true;
             Time.timeScale = 0f;
             string body = _showGoal ? $"{_howToPlay}\n\n<b>Meta: {_goal} pontos</b>" : _howToPlay;
-            Show(true, _title, body, TextAlignmentOptions.TopLeft, "Jogar", Play, null, null);
+            Show(true, _title, body, TextAlignmentOptions.TopLeft, "Jogar", Play, _skipLabel, Skip);
         }
 
         void Update()
@@ -97,6 +100,14 @@ namespace MovingIn.Core{
             _intro = false;
             Hide();
             if (_unpauseOnPlay) Time.timeScale = 1f;
+        }
+
+        public void Skip()
+        {
+            if (!_intro) return;
+            _intro = false;
+            Hide();
+            _exit.Leave(true);
         }
 
         public void ShowResult(int points)
@@ -142,9 +153,16 @@ namespace MovingIn.Core{
 
             foreach (GameObject k in _keys) Destroy(k);
             _keys.Clear();
-            Canvas.ForceUpdateCanvases();
-            PlaceKeys(_bodyText);
-            PlaceKeys(_footer);
+            try
+            {
+                Canvas.ForceUpdateCanvases();
+                PlaceKeys(_bodyText);
+                PlaceKeys(_footer);
+            }
+            catch (Exception e)
+            {
+                Debug.LogWarning($"[MinigameScreens] Nao consegui desenhar as teclas: {e.Message}");
+            }
         }
 
         void Hide()
