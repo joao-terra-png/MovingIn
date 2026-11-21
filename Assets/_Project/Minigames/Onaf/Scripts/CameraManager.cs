@@ -11,6 +11,7 @@ namespace MovingIn.Minigames.Onaf{
         [SerializeField] int idCurrentRoom;
         [SerializeField] GameObject SecurityCamera;
         [SerializeField] Arvore Tree;
+        [SerializeField] EnergyManager energia;
 
         bool IsCamOn {get; set;}
         // Start is called before the first frame update
@@ -19,6 +20,9 @@ namespace MovingIn.Minigames.Onaf{
             idCurrentRoom = 1;
             currentRoom = null;
             SecurityCamera = transform.GetChild(0).gameObject;
+
+            if(energia != null)
+                energia.EnergiaAcabou += DesligarCamera;
         }
 
         //Chamado ao clicar no botão da camera (evento)
@@ -38,8 +42,24 @@ namespace MovingIn.Minigames.Onaf{
         {
             //A princípio, o sinal é de fato a camera ligada ou não
             IsCamOn = SecurityCamera.GetComponent<Camera>().enabled;
-            if(currentRoom.GetBoneco() != null)
+
+            if(energia != null)
+                energia.SetCameraAtiva(IsCamOn);
+
+            if(currentRoom != null && currentRoom.GetBoneco() != null)
                 currentRoom.GetBoneco().movEnable = !IsCamOn;
         }
+
+        void DesligarCamera()
+        {
+            SecurityCamera.GetComponent<Camera>().enabled = false;
+        }
+
+        void OnDestroy()
+        {
+            if(energia != null)
+                energia.EnergiaAcabou -= DesligarCamera;
+        }
+
     }
 }
