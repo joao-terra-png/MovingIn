@@ -1260,9 +1260,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a78b60e828c3c34191d22e659db3795, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  music: {fileID: 0}
+  dayMusic: {fileID: 8300000, guid: 212c808eaa899ac44a0b867312dfdb4a, type: 3}
+  nightMusic: {fileID: 8300000, guid: a1b85d2c25644af409b6fc82e117c67f, type: 3}
   _volume: 0.5
-  _fadeIn: 2
+  _fadeTime: 2
+  _quietDuringNightfall: 1
+  chapters:
+  - chapter: 0
+    track: 0
+  - chapter: 1
+    track: 2
+  - chapter: 2
+    track: 1
+  - chapter: 3
+    track: 0
+  - chapter: 4
+    track: 1
+  - chapter: 5
+    track: 0
 --- !u!82 &9002124
 AudioSource:
   m_ObjectHideFlags: 0
@@ -12491,7 +12506,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &77180098
 RectTransform:
   m_ObjectHideFlags: 0
@@ -12540,7 +12555,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
+    rgba: 4282015920
   m_fontColor: {r: 0.6901961, g: 0.3764706, b: 0.22745098, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -12553,7 +12568,7 @@ MonoBehaviour:
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
   m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: 0
+  m_TextStyleHashCode: -1183493901
   m_overrideHtmlColors: 0
   m_faceColor:
     serializedVersion: 2
@@ -22592,10 +22607,21 @@ MonoBehaviour:
   creditsContent: {fileID: 2125192983}
   creditsText: {fileID: 606221422}
   continueHint: {fileID: 1688492478}
-  _creditsBody: "Projeto final de AED1 \xB7 UFSCar\n\nEquipe\nDavi Filipe Del Bianco\nFelipe
-    Gabriel Rabello\nJo\xE3o Gabriel Azevedo Terra\nNicolas Catini Ramalho dos Santos\n\nArte\n@krol.psd\n\nObrigado
-    por jogar!"
+  _creditsBody: "Projeto final de AED1 \xB7 UFSCar\r\n\r\n<size=120%><b>Equipe</b></size>\r\nDavi
+    Filipe Del Bianco\r\nFelipe Gabriel Rabello\r\nJo\xE3o Gabriel Azevedo Terra\r\nNicolas
+    Catini Ramalho dos Santos\r\n\r\n<size=120%><b>Minigames</b></size>\r\n<b>Hamsters'
+    Pipe</b>\r\nDavi Filipe Del Bianco\r\nFelipe Gabriel Rabello\r\n\r\n<b>Fuse Defense</b>\r\nNicolas
+    Catini Ramalho dos Santos\r\n\r\n<b>Kitchen Organizer \xB7 Laundry \xB7 Box Tetris</b>\r\nJo\xE3o
+    Gabriel Azevedo Terra\r\n\r\n<size=120%><b>Arte</b></size>\r\n@krol.psd (Kitchen
+    Organizer)\nJo\xE3o Gabriel Azevedo Terra\nFelipe Gabriel Rabello\r\n\r\n<size=120%><b>M\xFAsicas</b></size>\r\n\"Main
+    Title Theme\"\r\n\"Night Walk\"\r\nJonathan Morali\r\nLife is Strange - Original
+    Soundtrack\r\nDONTNOD Entertainment / Square Enix, 2015\r\n\r\n<size=120%><b>Efeitos
+    sonoros</b></size>\r\nInterface Sounds\r\nKenney (kenney.nl) - CC0\r\n\r\n<size=120%><b>Assets</b></size>\r\nModelos
+    3D: Furniture Kit\r\nKenney (kenney.nl) - CC0\r\n\r\nFonte: Pixelify Sans\r\nThe
+    Pixelify Sans Project Authors\r\nSIL Open Font License 1.1\r\n\r\n<size=120%><b>Ferramentas</b></size>\r\nUnity
+    2022.3 \xB7 C#\r\nTextMesh Pro\r\n\r\nObrigado por jogar!"
   _creditsSpeed: 60
+  _creditsBottomMargin: 160
 --- !u!114 &173297686
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30852,11 +30878,11 @@ RectTransform:
   - {fileID: 77180098}
   m_Father: {fileID: 1194863662}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 40, y: 40}
-  m_SizeDelta: {x: 320, y: 104}
-  m_Pivot: {x: 0, y: 0}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 0}
+  m_AnchoredPosition: {x: -80, y: 0}
+  m_SizeDelta: {x: 288, y: 320}
+  m_Pivot: {x: 1, y: 0}
 --- !u!225 &244217499
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -30889,9 +30915,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: a6e3374e700458041b1b5d0d31522b5b, type: 3}
-  m_Type: 1
-  m_PreserveAspect: 0
+  m_Sprite: {fileID: 21300000, guid: c2b9c21d28af6944b86408ee4bb9ea23, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -34463,6 +34489,81 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 272349752}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &272427142
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 272427143}
+  - component: {fileID: 272427145}
+  - component: {fileID: 272427144}
+  m_Layer: 0
+  m_Name: LogoImage
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &272427143
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 272427142}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1823358529}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -66.81, y: 0}
+  m_SizeDelta: {x: 520, y: 168}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &272427144
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 272427142}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 3dc414ca051dd404a9ef7ca1e840532e, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 1
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &272427145
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 272427142}
+  m_CullTransparentMesh: 1
 --- !u!1 &273666377
 GameObject:
   m_ObjectHideFlags: 0
@@ -55281,7 +55382,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &428511751
 RectTransform:
   m_ObjectHideFlags: 0
@@ -158474,7 +158575,7 @@ MonoBehaviour:
   card: {fileID: 244217498}
   group: {fileID: 244217499}
   _slideTime: 0.3
-  _slideDistance: 80
+  _slideDistance: 320
 --- !u!1 &1195572533
 GameObject:
   m_ObjectHideFlags: 0
@@ -200078,7 +200179,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1488842468
 RectTransform:
   m_ObjectHideFlags: 0
@@ -200498,7 +200599,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1493677979
 RectTransform:
   m_ObjectHideFlags: 0
@@ -223775,7 +223876,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1618138907
 RectTransform:
   m_ObjectHideFlags: 0
@@ -242860,7 +242961,7 @@ MonoBehaviour:
   bubble: {fileID: 1226283328}
   playerSpeaker: {fileID: 732976996}
   voice: {fileID: 1773518357}
-  blip: {fileID: 8300000, guid: 7453c6c6c333e5c4592471eb370ea95d, type: 3}
+  blip: {fileID: 8300000, guid: 443c8b5aff0bd9a4db473e14d61c17a8, type: 3}
   lockDuringDialogue:
   - {fileID: 732976990}
   - {fileID: 732976995}
@@ -247405,6 +247506,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1823358529}
   - component: {fileID: 1823358530}
+  - component: {fileID: 1823358531}
   m_Layer: 0
   m_Name: Logo
   m_TagString: Untagged
@@ -247421,11 +247523,12 @@ RectTransform:
   m_GameObject: {fileID: 1823358528}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1488842468}
   - {fileID: 428511751}
+  - {fileID: 272427143}
   m_Father: {fileID: 864508336}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -247453,6 +247556,14 @@ MonoBehaviour:
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
+--- !u!222 &1823358531
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1823358528}
+  m_CullTransparentMesh: 1
 --- !u!1 &1823414997
 GameObject:
   m_ObjectHideFlags: 0
@@ -253245,7 +253356,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1878415318
 RectTransform:
   m_ObjectHideFlags: 0
@@ -253294,7 +253405,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
+    rgba: 4281344555
   m_fontColor: {r: 0.16862746, g: 0.13333334, b: 0.1882353, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -253307,7 +253418,7 @@ MonoBehaviour:
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
   m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: 0
+  m_TextStyleHashCode: -1183493901
   m_overrideHtmlColors: 0
   m_faceColor:
     serializedVersion: 2
@@ -288324,10 +288435,6 @@ MonoBehaviour:
   _truckTime: 4.5
   _zoomTime: 1.8
   _skipMenu: 0
-  _pitch: 0
-  _holdCamera: 0
-  _followers: []
-  _camPosition: {x: 0, y: 0, z: 0}
 --- !u!225 &2119231358
 CanvasGroup:
   m_ObjectHideFlags: 0

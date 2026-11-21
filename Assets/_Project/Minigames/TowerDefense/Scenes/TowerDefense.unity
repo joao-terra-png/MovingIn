@@ -679,16 +679,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ee5c1615d00ea449845a919abb86ad3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _title: Quadro de Luz
+  _title: Fuse Defender
   _howToPlay: "Fa\xEDscas, surtos e cargas correm pelos fios at\xE9 o quadro de luz.
-    N\xE3o deixe chegarem!\n\n1 a 4 (ou clique na carta): escolher um aliado\nClique
-    num espa\xE7o vazio: colocar o aliado\nBot\xE3o direito: cancelar a escolha\n\nFus\xEDveis
-    atacam quem passa por perto. Baterias geram energia.\nDerrotar inimigos tamb\xE9m
-    d\xE1 energia.\n\nAguente todas as ondas para a luz voltar."
+    N\xE3o deixe chegarem!\n\n{1} {2} {3} {4}  escolher um aliado (ou clique na carta)\nClique
+    num espa\xE7o vazio para colocar. Bot\xE3o direito cancela.\n\nFus\xEDveis atacam
+    quem passa por perto. Baterias geram energia.\nAguente todas as ondas para a
+    luz voltar."
   _goal: 0
   font: {fileID: 11400000, guid: f63ff3045d161f047aa28ae3fcff18bc, type: 2}
   _showGoal: 0
   _unpauseOnPlay: 1
+  _introCard: {fileID: 0}
+  _resultCard: {fileID: 0}
+  _buttonSprite: {fileID: 0}
+  _keySprite: {fileID: 21300000, guid: f34f40cf54fe6be4dbd8821ae9577e71, type: 3}
+  _spritePixelScale: 0.35
   _paper: {r: 0.95686275, g: 0.91764706, b: 0.84705883, a: 1}
   _ink: {r: 0.16862746, g: 0.13333334, b: 0.1882353, a: 1}
   _accent: {r: 0.6901961, g: 0.3764706, b: 0.22745098, a: 1}

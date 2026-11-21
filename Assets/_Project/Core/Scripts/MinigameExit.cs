@@ -9,6 +9,8 @@ namespace MovingIn.Core{
 
         bool _finished;
 
+        public bool EscapeLeaves => _escapeLeaves;
+
         void Update()
         {
             if (_escapeLeaves && Input.GetKeyDown(KeyCode.Escape)) Leave(false);

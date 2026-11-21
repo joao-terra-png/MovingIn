@@ -45,8 +45,9 @@ namespace MovingIn.Hub{
         [SerializeField] RectTransform creditsContent;
         [SerializeField] TextMeshProUGUI creditsText;
         [SerializeField] TextMeshProUGUI continueHint;
-        [SerializeField, TextArea(3, 12)] string _creditsBody = "Projeto final de AED1 · UFSCar\n\nEquipe\n(nomes do grupo aqui)\n\nObrigado por jogar!";
+        [SerializeField, TextArea(3, 12)] string _creditsBody = "Projeto final de AED1 · UFSCar\n\n<size=120%><b>Equipe</b></size>\nDavi Filipe Del Bianco\nFelipe Gabriel Rabello\nJoão Gabriel Azevedo Terra\nNicolas Catini Ramalho dos Santos\n\n<size=120%><b>Minigames</b></size>\n<b>Hamsters' Pipe</b>\nDavi Filipe Del Bianco\nFelipe Gabriel Rabello\n\n<b>Fuse Defense</b>\nNicolas Catini Ramalho dos Santos\n\n<b>Kitchen Organizer · Laundry · Box Tetris</b>\nJoão Gabriel Azevedo Terra\n\n<size=120%><b>Arte</b></size>\n@krol.psd (Kitchen Organizer)\nJoão Gabriel Azevedo Terra\nFelipe Gabriel Rabello\n\n<size=120%><b>Músicas</b></size>\n\"Main Title Theme\"\n\"Night Walk\"\nJonathan Morali\nLife is Strange - Original Soundtrack\nDONTNOD Entertainment / Square Enix, 2015\n\n<size=120%><b>Efeitos sonoros</b></size>\nInterface Sounds\nKenney (kenney.nl) - CC0\n\n<size=120%><b>Assets</b></size>\nModelos 3D: Furniture Kit\nKenney (kenney.nl) - CC0\n\nFonte: Pixelify Sans\nThe Pixelify Sans Project Authors\nSIL Open Font License 1.1\n\n<size=120%><b>Ferramentas</b></size>\nUnity 2022.3 · C#\nTextMesh Pro\n\nObrigado por jogar!";
         [SerializeField] float _creditsSpeed = 60f;
+        [SerializeField] float _creditsBottomMargin = 160f;
 
         public static bool Playing { get; private set; }
 
@@ -218,7 +219,7 @@ namespace MovingIn.Hub{
             creditsContent.anchoredPosition = new Vector2(0f, -view / 2f - height / 2f);
             yield return Cutscene.Fade(credits, 1f, 0.8f);
 
-            float stop = 0f;
+            float stop = Mathf.Max(0f, (height - view) / 2f + _creditsBottomMargin);
             while (creditsContent.anchoredPosition.y < stop)
             {
                 creditsContent.anchoredPosition += Vector2.up * (_creditsSpeed * Time.unscaledDeltaTime);

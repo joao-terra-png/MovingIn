@@ -102,10 +102,9 @@ namespace MovingIn.Hub{
             _pitch = _gamePitch;
 
             newGameButton.onClick.AddListener(NewGame);
-            continueButton.onClick.AddListener(Continue);
             optionsButton.onClick.AddListener(OpenOptions);
             quitButton.onClick.AddListener(Quit);
-            continueButton.interactable = SaveSystem.HasSave;
+            if (continueButton != null) continueButton.gameObject.SetActive(false);
 
             yield return Cutscene.Fade(group, 1f, 0.6f);
             group.interactable = true;
@@ -203,14 +202,6 @@ namespace MovingIn.Hub{
         {
             yield return routine;
             done();
-        }
-
-        void Continue()
-        {
-            if (!SaveSystem.HasSave) return;
-            Active = false;
-            Cutscene.Playing = false;
-            SaveSystem.Load();
         }
 
         void OpenOptions()

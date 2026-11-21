@@ -532,15 +532,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ee5c1615d00ea449845a919abb86ad3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _title: Cozinha em Ordem
-  _howToPlay: "Tire os itens da caixa um de cada vez e arraste cada um para o lugar
-    certo.\nO bilhete mostra o que ainda falta guardar.\n\nPratos: um prato s\xF3
-    pode ficar em cima de um prato MAIOR.\nUse a bancada como apoio para trocar a
-    ordem.\n\nAcerto: +10    Erro: -5\nP: pausar"
+  _title: Kitchen Organizer
+  _howToPlay: "Arraste com o mouse cada item da caixa para o lugar certo.\nO bilhete
+    mostra o que ainda falta guardar.\n\nPratos: um prato s\xF3 pode ficar em cima
+    de um prato MAIOR.\nUse a bancada como apoio para trocar a ordem.\n\nAcerto:
+    +10    Erro: -5\n{P} pausar"
   _goal: 60
   font: {fileID: 11400000, guid: f63ff3045d161f047aa28ae3fcff18bc, type: 2}
   _showGoal: 1
   _unpauseOnPlay: 1
+  _introCard: {fileID: 0}
+  _resultCard: {fileID: 0}
+  _buttonSprite: {fileID: 0}
+  _keySprite: {fileID: 21300000, guid: f34f40cf54fe6be4dbd8821ae9577e71, type: 3}
+  _spritePixelScale: 0.35
   _paper: {r: 0.95686275, g: 0.91764706, b: 0.84705883, a: 1}
   _ink: {r: 0.16862746, g: 0.13333334, b: 0.1882353, a: 1}
   _accent: {r: 0.6901961, g: 0.3764706, b: 0.22745098, a: 1}

@@ -322,7 +322,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
+    rgba: 4292406004
   m_fontColor: {r: 0.95686275, g: 0.91764706, b: 0.84705883, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -335,7 +335,7 @@ MonoBehaviour:
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
   m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: 0
+  m_TextStyleHashCode: -1183493901
   m_overrideHtmlColors: 0
   m_faceColor:
     serializedVersion: 2
@@ -549,7 +549,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
+    rgba: 4284522720
   m_fontColor: {r: 0.8784314, g: 0.627451, b: 0.3764706, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -562,7 +562,7 @@ MonoBehaviour:
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
   m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: 0
+  m_TextStyleHashCode: -1183493901
   m_overrideHtmlColors: 0
   m_faceColor:
     serializedVersion: 2
@@ -805,19 +805,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   screens: {fileID: 504694134}
-  _startFall: 0.8
-  _minFall: 0.1
-  _speedUp: 0.85
-  _linesPerLevel: 5
+  _startFall: 0.45
+  _minFall: 0.06
+  _speedUp: 0.75
+  _linesPerLevel: 3
   _softFall: 0.04
-  _lockDelay: 0.5
-  _maxLockResets: 12
+  _lockDelay: 0.3
+  _maxLockResets: 6
   _repeatDelay: 0.17
   _repeatRate: 0.05
   _clearTime: 0.3
   _lineScores: 00000000640000002c010000f401000020030000
-  _softDropPoints: 1
-  _hardDropPoints: 2
+  _softDropPoints: 0
+  _hardDropPoints: 0
 --- !u!114 &504694134
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -830,14 +830,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ee5c1615d00ea449845a919abb86ad3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _title: Caixas na Garagem
+  _title: Box Tetris
   _howToPlay: "Empilhe as caixas da garagem sem deixar buracos.\nUma linha completa
-    some e vale pontos.\n\nA e D (ou setas): mover\nW (ou seta para cima): girar\nS
-    (ou seta para baixo): descer mais r\xE1pido\nEspa\xE7o: soltar de vez"
-  _goal: 800
+    some e vale pontos.\n\n{A} {D}  mover            {W}  girar\n{S}  descer mais
+    r\xE1pido\n{Espa\xE7o}  soltar de vez\nAs setas do teclado tamb\xE9m funcionam."
+  _goal: 3000
   font: {fileID: 11400000, guid: f63ff3045d161f047aa28ae3fcff18bc, type: 2}
   _showGoal: 1
   _unpauseOnPlay: 1
+  _introCard: {fileID: 0}
+  _resultCard: {fileID: 0}
+  _buttonSprite: {fileID: 0}
+  _keySprite: {fileID: 21300000, guid: f34f40cf54fe6be4dbd8821ae9577e71, type: 3}
+  _spritePixelScale: 0.35
   _paper: {r: 0.95686275, g: 0.91764706, b: 0.84705883, a: 1}
   _ink: {r: 0.16862746, g: 0.13333334, b: 0.1882353, a: 1}
   _accent: {r: 0.6901961, g: 0.3764706, b: 0.22745098, a: 1}
@@ -1149,7 +1154,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
+    rgba: 4292406004
   m_fontColor: {r: 0.95686275, g: 0.91764706, b: 0.84705883, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -1162,7 +1167,7 @@ MonoBehaviour:
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
   m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: 0
+  m_TextStyleHashCode: -1183493901
   m_overrideHtmlColors: 0
   m_faceColor:
     serializedVersion: 2
@@ -1858,7 +1863,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
+    rgba: 4292406004
   m_fontColor: {r: 0.95686275, g: 0.91764706, b: 0.84705883, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -1871,7 +1876,7 @@ MonoBehaviour:
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
   m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: 0
+  m_TextStyleHashCode: -1183493901
   m_overrideHtmlColors: 0
   m_faceColor:
     serializedVersion: 2
@@ -2155,7 +2160,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
+    rgba: 4284522720
   m_fontColor: {r: 0.8784314, g: 0.627451, b: 0.3764706, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -2168,7 +2173,7 @@ MonoBehaviour:
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
   m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: 0
+  m_TextStyleHashCode: -1183493901
   m_overrideHtmlColors: 0
   m_faceColor:
     serializedVersion: 2
