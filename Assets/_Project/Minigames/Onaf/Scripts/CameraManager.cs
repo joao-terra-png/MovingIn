@@ -10,31 +10,34 @@ namespace MovingIn.Minigames.Onaf{
         [SerializeField] QuartoNode currentRoom;
         [SerializeField] int idCurrentRoom;
         [SerializeField] GameObject SecurityCamera;
-        [SerializeField] Arvore Tree;
+        [SerializeField] GameObject Manager;
+        Arvore tree;
         [SerializeField] EnergyManager energia;
 
         bool IsCamOn {get; set;}
         // Start is called before the first frame update
         void Start()
         {
-            idCurrentRoom = 1;
-            currentRoom = null;
+            idCurrentRoom = 60;
+            currentRoom = Manager.GetComponent<GameManager>().Tree.GetRaiz();
             SecurityCamera = transform.GetChild(0).gameObject;
 
             if(energia != null)
                 energia.EnergiaAcabou += DesligarCamera;
+            
+            tree = Manager.GetComponent<GameManager>().Tree;
         }
 
         //Chamado ao clicar no botão da camera (evento)
             //cada botão na camera tem um valor assinado para sua
         public void SwitchCamera(int value)
         {
-            if(Tree.GetQuarto(value) != null)
+            if(tree.GetQuarto(value) != null)
                 idCurrentRoom = value;
 
             if(currentRoom.GetID() != idCurrentRoom){
                 currentRoom.GetRoom().gameObject.SetActive(false);
-                currentRoom = Tree.GetQuarto(idCurrentRoom);
+                currentRoom = tree.GetQuarto(idCurrentRoom);
                 currentRoom.GetRoom().gameObject.SetActive(true);
                 SecurityCamera.GetComponent<IsoCamera>().SnapTo(currentRoom.GetRoom());
             }

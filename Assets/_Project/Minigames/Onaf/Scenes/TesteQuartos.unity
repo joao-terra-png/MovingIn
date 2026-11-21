@@ -861,7 +861,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 6045573}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 555538787}
+        m_TargetAssemblyTypeName: MovingIn.Minigames.Onaf.CameraManager, Assembly-CSharp
+        m_MethodName: SwitchCamera
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 60
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &6045573
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10142,7 +10154,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 95404042}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 555538787}
+        m_TargetAssemblyTypeName: MovingIn.Minigames.Onaf.CameraManager, Assembly-CSharp
+        m_MethodName: SwitchCamera
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 40
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &95404042
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -58627,7 +58651,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 481020589}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 555538787}
+        m_TargetAssemblyTypeName: MovingIn.Minigames.Onaf.CameraManager, Assembly-CSharp
+        m_MethodName: SwitchCamera
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 10
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &481020589
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -66366,7 +66402,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   idCurrentRoom: 0
   SecurityCamera: {fileID: 0}
-  Tree: {fileID: 0}
+  Manager: {fileID: 1823196482}
   energia: {fileID: 1823196483}
 --- !u!1 &555762119
 GameObject:
@@ -119340,7 +119376,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 922738120}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 555538787}
+        m_TargetAssemblyTypeName: MovingIn.Minigames.Onaf.CameraManager, Assembly-CSharp
+        m_MethodName: SwitchCamera
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 30
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &922738120
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -132502,7 +132550,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1045905311}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 555538787}
+        m_TargetAssemblyTypeName: MovingIn.Minigames.Onaf.CameraManager, Assembly-CSharp
+        m_MethodName: SwitchCamera
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 80
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1045905311
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -183180,7 +183240,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1425161490}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 555538787}
+        m_TargetAssemblyTypeName: MovingIn.Minigames.Onaf.CameraManager, Assembly-CSharp
+        m_MethodName: SwitchCamera
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 100
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1425161490
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -208664,7 +208736,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1584720173}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 555538787}
+        m_TargetAssemblyTypeName: MovingIn.Minigames.Onaf.CameraManager, Assembly-CSharp
+        m_MethodName: SwitchCamera
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 90
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1584720173
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -228481,7 +228565,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1763115904}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 555538787}
+        m_TargetAssemblyTypeName: MovingIn.Minigames.Onaf.CameraManager, Assembly-CSharp
+        m_MethodName: SwitchCamera
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 50
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1763115904
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -240481,6 +240577,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1823196484}
   - component: {fileID: 1823196483}
+  - component: {fileID: 1823196485}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -240523,6 +240620,19 @@ Transform:
   - {fileID: 1970728316}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1823196485
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1823196482}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82385fd212e712542aeb862d608bec59, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  House: {fileID: 436972388}
 --- !u!1 &1823550521
 GameObject:
   m_ObjectHideFlags: 0
@@ -275468,7 +275578,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2064152351}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 555538787}
+        m_TargetAssemblyTypeName: MovingIn.Minigames.Onaf.CameraManager, Assembly-CSharp
+        m_MethodName: SwitchCamera
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 20
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2064152351
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -277938,7 +278060,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2087408676}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 555538787}
+        m_TargetAssemblyTypeName: MovingIn.Minigames.Onaf.CameraManager, Assembly-CSharp
+        m_MethodName: SwitchCamera
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 70
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2087408676
 MonoBehaviour:
   m_ObjectHideFlags: 0

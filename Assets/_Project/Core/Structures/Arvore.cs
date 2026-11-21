@@ -5,7 +5,7 @@ using MovingIn.Minigames.Onaf;
 
 namespace MovingIn.Core.Structures
 {
-    public class Arvore : MonoBehaviour
+    public class Arvore
     {
         private QuartoNode raiz;
 
