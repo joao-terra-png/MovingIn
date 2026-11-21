@@ -13,23 +13,23 @@ namespace MovingIn.Core.Structures
         private Boneco boneco;
         private Room room;
 
-        public QuartoNode(int id)
+        public QuartoNode(int id) : this(id, null)
+        {
+        }
+
+        public QuartoNode(int id, Room room)
         {
             ID = id;
             pai = null;
             esq = null;
             dir = null;
             boneco = null;
+            this.room = room;
         }
 
         public int GetID()
         {
             return ID;
-        }
-
-        public void SetID(int id)
-        {
-            ID = id;
         }
 
         public QuartoNode GetPai()
@@ -90,6 +90,7 @@ namespace MovingIn.Core.Structures
         {
             this.room = room;
         }
+
         public bool IsEmpty()
         {
             return boneco == null;

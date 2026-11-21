@@ -1,4 +1,6 @@
+using System;
 using UnityEngine;
+using MovingIn.Hub;
 using MovingIn.Minigames.Onaf;
 
 namespace MovingIn.Core.Structures
@@ -40,9 +42,14 @@ namespace MovingIn.Core.Structures
 
         public void Insere(int x, out bool ok)
         {
+            Insere(x, null, out ok);
+        }
+
+        public void Insere(int x, Room room, out bool ok)
+        {
             if (raiz == null)
             {
-                raiz = new QuartoNode(x);
+                raiz = new QuartoNode(x, room);
                 ok = true;
                 return;
             }
@@ -61,7 +68,7 @@ namespace MovingIn.Core.Structures
                 {
                     if (atual.GetEsq() == null)
                     {
-                        QuartoNode novo = new QuartoNode(x);
+                        QuartoNode novo = new QuartoNode(x, room);
                         novo.SetPai(atual);
                         atual.SetEsq(novo);
                         ok = true;
@@ -74,7 +81,7 @@ namespace MovingIn.Core.Structures
                 {
                     if (atual.GetDir() == null)
                     {
-                        QuartoNode novo = new QuartoNode(x);
+                        QuartoNode novo = new QuartoNode(x, room);
                         novo.SetPai(atual);
                         atual.SetDir(novo);
                         ok = true;
@@ -198,6 +205,37 @@ namespace MovingIn.Core.Structures
             QuartoNode quarto = GetQuarto(id);
 
             if (quarto != null) quarto.RemoveBoneco();
+        }
+
+        public Room GetRoom(int id)
+        {
+            QuartoNode quarto = GetQuarto(id);
+
+            return quarto != null ? quarto.GetRoom() : null;
+        }
+
+        public bool SetRoom(int id, Room room)
+        {
+            QuartoNode quarto = GetQuarto(id);
+
+            if (quarto == null) return false;
+
+            quarto.SetRoom(room);
+            return true;
+        }
+
+        public void EmOrdem(Action<QuartoNode> visita)
+        {
+            EmOrdem(raiz, visita);
+        }
+
+        private void EmOrdem(QuartoNode r, Action<QuartoNode> visita)
+        {
+            if (r == null) return;
+
+            EmOrdem(r.GetEsq(), visita);
+            visita(r);
+            EmOrdem(r.GetDir(), visita);
         }
     }
 }
