@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using MovingIn.Core.Structures;
 using MovingIn.Hub;
 using UnityEngine;
@@ -67,7 +68,12 @@ namespace MovingIn.Minigames.Onaf
 
         private void ConfigurarBonecos()
         {
-            bonecos = FindObjectsOfType<Boneco>();
+            List<Boneco> encontrados = new List<Boneco>();
+
+            foreach (GameObject raiz in gameObject.scene.GetRootGameObjects())
+                encontrados.AddRange(raiz.GetComponentsInChildren<Boneco>(true));
+
+            bonecos = encontrados.ToArray();
 
             foreach (Boneco boneco in bonecos)
             {

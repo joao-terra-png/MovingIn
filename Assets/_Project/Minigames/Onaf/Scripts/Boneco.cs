@@ -23,6 +23,12 @@ namespace MovingIn.Minigames.Onaf
         [SerializeField, Range(0f, 1f)]
         private float chanceDireita = 0.2f;
 
+        [Header("Aparência")]
+        [Tooltip("Deslocamento a partir do ponto de foco do cômodo. -0.6 deixa os pés no chão.")]
+        [SerializeField] private Vector3 deslocamentoNoComodo = new Vector3(0f, -0.6f, 0f);
+        [Tooltip("Cor da cápsula usada quando o boneco não tem nenhum visual próprio.")]
+        [SerializeField] private Color corPadrao = new Color(0.8f, 0.1f, 0.1f);
+
         private Arvore ABB;
 
         private float tempoAtual;
@@ -30,11 +36,14 @@ namespace MovingIn.Minigames.Onaf
         private bool sendoObservado;
 
         private GameManager gameManager;
+        private Renderer[] renderers;
 
         public void Configurar(Arvore arvore, GameManager manager)
         {
             ABB = arvore;
             gameManager = manager;
+
+            GarantirVisual();
 
             QuartoNode quarto = ABB.GetQuarto(idRoom);
 
@@ -55,6 +64,8 @@ namespace MovingIn.Minigames.Onaf
 
         private void Update()
         {
+            AtualizarVisibilidade();
+
             if (ABB == null || !movEnable || sendoObservado)
                 return;
 
@@ -99,7 +110,6 @@ namespace MovingIn.Minigames.Onaf
             if (destino == null || !destino.IsEmpty())
                 return false;
 
-            // O quarto 60 é onde o jogador fica.
             if (destino.GetID() == 60)
             {
                 if (gameManager != null)
@@ -133,7 +143,47 @@ namespace MovingIn.Minigames.Onaf
             Room room = quarto.GetRoom();
 
             if (room != null)
-                transform.position = room.transform.position;
+                transform.position = room.FocusPoint + deslocamentoNoComodo;
+        }
+
+        private void GarantirVisual()
+        {
+            renderers = GetComponentsInChildren<Renderer>(true);
+
+            if (renderers.Length > 0)
+                return;
+
+            GameObject capsula = GameObject.CreatePrimitive(PrimitiveType.Capsule);
+            capsula.name = "VisualBoneco";
+
+            Collider colisor = capsula.GetComponent<Collider>();
+            if (colisor != null)
+                Destroy(colisor);
+
+            capsula.transform.SetParent(transform, false);
+            capsula.transform.localPosition = Vector3.zero;
+            capsula.transform.localScale = new Vector3(0.8f, 0.9f, 0.8f);
+
+            Renderer render = capsula.GetComponent<Renderer>();
+            render.material.color = corPadrao;
+
+            renderers = new Renderer[] { render };
+        }
+
+        private void AtualizarVisibilidade()
+        {
+            if (ABB == null || renderers == null)
+                return;
+
+            QuartoNode quarto = ABB.GetQuarto(idRoom);
+            Room room = quarto != null ? quarto.GetRoom() : null;
+            bool visivel = room != null && room.gameObject.activeInHierarchy;
+
+            foreach (Renderer render in renderers)
+            {
+                if (render != null && render.enabled != visivel)
+                    render.enabled = visivel;
+            }
         }
 
         public int GetIDRoom()

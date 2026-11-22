@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using MovingIn.Core.Structures;
 using MovingIn.Hub;
 using UnityEngine;
@@ -18,10 +19,19 @@ namespace MovingIn.Minigames.Onaf
         [Header("Configuração")]
         [SerializeField] private int idCurrentRoom = 60;
 
+        [Header("Cômodos visíveis")]
+        [Tooltip("Liga só o cômodo mostrado (câmera de segurança) ou só os do jogador (visão do quarto). Evita ver os cômodos vizinhos nos cantos da imagem.")]
+        [SerializeField] private bool isolarComodos = true;
+        [Tooltip("Cômodos ligados enquanto o jogador olha o próprio quarto: o quarto (60) e o corredor (20), visto pela porta.")]
+        [SerializeField] private int[] comodosDoJogador = { 60, 20 };
+
         private Arvore tree;
         private QuartoNode currentRoom;
 
         private bool cameraLigada;
+
+        private readonly Dictionary<int, Room> comodos = new Dictionary<int, Room>();
+        private Boneco bonecoObservado;
 
         private void Start()
         {
@@ -50,12 +60,24 @@ namespace MovingIn.Minigames.Onaf
                 return;
             }
 
+            // guarda os cômodos da árvore (id -> Room) para poder ligar/desligar
+            tree.EmOrdem(q =>
+            {
+                if (q.GetRoom() != null)
+                    comodos[q.GetID()] = q.GetRoom();
+            });
+
             cameraJogador.enabled = true;
             cameraSeguranca.enabled = false;
 
             energia.EnergiaAcabou += DesligarCamera;
 
             AtualizarCamera();
+        }
+
+        private void Update()
+        {
+            AtualizarObservacao();
         }
 
         public void ToggleCamera()
@@ -120,9 +142,7 @@ namespace MovingIn.Minigames.Onaf
             currentRoom = novoQuarto;
             idCurrentRoom = id;
 
-            isoCamera.SnapTo(currentRoom.GetRoom());
-
-            Debug.Log("Câmera mudou para: " + id);
+            AtualizarCamera();
         }
 
         private void AtualizarCamera()
@@ -135,13 +155,56 @@ namespace MovingIn.Minigames.Onaf
             if (room == null)
                 return;
 
+            AplicarVisibilidade();
+
             if (cameraLigada)
                 isoCamera.SnapTo(room);
 
-            Boneco boneco = currentRoom.GetBoneco();
+            AtualizarObservacao();
+        }
 
-            if (boneco != null)
-                boneco.SetSendoObservado(cameraLigada);
+        private void AplicarVisibilidade()
+        {
+            if (!isolarComodos)
+                return;
+
+            foreach (KeyValuePair<int, Room> par in comodos)
+            {
+                bool ligado = cameraLigada ? par.Key == idCurrentRoom : EhComodoDoJogador(par.Key);
+
+                if (par.Value != null && par.Value.gameObject.activeSelf != ligado)
+                    par.Value.gameObject.SetActive(ligado);
+            }
+        }
+
+        private bool EhComodoDoJogador(int id)
+        {
+            foreach (int ativo in comodosDoJogador)
+            {
+                if (ativo == id)
+                    return true;
+            }
+
+            return false;
+        }
+
+        private void AtualizarObservacao()
+        {
+            Boneco alvo = null;
+
+            if (cameraLigada && currentRoom != null)
+                alvo = currentRoom.GetBoneco();
+
+            if (alvo == bonecoObservado)
+                return;
+
+            if (bonecoObservado != null)
+                bonecoObservado.SetSendoObservado(false);
+
+            if (alvo != null)
+                alvo.SetSendoObservado(true);
+
+            bonecoObservado = alvo;
         }
 
         public bool CameraEstaLigada()
@@ -154,13 +217,18 @@ namespace MovingIn.Minigames.Onaf
             return idCurrentRoom;
         }
 
+        public Camera GetCameraJogador()
+        {
+            return cameraJogador;
+        }
+
         private void OnDestroy()
         {
             if (energia != null)
                 energia.EnergiaAcabou -= DesligarCamera;
 
-            if (currentRoom != null && currentRoom.GetBoneco() != null)
-                currentRoom.GetBoneco().SetSendoObservado(false);
+            if (bonecoObservado != null)
+                bonecoObservado.SetSendoObservado(false);
         }
     }
 }
