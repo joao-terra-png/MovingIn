@@ -14,6 +14,8 @@ namespace MovingIn.Hub{
     {
         [SerializeField] string _roomName = "Comodo";
 
+        [SerializeField] private int RoomId;
+
         [Tooltip("Ponto que a camera enquadra. Se ficar vazio, usa a posicao deste objeto")]
         [SerializeField] Transform cameraFocus;
 
@@ -26,5 +28,15 @@ namespace MovingIn.Hub{
 
         public void Show() => gameObject.SetActive(true);
         public void Hide() => gameObject.SetActive(false);
+
+        public int GetRoomId()
+        {
+            return RoomId;
+        }
+
+        public string GetRoomName()
+        {
+            return _roomName;
+        }
     }
 }

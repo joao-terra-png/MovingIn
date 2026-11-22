@@ -1,70 +1,166 @@
-using System.Collections;
-using System.Collections.Generic;
 using MovingIn.Core.Structures;
 using MovingIn.Hub;
 using UnityEngine;
-namespace MovingIn.Minigames.Onaf{
+
+namespace MovingIn.Minigames.Onaf
+{
     public class CameraManager : MonoBehaviour
     {
+        [Header("Câmeras")]
+        [SerializeField] private Camera cameraJogador;
+        [SerializeField] private Camera cameraSeguranca;
+        [SerializeField] private IsoCamera isoCamera;
 
-        [SerializeField] QuartoNode currentRoom;
-        [SerializeField] int idCurrentRoom;
-        [SerializeField] GameObject SecurityCamera;
-        [SerializeField] GameObject Manager;
-        Arvore tree;
-        [SerializeField] EnergyManager energia;
+        [Header("Gerenciadores")]
+        [SerializeField] private GameManager gameManager;
+        [SerializeField] private EnergyManager energia;
 
-        bool IsCamOn {get; set;}
-        // Start is called before the first frame update
-        void Start()
+        [Header("Configuração")]
+        [SerializeField] private int idCurrentRoom = 60;
+
+        private Arvore tree;
+        private QuartoNode currentRoom;
+
+        private bool cameraLigada;
+
+        private void Start()
         {
-            idCurrentRoom = 60;
-            currentRoom = Manager.GetComponent<GameManager>().Tree.GetRaiz();
-            SecurityCamera = transform.GetChild(0).gameObject;
-
-            if(energia != null)
-                energia.EnergiaAcabou += DesligarCamera;
-            
-            tree = Manager.GetComponent<GameManager>().Tree;
-        }
-
-        //Chamado ao clicar no botão da camera (evento)
-            //cada botão na camera tem um valor assinado para sua
-        public void SwitchCamera(int value)
-        {
-            if(tree.GetQuarto(value) != null)
-                idCurrentRoom = value;
-
-            if(currentRoom.GetID() != idCurrentRoom){
-                currentRoom.GetRoom().gameObject.SetActive(false);
-                currentRoom = tree.GetQuarto(idCurrentRoom);
-                currentRoom.GetRoom().gameObject.SetActive(true);
-                SecurityCamera.GetComponent<IsoCamera>().SnapTo(currentRoom.GetRoom());
+            if (gameManager == null || energia == null)
+            {
+                Debug.LogError("CameraManager: faltam referências.");
+                return;
             }
+
+            tree = gameManager.GetTree();
+
+            if (cameraSeguranca == null ||
+                cameraJogador == null ||
+                isoCamera == null ||
+                tree == null)
+            {
+                Debug.LogError("CameraManager: câmera ou árvore não configurada.");
+                return;
+            }
+
+            currentRoom = tree.GetQuarto(idCurrentRoom);
+
+            if (currentRoom == null)
+            {
+                Debug.LogError("Cômodo inicial não encontrado.");
+                return;
+            }
+
+            cameraJogador.enabled = true;
+            cameraSeguranca.enabled = false;
+
+            energia.EnergiaAcabou += DesligarCamera;
+
+            AtualizarCamera();
         }
 
-        void Update()
+        public void ToggleCamera()
         {
-            //A princípio, o sinal é de fato a camera ligada ou não
-            IsCamOn = SecurityCamera.GetComponent<Camera>().enabled;
+            if (cameraLigada)
+            {
+                DesligarCamera();
+                return;
+            }
 
-            if(energia != null)
-                energia.SetCameraAtiva(IsCamOn);
+            if (!energia.TemEnergia())
+                return;
 
-            if(currentRoom != null && currentRoom.GetBoneco() != null)
-                currentRoom.GetBoneco().movEnable = !IsCamOn;
+            LigarCamera();
         }
 
-        void DesligarCamera()
+        private void LigarCamera()
         {
-            SecurityCamera.GetComponent<Camera>().enabled = false;
+            if (!energia.TemEnergia())
+                return;
+
+            cameraLigada = true;
+
+            cameraJogador.enabled = false;
+            cameraSeguranca.enabled = true;
+
+            AtualizarCamera();
+
+            energia.SetCameraAtiva(true);
         }
 
-        void OnDestroy()
+        public void DesligarCamera()
         {
-            if(energia != null)
+            cameraLigada = false;
+
+            if (cameraJogador != null)
+                cameraJogador.enabled = true;
+
+            if (cameraSeguranca != null)
+                cameraSeguranca.enabled = false;
+
+            if (energia != null)
+                energia.SetCameraAtiva(false);
+
+            AtualizarCamera();
+        }
+
+        public void SwitchCamera(int id)
+        {
+            if (!cameraLigada)
+            {
+                return;
+            }
+
+            QuartoNode novoQuarto = tree.GetQuarto(id);
+
+            if (novoQuarto == null)
+            {
+                return;
+            }
+
+            currentRoom = novoQuarto;
+            idCurrentRoom = id;
+
+            isoCamera.SnapTo(currentRoom.GetRoom());
+
+            Debug.Log("Câmera mudou para: " + id);
+        }
+
+        private void AtualizarCamera()
+        {
+            if (currentRoom == null)
+                return;
+
+            Room room = currentRoom.GetRoom();
+
+            if (room == null)
+                return;
+
+            if (cameraLigada)
+                isoCamera.SnapTo(room);
+
+            Boneco boneco = currentRoom.GetBoneco();
+
+            if (boneco != null)
+                boneco.SetSendoObservado(cameraLigada);
+        }
+
+        public bool CameraEstaLigada()
+        {
+            return cameraLigada;
+        }
+
+        public int GetIDRoomAtual()
+        {
+            return idCurrentRoom;
+        }
+
+        private void OnDestroy()
+        {
+            if (energia != null)
                 energia.EnergiaAcabou -= DesligarCamera;
-        }
 
+            if (currentRoom != null && currentRoom.GetBoneco() != null)
+                currentRoom.GetBoneco().SetSendoObservado(false);
+        }
     }
 }

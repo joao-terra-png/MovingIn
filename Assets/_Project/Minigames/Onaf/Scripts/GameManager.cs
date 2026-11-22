@@ -1,40 +1,175 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using MovingIn.Core.Structures;
 using MovingIn.Hub;
 using UnityEngine;
-namespace MovingIn.Minigames.Onaf{
+
+namespace MovingIn.Minigames.Onaf
+{
     public class GameManager : MonoBehaviour
     {
-        
-        Arvore HouseMap;
-        public Arvore Tree => HouseMap; 
-        [SerializeField] GameObject House;
+        [Header("Casa")]
+        [SerializeField] private GameObject House;
 
-        void Awake()
-        {   
+        [Header("Gerenciadores")]
+        [SerializeField] private EnergyManager energia;
+        [SerializeField] private CameraManager cameraManager;
+        [SerializeField] private NightManager nightManager;
+        [SerializeField] private DefesaManager defesaManager;
+
+        private Arvore HouseMap;
+        private Boneco[] bonecos;
+
+        private bool partidaFinalizada;
+
+        public event Action<bool> PartidaTerminou;
+
+        private void Awake()
+        {
+            CriarArvore();
+            ConfigurarBonecos();
+        }
+
+        private void Start()
+        {
+            if (nightManager != null)
+                nightManager.NoiteTerminou += Vitoria;
+
+            if (energia != null)
+                energia.ToleranciaEsgotada += Derrota;
+
+            if (nightManager != null)
+                nightManager.IniciarNoite();
+        }
+
+        private void CriarArvore()
+        {
             HouseMap = new Arvore();
-            int i = 0;
-            bool ok = true;
-            while(ok)
+
+            if (House == null)
             {
-                HouseMap.Insere(ordem[i], House.transform.GetChild(i).gameObject.GetComponent<Room>(), out ok);
-                i++;
+                return;
+            }
+
+            Room[] rooms = House.GetComponentsInChildren<Room>(true);
+
+            foreach (Room room in rooms)
+            {
+                HouseMap.Insere(
+                    room.GetRoomId(),
+                    room,
+                    out bool ok
+                );
+            }
+
+            if (HouseMap.Vazia())
+                Debug.LogError("A árvore de cômodos está vazia.");
+        }
+
+        private void ConfigurarBonecos()
+        {
+            bonecos = FindObjectsOfType<Boneco>();
+
+            foreach (Boneco boneco in bonecos)
+            {
+                boneco.Configurar(HouseMap, this);
             }
         }
 
-        // Update is called once per frame
-        const int Sotao = 10;
-        const int Corredor = 20;
-        const int Porao = 30;
-        const int Escada = 40;
-        const int Lavanderia = 50;
-        const int QuartoGaroto = 60;
-        const int Sala = 70;
-        const int Quintal = 80;
-        const int Cozinha = 90;
-        const int Garagem = 100;
-        static int[] ordem = {QuartoGaroto, Corredor, Quintal, Sotao, 
-                Escada, Sala, Garagem, Porao, Lavanderia, Cozinha};
+        public Arvore GetTree()
+        {
+            return HouseMap;
+        }
+
+        public void VerificarInvasao(int idOrigem)
+        {
+            if (partidaFinalizada)
+                return;
+
+            if (defesaManager == null)
+            {
+                Debug.LogError("GameManager: DefesaManager não configurado!");
+                Derrota();
+                return;
+            }
+
+            // Entrada pelo corredor: verifica a porta.
+            if (idOrigem == 20 && defesaManager.PortaEstaFechada())
+            {
+                Debug.Log("Boneco bloqueado pela porta!");
+                return;
+            }
+
+            // Entrada pelo quintal: verifica a janela.
+            if (idOrigem == 80 && defesaManager.JanelaEstaFechada())
+            {
+                Debug.Log("Boneco bloqueado pela janela!");
+                return;
+            }
+
+            Debug.Log("O boneco invadiu o quarto do jogador!");
+            Derrota();
+        }
+
+        public void Vitoria()
+        {
+            FinalizarPartida(true);
+        }
+
+        public void Derrota()
+        {
+            FinalizarPartida(false);
+        }
+
+        private void FinalizarPartida(bool venceu)
+        {
+            if (partidaFinalizada)
+                return;
+
+            partidaFinalizada = true;
+
+            if (nightManager != null)
+                nightManager.Parar();
+
+            if (energia != null)
+                energia.Parar();
+
+            if (cameraManager != null)
+                cameraManager.DesligarCamera();
+
+            PartidaTerminou?.Invoke(venceu);
+
+            if (venceu)
+                Debug.Log("Você sobreviveu até as 6 AM!");
+            else
+                Debug.Log("Você perdeu!");
+        }
+
+        public string GetNomeComodo(int id)
+        {
+            if (HouseMap == null)
+            {
+                Debug.LogError("GameManager: a árvore ainda não foi inicializada!");
+                return "Árvore não encontrada";
+            }
+
+            Room room = HouseMap.GetRoom(id);
+
+            if (room == null)
+            {
+                Debug.LogWarning("GameManager: não existe Room associado ao ID " + id);
+                return "Desconhecido";
+            }
+
+            return room.GetRoomName();
+        }
+
+        private void OnDestroy()
+        {
+            if (nightManager != null)
+                nightManager.NoiteTerminou -= Vitoria;
+
+            if (energia != null)
+                energia.ToleranciaEsgotada -= Derrota;
+        }
     }
 }

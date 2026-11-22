@@ -1,34 +1,164 @@
-using System.Collections;
 using System.Collections.Generic;
 using MovingIn.Core.Structures;
+using MovingIn.Hub;
 using UnityEngine;
 
-namespace MovingIn.Minigames.Onaf{
+namespace MovingIn.Minigames.Onaf
+{
     public class Boneco : MonoBehaviour
     {
-        public int idRoom {get; set;}
-        public bool movEnable {get; set;}
-    
-        public void GoToNextRoom(Arvore ABB)
-        {
-            if(!movEnable)
-                return ;
-            
-            QuartoNode nextRoom;
-            float randomValue = Random.value;
-            if(randomValue < 0.2)          //ABB->left
-                nextRoom = ABB.GetQuarto(idRoom).GetEsq();
-            else if(randomValue < 0.4)      //ABB->right
-                nextRoom = ABB.GetQuarto(idRoom).GetDir();
-            else                            //ABB->parent
-                nextRoom = ABB.GetQuarto(idRoom).GetPai();
+        [Header("Configuração")]
+        [SerializeField] private int idRoom = 60;
+        [SerializeField] private float tempoEntreMovimentos = 8f;
+        [Header("Probabilidade de movimento")]
+        [SerializeField, Range(0f, 1f)]
+        private float chanceMover = 1f;
 
-            int newIdRoom = nextRoom.GetID();
-            ABB.ColocarBoneco(newIdRoom, this);
-            ABB.GetQuarto(idRoom).RemoveBoneco();
-            idRoom = newIdRoom;
+        [SerializeField, Range(0f, 1f)]
+        private float chancePai = 0.6f;
+
+        [SerializeField, Range(0f, 1f)]
+        private float chanceEsquerda = 0.2f;
+
+        [SerializeField, Range(0f, 1f)]
+        private float chanceDireita = 0.2f;
+
+        private Arvore ABB;
+
+        private float tempoAtual;
+        private bool movEnable = true;
+        private bool sendoObservado;
+
+        private GameManager gameManager;
+
+        public void Configurar(Arvore arvore, GameManager manager)
+        {
+            ABB = arvore;
+            gameManager = manager;
+
+            QuartoNode quarto = ABB.GetQuarto(idRoom);
+
+            if (quarto == null)
+            {
+                Debug.LogError("Quarto inicial do boneco não existe: " + idRoom);
+                return;
+            }
+
+            if (!quarto.SetBoneco(this))
+            {
+                Debug.LogError("O quarto inicial já está ocupado: " + idRoom);
+                return;
+            }
+
+            AtualizarPosicao(quarto);
         }
-    
-    
+
+        private void Update()
+        {
+            if (ABB == null || !movEnable || sendoObservado)
+                return;
+
+            tempoAtual += Time.deltaTime;
+
+            if (tempoAtual >= tempoEntreMovimentos)
+            {
+                tempoAtual = 0f;
+
+                if (Random.value <= chanceMover)
+                    GoToNextRoom();
+            }
+        }
+
+        public bool GoToNextRoom()
+        {
+            if (ABB == null || !movEnable || sendoObservado)
+                return false;
+
+            QuartoNode atual = ABB.GetQuarto(idRoom);
+
+            if (atual == null)
+                return false;
+
+            float sorteio = Random.value;
+
+            QuartoNode destino = null;
+
+            if (sorteio < chancePai)
+            {
+                destino = atual.GetPai();
+            }
+            else if (sorteio < chancePai + chanceEsquerda)
+            {
+                destino = atual.GetEsq();
+            }
+            else
+            {
+                destino = atual.GetDir();
+            }
+
+            if (destino == null || !destino.IsEmpty())
+                return false;
+
+            // O quarto 60 é onde o jogador fica.
+            if (destino.GetID() == 60)
+            {
+                if (gameManager != null)
+                    gameManager.VerificarInvasao(idRoom);
+
+                return false;
+            }
+
+            return MoverPara(atual, destino);
+        }
+
+        private bool MoverPara(QuartoNode atual, QuartoNode destino)
+        {
+            if (destino == null || !destino.IsEmpty())
+                return false;
+
+            if (!destino.SetBoneco(this))
+                return false;
+
+            atual.RemoveBoneco();
+
+            idRoom = destino.GetID();
+
+            AtualizarPosicao(destino);
+
+            return true;
+        }
+
+        private void AtualizarPosicao(QuartoNode quarto)
+        {
+            Room room = quarto.GetRoom();
+
+            if (room != null)
+                transform.position = room.transform.position;
+        }
+
+        public int GetIDRoom()
+        {
+            return idRoom;
+        }
+
+        public void SetIDRoom(int id)
+        {
+            idRoom = id;
+        }
+
+        public void SetMovEnable(bool valor)
+        {
+            movEnable = valor;
+        }
+
+        public void SetSendoObservado(bool valor)
+        {
+            sendoObservado = valor;
+        }
+
+        public bool EstaSendoObservado()
+        {
+            return sendoObservado;
+        }
     }
 }
