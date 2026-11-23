@@ -28419,7 +28419,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &215740721
 Transform:
   m_ObjectHideFlags: 0
@@ -29582,7 +29582,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &233743287
 Transform:
   m_ObjectHideFlags: 0
@@ -50481,6 +50481,60 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 405597984}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &405874658
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 405874659}
+  - component: {fileID: 405874660}
+  m_Layer: 0
+  m_Name: Ferrari
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &405874659
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 405874658}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 20, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1897868459}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &405874660
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 405874658}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d2707ac51627944da29478a9ee2c943, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  idRoom: 90
+  tempoEntreMovimentos: 8
+  chanceMover: 1
+  chancePai: 0.6
+  chanceEsquerda: 0.2
+  chanceDireita: 0.2
+  deslocamentoNoComodo: {x: 0, y: -0.6, z: 0}
+  sprite: {fileID: 21300000, guid: 483267877823bf54ba04fcec9c59a90f, type: 3}
+  alturaDoSprite: 1.8
+  corPadrao: {r: 0.8, g: 0.1, b: 0.1, a: 1}
 --- !u!1 &407586333
 GameObject:
   m_ObjectHideFlags: 0
@@ -75641,6 +75695,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2548c1356ba89144bcf37eb9d3ecf7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameManager: {fileID: 0}
+  cameraManager: {fileID: 0}
+  tamanhoDoMapa: {x: 620, y: 400}
+  tamanhoDoBotao: {x: 96, y: 42}
+  margem: {x: 30, y: 30}
+  idDoQuarto: 60
+  tamanhoDoTitulo: 40
+  tamanhoDoTextoDoBotao: 28
+  espessuraDaLinha: 6
 --- !u!1 &649838845
 GameObject:
   m_ObjectHideFlags: 0
@@ -86325,7 +86388,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &745006060
 Transform:
   m_ObjectHideFlags: 0
@@ -182172,7 +182235,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1416927048
 Transform:
   m_ObjectHideFlags: 0
@@ -186595,7 +186658,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1467409613
 Transform:
   m_ObjectHideFlags: 0
@@ -230130,7 +230193,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1780847148
 Transform:
   m_ObjectHideFlags: 0
@@ -231353,58 +231416,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1789270668}
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &1790891579
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1790891581}
-  - component: {fileID: 1790891580}
-  m_Layer: 0
-  m_Name: Boneco1
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1790891580
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1790891579}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0d2707ac51627944da29478a9ee2c943, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  idRoom: 90
-  tempoEntreMovimentos: 8
-  chanceMover: 1
-  chancePai: 0.6
-  chanceEsquerda: 0.2
-  chanceDireita: 0.2
-  deslocamentoNoComodo: {x: 0, y: -0.6, z: 0}
-  corPadrao: {r: 0.8, g: 0.1, b: 0.1, a: 1}
---- !u!4 &1790891581
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1790891579}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 20, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1897868459}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1791164175
 GameObject:
   m_ObjectHideFlags: 0
@@ -240469,13 +240480,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   energia: {fileID: 1823196483}
-  teclaPorta: 113
-  teclaJanela: 101
+  teclaPorta: 101
+  teclaJanela: 113
   bloquearComCamera: 1
   portaAbertaVisual: {fileID: 0}
   portaFechadaVisual: {fileID: 0}
   janelaAbertaVisual: {fileID: 0}
   janelaFechadaVisual: {fileID: 0}
+  portaAbertaSprite: {fileID: 0}
+  portaFechadaSprite: {fileID: 0}
+  portaSpritePosicao: {x: 9.85, y: 21.1, z: 4}
+  portaSpriteRotacao: {x: 0, y: 90, z: 0}
+  portaSpriteAltura: 2.2
+  esconderComSpritesDaPorta: []
+  janelaAbertaSprite: {fileID: 0}
+  janelaFechadaSprite: {fileID: 0}
+  janelaSpritePosicao: {x: 6.8, y: 21.7, z: 7.83}
+  janelaSpriteRotacao: {x: 0, y: 0, z: 0}
+  janelaSpriteAltura: 1.2
+  esconderComSpritesDaJanela: []
   portaPosicao: {x: 9.95, y: 21.1, z: 4}
   portaEscala: {x: 0.14, y: 2.2, z: 1.5}
   janelaPosicao: {x: 6.8, y: 21.7, z: 7.8}
@@ -254015,7 +254038,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1790891581}
+  - {fileID: 405874659}
   - {fileID: 2061594592}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -275096,7 +275119,7 @@ GameObject:
   - component: {fileID: 2061594592}
   - component: {fileID: 2061594591}
   m_Layer: 0
-  m_Name: Boneco2
+  m_Name: Rato
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -275121,6 +275144,8 @@ MonoBehaviour:
   chanceEsquerda: 0.2
   chanceDireita: 0.2
   deslocamentoNoComodo: {x: 0, y: -0.6, z: 0}
+  sprite: {fileID: 21300000, guid: 07c97d08493e1924587087d7119b3a5c, type: 3}
+  alturaDoSprite: 1.8
   corPadrao: {r: 0.8, g: 0.1, b: 0.1, a: 1}
 --- !u!4 &2061594592
 Transform:

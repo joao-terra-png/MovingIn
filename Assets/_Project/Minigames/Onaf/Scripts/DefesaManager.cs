@@ -9,8 +9,8 @@ namespace MovingIn.Minigames.Onaf
         [SerializeField] private EnergyManager energia;
 
         [Header("Controles")]
-        [SerializeField] private KeyCode teclaPorta = KeyCode.Q;
-        [SerializeField] private KeyCode teclaJanela = KeyCode.E;
+        [SerializeField] private KeyCode teclaPorta = KeyCode.E;
+        [SerializeField] private KeyCode teclaJanela = KeyCode.Q;
         [Tooltip("Com a câmera (tablet) ligada o jogador não está olhando o quarto, então não fecha porta nem janela.")]
         [SerializeField] private bool bloquearComCamera = true;
 
@@ -21,6 +21,30 @@ namespace MovingIn.Minigames.Onaf
         [Header("Janela")]
         [SerializeField] private GameObject janelaAbertaVisual;
         [SerializeField] private GameObject janelaFechadaVisual;
+
+        [Header("Sprites da porta (opcional: se preencher, substitui o visual abaixo)")]
+        [SerializeField] private Sprite portaAbertaSprite;
+        [SerializeField] private Sprite portaFechadaSprite;
+        [Tooltip("Centro do sprite, em coordenadas do mundo (parede leste do quarto).")]
+        [SerializeField] private Vector3 portaSpritePosicao = new Vector3(9.85f, 21.1f, 4f);
+        [Tooltip("Rotação do sprite. Y = 90 deixa o sprite virado para dentro do quarto (parede leste).")]
+        [SerializeField] private Vector3 portaSpriteRotacao = new Vector3(0f, 90f, 0f);
+        [Tooltip("Altura do sprite no jogo (a largura segue a proporção do PNG).")]
+        [SerializeField] private float portaSpriteAltura = 2.2f;
+        [Tooltip("Objetos originais da porta que devem sumir quando houver sprites (opcional).")]
+        [SerializeField] private GameObject[] esconderComSpritesDaPorta;
+
+        [Header("Sprites da janela (opcional: se preencher, substitui o visual abaixo)")]
+        [SerializeField] private Sprite janelaAbertaSprite;
+        [SerializeField] private Sprite janelaFechadaSprite;
+        [Tooltip("Centro do sprite, em coordenadas do mundo (parede norte do quarto).")]
+        [SerializeField] private Vector3 janelaSpritePosicao = new Vector3(6.8f, 21.7f, 7.83f);
+        [Tooltip("Rotação do sprite. Y = 0 deixa o sprite virado para dentro do quarto (parede norte).")]
+        [SerializeField] private Vector3 janelaSpriteRotacao = Vector3.zero;
+        [Tooltip("Altura do sprite no jogo (a largura segue a proporção do PNG).")]
+        [SerializeField] private float janelaSpriteAltura = 1.2f;
+        [Tooltip("Objetos originais da janela que devem sumir quando houver sprites (opcional).")]
+        [SerializeField] private GameObject[] esconderComSpritesDaJanela;
 
         [Header("Visual automático (usado se os 'Fechada' acima estiverem vazios)")]
         [Tooltip("Posição, em coordenadas do mundo, da tábua que tampa a porta do quarto.")]
@@ -140,11 +164,66 @@ namespace MovingIn.Minigames.Onaf
                     pai = quarto.transform;
             }
 
+            // porta
+            if (portaAbertaVisual == null && portaAbertaSprite != null)
+                portaAbertaVisual = CriarSprite("PortaAberta", portaAbertaSprite, portaSpritePosicao, portaSpriteRotacao, portaSpriteAltura, pai);
+
             if (portaFechadaVisual == null)
-                portaFechadaVisual = CriarTabua("PortaFechada", portaPosicao, portaEscala, pai);
+            {
+                portaFechadaVisual = portaFechadaSprite != null
+                    ? CriarSprite("PortaFechada", portaFechadaSprite, portaSpritePosicao, portaSpriteRotacao, portaSpriteAltura, pai)
+                    : CriarTabua("PortaFechada", portaPosicao, portaEscala, pai);
+            }
+
+            if (portaAbertaSprite != null || portaFechadaSprite != null)
+                Esconder(esconderComSpritesDaPorta);
+
+            // janela
+            if (janelaAbertaVisual == null && janelaAbertaSprite != null)
+                janelaAbertaVisual = CriarSprite("JanelaAberta", janelaAbertaSprite, janelaSpritePosicao, janelaSpriteRotacao, janelaSpriteAltura, pai);
 
             if (janelaFechadaVisual == null)
-                janelaFechadaVisual = CriarTabua("JanelaFechada", janelaPosicao, janelaEscala, pai);
+            {
+                janelaFechadaVisual = janelaFechadaSprite != null
+                    ? CriarSprite("JanelaFechada", janelaFechadaSprite, janelaSpritePosicao, janelaSpriteRotacao, janelaSpriteAltura, pai)
+                    : CriarTabua("JanelaFechada", janelaPosicao, janelaEscala, pai);
+            }
+
+            if (janelaAbertaSprite != null || janelaFechadaSprite != null)
+                Esconder(esconderComSpritesDaJanela);
+        }
+
+        private static void Esconder(GameObject[] objetos)
+        {
+            if (objetos == null)
+                return;
+
+            foreach (GameObject go in objetos)
+            {
+                if (go != null)
+                    go.SetActive(false);
+            }
+        }
+
+        private GameObject CriarSprite(string nome, Sprite sprite, Vector3 posicao, Vector3 rotacao, float altura, Transform pai)
+        {
+            GameObject go = new GameObject(nome);
+
+            if (pai != null)
+                go.transform.SetParent(pai, true);
+
+            go.transform.position = posicao;
+            go.transform.rotation = Quaternion.Euler(rotacao);
+
+            float alturaDoSprite = sprite.bounds.size.y;
+            float escala = alturaDoSprite > 0f ? altura / alturaDoSprite : 1f;
+            go.transform.localScale = new Vector3(escala, escala, 1f);
+
+            SpriteRenderer sr = go.AddComponent<SpriteRenderer>();
+            sr.sprite = sprite;
+            sr.sortingOrder = 5;
+
+            return go;
         }
 
         private GameObject CriarTabua(string nome, Vector3 posicao, Vector3 escala, Transform pai)
@@ -165,6 +244,16 @@ namespace MovingIn.Minigames.Onaf
             tabua.GetComponent<Renderer>().material.color = corMadeira;
 
             return tabua;
+        }
+
+        public KeyCode GetTeclaPorta()
+        {
+            return teclaPorta;
+        }
+
+        public KeyCode GetTeclaJanela()
+        {
+            return teclaJanela;
         }
 
         public bool PortaEstaFechada()
