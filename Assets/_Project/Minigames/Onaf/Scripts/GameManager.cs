@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using MovingIn.Core.Structures;
 using MovingIn.Hub;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace MovingIn.Minigames.Onaf
 {
@@ -16,6 +17,10 @@ namespace MovingIn.Minigames.Onaf
         [SerializeField] private CameraManager cameraManager;
         [SerializeField] private NightManager nightManager;
         [SerializeField] private DefesaManager defesaManager;
+
+        [Header("Derrota")]
+        [Tooltip("Jumpscare da derrota. Vazio = procura na cena e, se não houver, cria sozinho.")]
+        [SerializeField] private JumpscareUI jumpscare;
 
         private Arvore HouseMap;
         private Boneco[] bonecos;
@@ -37,6 +42,8 @@ namespace MovingIn.Minigames.Onaf
 
             if (energia != null)
                 energia.ToleranciaEsgotada += Derrota;
+
+            GarantirJumpscare();
 
             if (nightManager != null)
                 nightManager.IniciarNoite();
@@ -86,7 +93,7 @@ namespace MovingIn.Minigames.Onaf
             return HouseMap;
         }
 
-        public void VerificarInvasao(int idOrigem)
+        public void VerificarInvasao(int idOrigem, Boneco atacante = null)
         {
             if (partidaFinalizada)
                 return;
@@ -113,20 +120,20 @@ namespace MovingIn.Minigames.Onaf
             }
 
             Debug.Log("O boneco invadiu o quarto do jogador!");
-            Derrota();
+            FinalizarPartida(false, atacante);
         }
 
         public void Vitoria()
         {
-            FinalizarPartida(true);
+            FinalizarPartida(true, null);
         }
 
         public void Derrota()
         {
-            FinalizarPartida(false);
+            FinalizarPartida(false, null);
         }
 
-        private void FinalizarPartida(bool venceu)
+        private void FinalizarPartida(bool venceu, Boneco atacante)
         {
             if (partidaFinalizada)
                 return;
@@ -142,12 +149,73 @@ namespace MovingIn.Minigames.Onaf
             if (cameraManager != null)
                 cameraManager.DesligarCamera();
 
+            if (!venceu)
+            {
+                PararBonecos();
+
+                // derrota: jumpscare primeiro, o painel final só aparece quando ele acaba
+                if (jumpscare != null)
+                {
+                    jumpscare.Tocar(EscolherSpriteDoJumpscare(atacante), () =>
+                    {
+                        PartidaTerminou?.Invoke(false);
+                        Debug.Log("Você perdeu!");
+                    });
+                    return;
+                }
+            }
+
             PartidaTerminou?.Invoke(venceu);
 
             if (venceu)
                 Debug.Log("Você sobreviveu até as 6 AM!");
             else
                 Debug.Log("Você perdeu!");
+        }
+
+        private void PararBonecos()
+        {
+            if (bonecos == null)
+                return;
+
+            foreach (Boneco boneco in bonecos)
+            {
+                if (boneco != null)
+                    boneco.SetMovEnable(false);
+            }
+        }
+
+        // O boneco que atacou aparece no jumpscare. Sem atacante (ex.: acabou a energia), sorteia um que tenha sprite.
+        private Sprite EscolherSpriteDoJumpscare(Boneco atacante)
+        {
+            if (atacante != null && atacante.GetSpriteDoJumpscare() != null)
+                return atacante.GetSpriteDoJumpscare();
+
+            List<Sprite> opcoes = new List<Sprite>();
+
+            if (bonecos != null)
+            {
+                foreach (Boneco boneco in bonecos)
+                {
+                    if (boneco != null && boneco.GetSpriteDoJumpscare() != null)
+                        opcoes.Add(boneco.GetSpriteDoJumpscare());
+                }
+            }
+
+            return opcoes.Count > 0 ? opcoes[UnityEngine.Random.Range(0, opcoes.Count)] : null;
+        }
+
+        private void GarantirJumpscare()
+        {
+            if (jumpscare == null)
+                jumpscare = OnafUtil.EncontrarNaCena<JumpscareUI>(gameObject.scene);
+
+            if (jumpscare != null)
+                return;
+
+            GameObject go = new GameObject("Jumpscare");
+            SceneManager.MoveGameObjectToScene(go, gameObject.scene);
+            jumpscare = go.AddComponent<JumpscareUI>();
         }
 
         public string GetNomeComodo(int id)

@@ -50533,7 +50533,9 @@ MonoBehaviour:
   chanceDireita: 0.2
   deslocamentoNoComodo: {x: 0, y: -0.6, z: 0}
   sprite: {fileID: 21300000, guid: 483267877823bf54ba04fcec9c59a90f, type: 3}
+  spriteDoJumpscare: {fileID: 0}
   alturaDoSprite: 1.8
+  aproximarDaCamera: 1
   corPadrao: {r: 0.8, g: 0.1, b: 0.1, a: 1}
 --- !u!1 &407586333
 GameObject:
@@ -240396,6 +240398,7 @@ GameObject:
   - component: {fileID: 1823196486}
   - component: {fileID: 1823196487}
   - component: {fileID: 1823196488}
+  - component: {fileID: 1823196489}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -240454,6 +240457,7 @@ MonoBehaviour:
   cameraManager: {fileID: 555538787}
   nightManager: {fileID: 1823196486}
   defesaManager: {fileID: 1823196487}
+  jumpscare: {fileID: 0}
 --- !u!114 &1823196486
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -240523,6 +240527,26 @@ MonoBehaviour:
   cameraManager: {fileID: 555538787}
   voltarParaCasaNaDerrota: 0
   permitirSairComEsc: 0
+--- !u!114 &1823196489
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1823196482}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b5a9b0c30ba30c4ea8d50f0faa82dfb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  somDoGrito: {fileID: 8300000, guid: 827be2128550703499706d1b351530ab, type: 3}
+  volume: 1
+  duracaoTotal: 1.6
+  tempoDeAproximacao: 0.35
+  escalaInicial: 0.12
+  escalaFinal: 1.8
+  intensidadeDoTremor: 30
+  spritePadrao: {fileID: 0}
 --- !u!1 &1823550521
 GameObject:
   m_ObjectHideFlags: 0
@@ -275145,7 +275169,9 @@ MonoBehaviour:
   chanceDireita: 0.2
   deslocamentoNoComodo: {x: 0, y: -0.6, z: 0}
   sprite: {fileID: 21300000, guid: 07c97d08493e1924587087d7119b3a5c, type: 3}
+  spriteDoJumpscare: {fileID: 0}
   alturaDoSprite: 1.8
+  aproximarDaCamera: 1
   corPadrao: {r: 0.8, g: 0.1, b: 0.1, a: 1}
 --- !u!4 &2061594592
 Transform:
