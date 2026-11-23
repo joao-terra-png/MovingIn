@@ -17441,6 +17441,9 @@ MonoBehaviour:
   frontAirSprite: {fileID: 0}
   backAirSprite: {fileID: 0}
   cam: {fileID: 296443554}
+  _frontFacesLeft: 0
+  _backFacesLeft: 0
+  _alwaysFront: 0
   _turnThreshold: 0.35
   _minSpeed: 0.2
   _teleportDistance: 1
@@ -37316,7 +37319,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _pixelate: 1
-  _height: 270
+  _height: 360
 --- !u!114 &296443558
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -56533,7 +56536,7 @@ Transform:
   m_GameObject: {fileID: 436369164}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.5, z: 0}
+  m_LocalPosition: {x: -0.145, y: 0.5, z: 0}
   m_LocalScale: {x: 1, y: 1.1547005, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -64592,6 +64595,9 @@ MonoBehaviour:
   frontAirSprite: {fileID: 0}
   backAirSprite: {fileID: 0}
   cam: {fileID: 296443554}
+  _frontFacesLeft: 1
+  _backFacesLeft: 1
+  _alwaysFront: 0
   _turnThreshold: 0.35
   _minSpeed: 0.2
   _teleportDistance: 1
@@ -116889,6 +116895,9 @@ MonoBehaviour:
   frontAirSprite: {fileID: 0}
   backAirSprite: {fileID: 0}
   cam: {fileID: 296443554}
+  _frontFacesLeft: 0
+  _backFacesLeft: 1
+  _alwaysFront: 0
   _turnThreshold: 0.35
   _minSpeed: 0.2
   _teleportDistance: 1
@@ -125583,6 +125592,9 @@ MonoBehaviour:
   frontAirSprite: {fileID: 0}
   backAirSprite: {fileID: 0}
   cam: {fileID: 296443554}
+  _frontFacesLeft: 1
+  _backFacesLeft: 1
+  _alwaysFront: 0
   _turnThreshold: 0.35
   _minSpeed: 0.2
   _teleportDistance: 1
@@ -156038,6 +156050,9 @@ MonoBehaviour:
   frontAirSprite: {fileID: 0}
   backAirSprite: {fileID: 0}
   cam: {fileID: 296443554}
+  _frontFacesLeft: 0
+  _backFacesLeft: 1
+  _alwaysFront: 0
   _turnThreshold: 0.35
   _minSpeed: 0.2
   _teleportDistance: 1
@@ -251444,7 +251459,7 @@ Transform:
   m_GameObject: {fileID: 1859951764}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.5, z: 0}
+  m_LocalPosition: {x: -0.145, y: 0.5, z: 0}
   m_LocalScale: {x: 1, y: 1.1547005, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
