@@ -13,6 +13,12 @@ namespace MovingIn.Hub{
         [SerializeField] Camera cam;
 
         [Header("Facing")]
+        [Tooltip("Marque se o desenho de FRENTE olha para a esquerda")]
+        [SerializeField] bool _frontFacesLeft = false;
+        [Tooltip("Marque se o desenho de COSTAS olha para a esquerda")]
+        [SerializeField] bool _backFacesLeft = true;
+        [Tooltip("Nunca vira de costas (usa sempre o sprite de frente)")]
+        [SerializeField] bool _alwaysFront;
         [SerializeField] float _turnThreshold = 0.35f;
         [SerializeField] float _minSpeed = 0.2f;
         [SerializeField] float _teleportDistance = 1f;
@@ -68,7 +74,8 @@ namespace MovingIn.Hub{
                 Vector3 dir = delta.normalized;
                 float v = Vector3.Dot(dir, screenUp);
                 float h = Vector3.Dot(dir, screenRight);
-                if (v > _turnThreshold) _facingBack = true;
+                if (_alwaysFront) _facingBack = false;
+                else if (v > _turnThreshold) _facingBack = true;
                 else if (v < -_turnThreshold) _facingBack = false;
                 if (h > 0.1f) _flip = false;
                 else if (h < -0.1f) _flip = true;
@@ -93,7 +100,7 @@ namespace MovingIn.Hub{
             bool inAir = IsMoving && _hop > _airThreshold;
             Sprite air = _facingBack ? backAirSprite : frontAirSprite;
             body.sprite = inAir && air != null ? air : (_facingBack ? backSprite : frontSprite);
-            body.flipX = _flip;
+            body.flipX = _flip != (_facingBack ? _backFacesLeft : _frontFacesLeft);
             body.transform.localPosition = new Vector3(0f, _hop * _hopHeight, 0f);
             body.transform.localScale = new Vector3(sx, sy, 1f);
 
