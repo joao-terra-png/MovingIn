@@ -1,0 +1,249 @@
+using System;
+using System.Collections.Generic;
+using MovingIn.Core.Structures;
+using MovingIn.Hub;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+
+namespace MovingIn.Minigames.Onaf
+{
+    public class GameManager : MonoBehaviour
+    {
+        [Header("Casa")]
+        [SerializeField] private GameObject House;
+
+        [Header("Gerenciadores")]
+        [SerializeField] private EnergyManager energia;
+        [SerializeField] private CameraManager cameraManager;
+        [SerializeField] private NightManager nightManager;
+        [SerializeField] private DefesaManager defesaManager;
+
+        [Header("Derrota")]
+        [Tooltip("Jumpscare da derrota. Vazio = procura na cena e, se não houver, cria sozinho.")]
+        [SerializeField] private JumpscareUI jumpscare;
+
+        private Arvore HouseMap;
+        private Boneco[] bonecos;
+
+        private bool partidaFinalizada;
+
+        public event Action<bool> PartidaTerminou;
+
+        private void Awake()
+        {
+            CriarArvore();
+            ConfigurarBonecos();
+        }
+
+        private void Start()
+        {
+            if (nightManager != null)
+                nightManager.NoiteTerminou += Vitoria;
+
+            if (energia != null)
+                energia.ToleranciaEsgotada += Derrota;
+
+            GarantirJumpscare();
+
+            if (nightManager != null)
+                nightManager.IniciarNoite();
+        }
+
+        private void CriarArvore()
+        {
+            HouseMap = new Arvore();
+
+            if (House == null)
+            {
+                return;
+            }
+
+            Room[] rooms = House.GetComponentsInChildren<Room>(true);
+
+            foreach (Room room in rooms)
+            {
+                HouseMap.Insere(
+                    room.GetRoomId(),
+                    room,
+                    out bool ok
+                );
+            }
+
+            if (HouseMap.Vazia())
+                Debug.LogError("A árvore de cômodos está vazia.");
+        }
+
+        private void ConfigurarBonecos()
+        {
+            List<Boneco> encontrados = new List<Boneco>();
+
+            foreach (GameObject raiz in gameObject.scene.GetRootGameObjects())
+                encontrados.AddRange(raiz.GetComponentsInChildren<Boneco>(true));
+
+            bonecos = encontrados.ToArray();
+
+            foreach (Boneco boneco in bonecos)
+            {
+                boneco.Configurar(HouseMap, this);
+            }
+        }
+
+        public Arvore GetTree()
+        {
+            return HouseMap;
+        }
+
+        public void VerificarInvasao(int idOrigem, Boneco atacante = null)
+        {
+            if (partidaFinalizada)
+                return;
+
+            if (defesaManager == null)
+            {
+                Debug.LogError("GameManager: DefesaManager não configurado!");
+                Derrota();
+                return;
+            }
+
+            // Entrada pelo corredor: verifica a porta.
+            if (idOrigem == 20 && defesaManager.PortaEstaFechada())
+            {
+                Debug.Log("Boneco bloqueado pela porta!");
+                return;
+            }
+
+            // Entrada pelo quintal: verifica a janela.
+            if (idOrigem == 80 && defesaManager.JanelaEstaFechada())
+            {
+                Debug.Log("Boneco bloqueado pela janela!");
+                return;
+            }
+
+            Debug.Log("O boneco invadiu o quarto do jogador!");
+            FinalizarPartida(false, atacante);
+        }
+
+        public void Vitoria()
+        {
+            FinalizarPartida(true, null);
+        }
+
+        public void Derrota()
+        {
+            FinalizarPartida(false, null);
+        }
+
+        private void FinalizarPartida(bool venceu, Boneco atacante)
+        {
+            if (partidaFinalizada)
+                return;
+
+            partidaFinalizada = true;
+
+            if (nightManager != null)
+                nightManager.Parar();
+
+            if (energia != null)
+                energia.Parar();
+
+            if (cameraManager != null)
+                cameraManager.DesligarCamera();
+
+            if (!venceu)
+            {
+                PararBonecos();
+
+                // derrota: jumpscare primeiro, o painel final só aparece quando ele acaba
+                if (jumpscare != null)
+                {
+                    jumpscare.Tocar(EscolherSpriteDoJumpscare(atacante), () =>
+                    {
+                        PartidaTerminou?.Invoke(false);
+                        Debug.Log("Você perdeu!");
+                    });
+                    return;
+                }
+            }
+
+            PartidaTerminou?.Invoke(venceu);
+
+            if (venceu)
+                Debug.Log("Você sobreviveu até as 6 AM!");
+            else
+                Debug.Log("Você perdeu!");
+        }
+
+        private void PararBonecos()
+        {
+            if (bonecos == null)
+                return;
+
+            foreach (Boneco boneco in bonecos)
+            {
+                if (boneco != null)
+                    boneco.SetMovEnable(false);
+            }
+        }
+
+        // O boneco que atacou aparece no jumpscare. Sem atacante (ex.: acabou a energia), sorteia um que tenha sprite.
+        private Sprite EscolherSpriteDoJumpscare(Boneco atacante)
+        {
+            if (atacante != null && atacante.GetSpriteDoJumpscare() != null)
+                return atacante.GetSpriteDoJumpscare();
+
+            List<Sprite> opcoes = new List<Sprite>();
+
+            if (bonecos != null)
+            {
+                foreach (Boneco boneco in bonecos)
+                {
+                    if (boneco != null && boneco.GetSpriteDoJumpscare() != null)
+                        opcoes.Add(boneco.GetSpriteDoJumpscare());
+                }
+            }
+
+            return opcoes.Count > 0 ? opcoes[UnityEngine.Random.Range(0, opcoes.Count)] : null;
+        }
+
+        private void GarantirJumpscare()
+        {
+            if (jumpscare == null)
+                jumpscare = OnafUtil.EncontrarNaCena<JumpscareUI>(gameObject.scene);
+
+            if (jumpscare != null)
+                return;
+
+            GameObject go = new GameObject("Jumpscare");
+            SceneManager.MoveGameObjectToScene(go, gameObject.scene);
+            jumpscare = go.AddComponent<JumpscareUI>();
+        }
+
+        public string GetNomeComodo(int id)
+        {
+            if (HouseMap == null)
+            {
+                Debug.LogError("GameManager: a árvore ainda não foi inicializada!");
+                return "Árvore não encontrada";
+            }
+
+            Room room = HouseMap.GetRoom(id);
+
+            if (room == null)
+            {
+                Debug.LogWarning("GameManager: não existe Room associado ao ID " + id);
+                return "Desconhecido";
+            }
+
+            return room.GetRoomName();
+        }
+
+        private void OnDestroy()
+        {
+            if (nightManager != null)
+                nightManager.NoiteTerminou -= Vitoria;
+
+            if (energia != null)
+                energia.ToleranciaEsgotada -= Derrota;
+        }
+    }
+}

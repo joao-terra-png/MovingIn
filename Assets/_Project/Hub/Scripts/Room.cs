@@ -8,10 +8,13 @@ namespace MovingIn.Hub{
     /// vai no objeto PAI do comodo (ex: Casa/Quarto)
     /// tudo que pertence ao comodo (chao, paredes, caixas, portas) fica dentro dele
     /// o RoomManager liga so o comodo atual e desliga os outros
+    /// RoomId utilizado na montagem da árvore de Onaf
     /// </summary>
     public class Room : MonoBehaviour
     {
         [SerializeField] string _roomName = "Comodo";
+
+        [SerializeField] private int RoomId;
 
         [Tooltip("Ponto que a camera enquadra. Se ficar vazio, usa a posicao deste objeto")]
         [SerializeField] Transform cameraFocus;
@@ -25,5 +28,15 @@ namespace MovingIn.Hub{
 
         public void Show() => gameObject.SetActive(true);
         public void Hide() => gameObject.SetActive(false);
+
+        public int GetRoomId()
+        {
+            return RoomId;
+        }
+
+        public string GetRoomName()
+        {
+            return _roomName;
+        }
     }
 }
