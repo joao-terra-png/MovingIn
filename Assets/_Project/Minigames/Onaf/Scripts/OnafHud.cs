@@ -132,10 +132,10 @@ namespace MovingIn.Minigames.Onaf
 
             Vector2 topoEsquerda = new Vector2(0f, 1f);
 
-            textoPorta = CriarTexto("Porta", painel.transform, "[Q] PORTA: ABERTA", 32f, TextAlignmentOptions.MidlineLeft, Color.white);
+            textoPorta = CriarTexto("Porta", painel.transform, "[E] PORTA: ABERTA", 32f, TextAlignmentOptions.MidlineLeft, Color.white);
             Posicionar(textoPorta.rectTransform, topoEsquerda, topoEsquerda, new Vector2(20f, -12f), new Vector2(580f, 44f));
 
-            textoJanela = CriarTexto("Janela", painel.transform, "[E] JANELA: ABERTA", 32f, TextAlignmentOptions.MidlineLeft, Color.white);
+            textoJanela = CriarTexto("Janela", painel.transform, "[Q] JANELA: ABERTA", 32f, TextAlignmentOptions.MidlineLeft, Color.white);
             Posicionar(textoJanela.rectTransform, topoEsquerda, topoEsquerda, new Vector2(20f, -58f), new Vector2(580f, 44f));
 
             textoCamera = CriarTexto("Camera", painel.transform, "[Espaço] ABRIR AS CÂMERAS", 32f, TextAlignmentOptions.MidlineLeft, new Color(0.6f, 0.85f, 1f));
@@ -254,8 +254,8 @@ namespace MovingIn.Minigames.Onaf
                 bool porta = defesaManager.PortaEstaFechada();
                 bool janela = defesaManager.JanelaEstaFechada();
 
-                Definir(textoPorta, "[Q] PORTA: " + (porta ? "FECHADA" : "ABERTA"));
-                Definir(textoJanela, "[E] JANELA: " + (janela ? "FECHADA" : "ABERTA"));
+                Definir(textoPorta, "[E] PORTA: " + (porta ? "FECHADA" : "ABERTA"));
+                Definir(textoJanela, "[Q] JANELA: " + (janela ? "FECHADA" : "ABERTA"));
 
                 textoPorta.color = porta ? Verde : Color.white;
                 textoJanela.color = janela ? Verde : Color.white;

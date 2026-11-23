@@ -26,6 +26,10 @@ namespace MovingIn.Minigames.Onaf
         [Header("Aparência")]
         [Tooltip("Deslocamento a partir do ponto de foco do cômodo. -0.6 deixa os pés no chão.")]
         [SerializeField] private Vector3 deslocamentoNoComodo = new Vector3(0f, -0.6f, 0f);
+        [Tooltip("PNG do boneco (importado como Sprite). Se estiver vazio, usa a cápsula.")]
+        [SerializeField] private Sprite sprite;
+        [Tooltip("Altura do sprite no jogo, em unidades do Unity (a cápsula antiga tinha 1.8).")]
+        [SerializeField] private float alturaDoSprite = 1.8f;
         [Tooltip("Cor da cápsula usada quando o boneco não tem nenhum visual próprio.")]
         [SerializeField] private Color corPadrao = new Color(0.8f, 0.1f, 0.1f);
 
@@ -37,6 +41,7 @@ namespace MovingIn.Minigames.Onaf
 
         private GameManager gameManager;
         private Renderer[] renderers;
+        private Transform visualSprite;
 
         public void Configurar(Arvore arvore, GameManager manager)
         {
@@ -153,6 +158,12 @@ namespace MovingIn.Minigames.Onaf
             if (renderers.Length > 0)
                 return;
 
+            if (sprite != null)
+            {
+                CriarVisualSprite();
+                return;
+            }
+
             GameObject capsula = GameObject.CreatePrimitive(PrimitiveType.Capsule);
             capsula.name = "VisualBoneco";
 
@@ -168,6 +179,41 @@ namespace MovingIn.Minigames.Onaf
             render.material.color = corPadrao;
 
             renderers = new Renderer[] { render };
+        }
+
+        private void CriarVisualSprite()
+        {
+            GameObject go = new GameObject("VisualBoneco");
+            go.transform.SetParent(transform, false);
+
+            SpriteRenderer sr = go.AddComponent<SpriteRenderer>();
+            sr.sprite = sprite;
+
+            float altura = sprite.bounds.size.y;
+            float escala = altura > 0f ? alturaDoSprite / altura : 1f;
+            go.transform.localScale = new Vector3(escala, escala, 1f);
+
+            // pés do sprite na mesma altura em que ficavam os pés da cápsula (-0.9 do centro)
+            go.transform.localPosition = new Vector3(0f, -0.9f - sprite.bounds.min.y * escala, 0f);
+
+            visualSprite = go.transform;
+            renderers = new Renderer[] { sr };
+        }
+
+        // o sprite sempre olha para a câmera que está ligada (jogador ou segurança)
+        private void LateUpdate()
+        {
+            if (visualSprite == null)
+                return;
+
+            foreach (Camera cam in Camera.allCameras)
+            {
+                if (cam.enabled)
+                {
+                    visualSprite.rotation = cam.transform.rotation;
+                    return;
+                }
+            }
         }
 
         private void AtualizarVisibilidade()
