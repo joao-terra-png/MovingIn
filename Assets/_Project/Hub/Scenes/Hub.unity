@@ -3303,6 +3303,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _roomName: Hall
+  RoomId: 0
   cameraFocus: {fileID: 1505164361}
   _cameraSize: 4.5
 --- !u!4 &32140388
@@ -18940,6 +18941,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _roomName: Attic
+  RoomId: 0
   cameraFocus: {fileID: 764669781}
   _cameraSize: 4.5
 --- !u!1 &132485526
@@ -22614,9 +22616,10 @@ MonoBehaviour:
     Filipe Del Bianco\r\nFelipe Gabriel Rabello\r\nJo\xE3o Gabriel Azevedo Terra\r\nNicolas
     Catini Ramalho dos Santos\r\n\r\n<size=120%><b>Minigames</b></size>\r\n<b>Hamsters'
     Pipe</b>\r\nDavi Filipe Del Bianco\r\nFelipe Gabriel Rabello\r\n\r\n<b>Fuse Defense</b>\r\nNicolas
-    Catini Ramalho dos Santos\r\n\r\n<b>Kitchen Organizer \xB7 Laundry \xB7 Box Tetris</b>\r\nJo\xE3o
-    Gabriel Azevedo Terra\r\n\r\n<size=120%><b>Arte</b></size>\r\n@krol.psd (Kitchen
-    Organizer)\nJo\xE3o Gabriel Azevedo Terra\nFelipe Gabriel Rabello\r\n\r\n<size=120%><b>M\xFAsicas</b></size>\r\n\"Main
+    Catini Ramalho dos Santos\r\n\r\n<b>One Night at Ferrari's</b>\nNicolas Catini
+    Ramalho dos Santos\nDavi Filipe Del Bianco\n\n<b>Kitchen Organizer \xB7 Laundry
+    \xB7 Box Tetris</b>\r\nJo\xE3o Gabriel Azevedo Terra\r\n\r\n<size=120%><b>Arte</b></size>\r\n@krol.psd
+    (Kitchen Organizer)\nJo\xE3o Gabriel Azevedo Terra\nFelipe Gabriel Rabello\r\n\r\n<size=120%><b>M\xFAsicas</b></size>\r\n\"Main
     Title Theme\"\r\n\"Night Walk\"\r\nJonathan Morali\r\nLife is Strange - Original
     Soundtrack\r\nDONTNOD Entertainment / Square Enix, 2015\r\n\r\n<size=120%><b>Efeitos
     sonoros</b></size>\r\nInterface Sounds\r\nKenney (kenney.nl) - CC0\r\n\r\n<size=120%><b>Assets</b></size>\r\nModelos
@@ -28229,6 +28232,37 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 223746727}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &224083693
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 224083694}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &224083694
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 224083693}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 264.14722, y: -452.25543, z: 498.45844}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &224092684
 GameObject:
   m_ObjectHideFlags: 0
@@ -36416,6 +36450,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _roomName: LivingRoom
+  RoomId: 0
   cameraFocus: {fileID: 980119216}
   _cameraSize: 4.5
 --- !u!4 &288420727
@@ -49194,6 +49229,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _roomName: Basement
+  RoomId: 0
   cameraFocus: {fileID: 219516565}
   _cameraSize: 4.5
 --- !u!1 &367756751
@@ -58245,6 +58281,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _roomName: Garage
+  RoomId: 0
   cameraFocus: {fileID: 1832689559}
   _cameraSize: 4.5
 --- !u!4 &451577288
@@ -70867,6 +70904,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _roomName: UpstairsHall
+  RoomId: 0
   cameraFocus: {fileID: 803649027}
   _cameraSize: 4.5
 --- !u!4 &561261605
@@ -120714,6 +120752,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _roomName: Laundry
+  RoomId: 0
   cameraFocus: {fileID: 1311579380}
   _cameraSize: 4.5
 --- !u!1 &941171590
@@ -166725,6 +166764,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _roomName: Bedroom
+  RoomId: 0
   cameraFocus: {fileID: 1425836905}
   _cameraSize: 4.5
 --- !u!4 &1218372840
@@ -170339,7 +170379,7 @@ Transform:
   m_GameObject: {fileID: 1244468535}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.6, y: 20.65, z: 6.6}
+  m_LocalPosition: {x: 8.6, y: 20.62, z: 6.6}
   m_LocalScale: {x: 1.6, y: 0.1, z: 1.6}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -170359,7 +170399,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _minigameId: bedroom_first_night
-  _sceneName: Minigame_PrimeiraNoite
+  _sceneName: TesteQuartos
   _prompt: Dormir (primeira noite)
   _displayName: 
   hideWhenDone: []
@@ -232401,6 +232441,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _roomName: Kitchen
+  RoomId: 0
   cameraFocus: {fileID: 669087211}
   _cameraSize: 4.5
 --- !u!4 &1706140684
@@ -275743,6 +275784,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _roomName: Front
+  RoomId: 0
   cameraFocus: {fileID: 1092361720}
   _cameraSize: 4.5
 --- !u!1 &2031631696
@@ -292390,3 +292432,4 @@ SceneRoots:
   - {fileID: 70727908}
   - {fileID: 1889696688}
   - {fileID: 9002125}
+  - {fileID: 224083694}

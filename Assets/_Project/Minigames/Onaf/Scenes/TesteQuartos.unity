@@ -50526,11 +50526,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   idRoom: 90
-  tempoEntreMovimentos: 8
+  tempoEntreMovimentos: 9.5
   chanceMover: 1
-  chancePai: 0.6
-  chanceEsquerda: 0.2
-  chanceDireita: 0.2
+  chancePai: 0.52
+  chanceEsquerda: 0.24
+  chanceDireita: 0.24
   deslocamentoNoComodo: {x: 0, y: -0.6, z: 0}
   sprite: {fileID: 21300000, guid: 483267877823bf54ba04fcec9c59a90f, type: 3}
   spriteDoJumpscare: {fileID: 0}
@@ -215332,8 +215332,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ee6b3490c1875b40931c7d8913021df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _pixelate: 1
-  _height: 270
+  _pixelate: 0
+  _height: 540
 --- !u!114 &1642962231
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -240470,7 +240470,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b5087ee4b251e04683f7f28625f77a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  duracaoNoite: 360
+  duracaoNoite: 300
 --- !u!114 &1823196487
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -275162,11 +275162,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   idRoom: 30
-  tempoEntreMovimentos: 8
+  tempoEntreMovimentos: 9.5
   chanceMover: 1
-  chancePai: 0.6
-  chanceEsquerda: 0.2
-  chanceDireita: 0.2
+  chancePai: 0.52
+  chanceEsquerda: 0.24
+  chanceDireita: 0.24
   deslocamentoNoComodo: {x: 0, y: -0.6, z: 0}
   sprite: {fileID: 21300000, guid: 07c97d08493e1924587087d7119b3a5c, type: 3}
   spriteDoJumpscare: {fileID: 0}
@@ -284380,6 +284380,144 @@ MonoBehaviour:
   _settleSpeed: 1.5
   _airThreshold: 0.6
   _shadowShrink: 0.3
+--- !u!1 &687091572
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1529643563}
+  - component: {fileID: 1239501894}
+  - component: {fileID: 492714414}
+  m_Layer: 0
+  m_Name: HubLink
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1529643563
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 687091572}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1239501894
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 687091572}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d136a7a5fd54b494da16247f2d3b5694, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _escapeLeaves: 0
+--- !u!114 &492714414
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 687091572}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ee5c1615d00ea449845a919abb86ad3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _title: One Night at Ferrari's
+  _howToPlay: "Sobreviva \xE0 primeira noite, da meia-noite \xE0s 6 da manh\xE3.\nMova o mouse para olhar entre a janela e a porta.\n\n{E}  fecha ou abre a porta\n{Q}  fecha ou abre a janela\n{Espa\xE7o}  c\xE2meras da casa\n\nSe algo aparecer na porta ou na janela, feche r\xE1pido!\nTudo gasta energia: sem energia, n\xE3o h\xE1 defesa."
+  _goal: 0
+  font: {fileID: 11400000, guid: f63ff3045d161f047aa28ae3fcff18bc, type: 2}
+  _showGoal: 0
+  _unpauseOnPlay: 1
+  _keySprite: {fileID: 21300000, guid: f34f40cf54fe6be4dbd8821ae9577e71, type: 3}
+--- !u!1 &263701041
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 483386065}
+  - component: {fileID: 1072998098}
+  - component: {fileID: 1858276548}
+  - component: {fileID: 1465942965}
+  m_Layer: 0
+  m_Name: NightExtras
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &483386065
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 263701041}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1072998098
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 263701041}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f330c97ea0d46008d071d3f4ff9d580, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1858276548
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 263701041}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 850f09571ea9404299b9d72a32a1e705, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1465942965
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 263701041}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b61076ca6ebf4c1487207f866b18e497, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _schedule:
+  - monster: Rato
+    startAt: 0.17
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -284390,3 +284528,5 @@ SceneRoots:
   - {fileID: 1181307624}
   - {fileID: 318909593}
   - {fileID: 1129223001}
+  - {fileID: 1529643563}
+  - {fileID: 483386065}
